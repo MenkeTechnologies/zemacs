@@ -129,7 +129,7 @@ def parse_keymap():
     # commands the macro cannot express) are declared in a parseable table:
     #   ("space f s", "Files", ":write"),
     for tm in re.finditer(
-        r'\(\s*"(space [^"]+)"\s*,\s*"[^"]*"\s*,\s*"(:?[a-z][a-z0-9!_-]*)"\s*\)', src
+        r'\(\s*"(space [^"]+)"\s*,\s*"[^"]*"\s*,\s*"(:[^"]+)"\s*\)', src
     ):
         chord, cmd = tm.group(1), tm.group(2).lstrip(":")
         result["normal"][chord] = cmd

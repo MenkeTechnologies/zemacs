@@ -44,6 +44,13 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space q s", "Quit",    ":write-quit-all"),   // SPC q s : save and quit
     ("space f T", "Files",   ":theme"),            // SPC T n / theme
     ("space x l s", "Text",  ":sort"),             // SPC x l s : sort lines
+    // SPC t toggles -> existing :toggle substrate (config options).
+    ("space t n r", "Toggles", ":toggle line-number absolute relative"), // relative nums
+    ("space t n a", "Toggles", ":toggle line-number relative absolute"), // absolute nums
+    ("space t i",   "Toggles", ":toggle indent-guides.render"),          // indent guides
+    ("space t a",   "Toggles", ":toggle auto-completion"),               // auto-complete
+    ("space t h h", "Toggles", ":toggle cursorline"),                    // highlight line
+    ("space t w",   "Toggles", ":toggle whitespace.render all none"),    // whitespace
 ];
 
 /// Insert `cmd` at `path` under `root`, creating intermediate submap nodes
@@ -543,12 +550,16 @@ mod tests {
         for (chord_str, _, cmd) in SPACEMACS_TYPABLE {
             let leaf = resolve(n, chord_str)
                 .unwrap_or_else(|| panic!("{chord_str} did not resolve"));
-            match leaf {
-                KeyTrie::MappableCommand(MappableCommand::Typable { name, .. }) => {
-                    assert_eq!(format!(":{name}"), *cmd, "wrong typable for {chord_str}");
-                }
-                other => panic!("{chord_str} should be a typable command, got {other:?}"),
-            }
+            // The bound leaf must equal what the command string parses to, and
+            // it must be a typable command.
+            let expected = KeyTrie::MappableCommand(
+                cmd.parse::<MappableCommand>().expect("valid command"),
+            );
+            assert_eq!(leaf, &expected, "wrong command for {chord_str}");
+            assert!(
+                matches!(leaf, KeyTrie::MappableCommand(MappableCommand::Typable { .. })),
+                "{chord_str} should be a typable command"
+            );
         }
     }
 

@@ -2104,6 +2104,54 @@
     "note": "reload file from disk"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_t_h_h",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t h h"
+    ],
+    "note": "spacemacs SPC t h h -> toggle cursorline"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_i",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t i"
+    ],
+    "note": "spacemacs SPC t i -> toggle indent-guides.render"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_n_a",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t n a"
+    ],
+    "note": "spacemacs SPC t n a -> toggle line-number relative absolute"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_n_r",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t n r"
+    ],
+    "note": "spacemacs SPC t n r -> toggle line-number absolute relative"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_a",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t a"
+    ],
+    "note": "spacemacs SPC t a -> toggle auto-completion"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_w",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t w"
+    ],
+    "note": "spacemacs SPC t w -> toggle whitespace.render all none"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_spc",
     "status": "ported",
     "evidence": [
