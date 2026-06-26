@@ -2192,6 +2192,14 @@
     "note": "spacemacs SPC j j -> jumplist_picker"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_j_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j d"
+    ],
+    "note": "spacemacs SPC j d -> file_explorer_in_current_buffer_directory"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_j_i",
     "status": "ported",
     "evidence": [
@@ -2206,6 +2214,14 @@
       "key:normal:space j n"
     ],
     "note": "spacemacs SPC j n -> split-line"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w d"
+    ],
+    "note": "spacemacs SPC w d -> wclose"
   },
   {
     "spec_id": "spacemacs.keybinding.spc_w_h",
@@ -2310,6 +2326,14 @@
       "key:normal:space b R"
     ],
     "note": "spacemacs SPC b R -> reload"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b s"
+    ],
+    "note": "spacemacs SPC b s -> new"
   },
   {
     "spec_id": "spacemacs.keybinding.spc_f_d",

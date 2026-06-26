@@ -67,6 +67,7 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space x i p", "Text",    ":change-case pascal"),                   // PascalCase
     ("space x i i", "Text",    ":cycle-case"),                           // SPC x i i : cycle
     ("space j n",   "Jump",    ":split-line"),                           // SPC j n : split line
+    ("space b s",   "Buffers", ":new"),                                  // SPC b s : scratch buffer
 ];
 
 /// Insert `cmd` at `path` under `root`, creating intermediate submap nodes
@@ -272,6 +273,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "v" | "C-v" => vsplit,
             "w" | "C-w" => rotate_view,
             "q" | "C-q" => wclose,
+            "d" | "C-d" => wclose,
             "o" | "C-o" => wonly,
             "h" | "C-h" => jump_view_left,
             "j" | "C-j" => jump_view_down,
@@ -331,6 +333,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "v" | "C-v" => vsplit,
                 "w" | "C-w" => rotate_view,
                 "q" | "C-q" => wclose,
+                "d" | "C-d" => wclose,
                 "o" | "C-o" => wonly,
                 "h" | "C-h" => jump_view_left,
                 "j" | "C-j" => jump_view_down,
@@ -369,6 +372,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "0" => goto_line_start,            // SPC j 0
                 "$" => goto_line_end,              // SPC j $
                 "b" => jump_backward,              // SPC j b : back to prev location
+                "d" => file_explorer_in_current_buffer_directory, // SPC j d : dir listing
             },
             "g" => { "Goto (LSP)"
                 "d" => goto_definition,
