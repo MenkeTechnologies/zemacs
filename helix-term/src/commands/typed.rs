@@ -2696,6 +2696,156 @@ fn cycle_case(
     })
 }
 
+/// Translate a vim `:s` replacement string to `regex` crate replacement syntax.
+/// `\1`..`\9` and `\0`/`&` become `${1}`..`${0}`; `\n`/`\t` become real
+/// newline/tab; `\&`/`\\` are literal; a literal `$` is escaped to `$$`.
+fn vim_replacement_to_regex(rep: &str) -> String {
+    let mut out = String::with_capacity(rep.len());
+    let mut chars = rep.chars().peekable();
+    while let Some(c) = chars.next() {
+        match c {
+            '&' => out.push_str("${0}"),
+            '$' => out.push_str("$$"),
+            '\\' => match chars.next() {
+                Some(d) if d.is_ascii_digit() => {
+                    out.push_str("${");
+                    out.push(d);
+                    out.push('}');
+                }
+                Some('n') => out.push('\n'),
+                Some('t') => out.push('\t'),
+                Some('r') => out.push('\r'),
+                Some('&') => out.push('&'),
+                Some('\\') => out.push('\\'),
+                Some(other) => out.push(other),
+                None => out.push('\\'),
+            },
+            other => out.push(other),
+        }
+    }
+    out
+}
+
+/// Parse a vim-style substitute command line: `[%]s<delim>pat<delim>rep<delim>flags`.
+/// Returns (whole_file, pattern, replacement, flags) or None if `input` is not a
+/// substitute.
+fn parse_vim_substitute(input: &str) -> Option<(bool, String, String, String)> {
+    let s = input.trim_start();
+    let (whole, s) = match s.strip_prefix('%') {
+        Some(rest) => (true, rest.trim_start()),
+        None => (false, s),
+    };
+    // Command name: any prefix of "substitute" of length >= 1, immediately
+    // followed by a non-alphanumeric, non-space delimiter.
+    let name_len = (1..="substitute".len())
+        .rev()
+        .find(|&n| s.starts_with(&"substitute"[..n]))?;
+    let after = &s[name_len..];
+    let delim = after.chars().next()?;
+    if delim.is_alphanumeric() || delim.is_whitespace() {
+        return None;
+    }
+    let body = &after[delim.len_utf8()..];
+    let mut parts = body.splitn(3, delim);
+    let pattern = parts.next()?.to_string();
+    if pattern.is_empty() {
+        return None;
+    }
+    let replacement = parts.next().unwrap_or("").to_string();
+    let flags = parts.next().unwrap_or("").to_string();
+    Some((whole, pattern, replacement, flags))
+}
+
+/// Run a substitute over the target lines. `whole_file` selects the whole
+/// buffer; otherwise the lines spanned by the primary selection are used.
+fn do_substitute(
+    cx: &mut compositor::Context,
+    whole_file: bool,
+    pattern: &str,
+    replacement: &str,
+    flags: &str,
+) -> anyhow::Result<()> {
+    let global = flags.contains('g');
+    let case_insensitive = flags.contains('i');
+
+    let re = regex::RegexBuilder::new(pattern)
+        .case_insensitive(case_insensitive)
+        .build()
+        .map_err(|e| anyhow!("invalid pattern: {e}"))?;
+    let rep = vim_replacement_to_regex(replacement);
+
+    let (view, doc) = current!(cx.editor);
+    let slice = doc.text().slice(..);
+    let total = slice.len_lines();
+
+    let (first_line, last_line) = if whole_file {
+        (0, total.saturating_sub(1))
+    } else {
+        let sel = doc.selection(view.id).primary();
+        (
+            slice.char_to_line(sel.from()),
+            slice.char_to_line(sel.to().min(slice.len_chars().saturating_sub(1).max(0))),
+        )
+    };
+
+    let mut changes = Vec::new();
+    for line in first_line..=last_line {
+        if line >= total {
+            break;
+        }
+        let lstart = slice.line_to_char(line);
+        let lend = line_ending::line_end_char_index(&slice, line);
+        if lstart > lend {
+            continue;
+        }
+        let text: std::borrow::Cow<str> = slice.slice(lstart..lend).into();
+        let new = if global {
+            re.replace_all(&text, rep.as_str())
+        } else {
+            re.replacen(&text, 1, rep.as_str())
+        };
+        if new != text {
+            changes.push((lstart, lend, Some(Tendril::from(new.as_ref()))));
+        }
+    }
+
+    if changes.is_empty() {
+        return Ok(());
+    }
+
+    let transaction = Transaction::change(doc.text(), changes.into_iter());
+    doc.apply(&transaction, view.id);
+    doc.append_changes_to_history(view);
+    Ok(())
+}
+
+fn substitute(
+    cx: &mut compositor::Context,
+    args: Args,
+    event: PromptEvent,
+) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    // Raw `/pat/rep/flags` argument (space form: `:s /p/r/g`). The no-space vim
+    // form `:s/p/r/g` is handled earlier in execute_command_line.
+    let raw = args[0].trim();
+    let delim = raw
+        .chars()
+        .next()
+        .filter(|c| !c.is_alphanumeric() && !c.is_whitespace())
+        .ok_or_else(|| anyhow!("usage: :s/pattern/replacement/[flags]"))?;
+    let body = &raw[delim.len_utf8()..];
+    let mut parts = body.splitn(3, delim);
+    let pattern = parts.next().unwrap_or("");
+    let replacement = parts.next().unwrap_or("");
+    let flags = parts.next().unwrap_or("");
+    if pattern.is_empty() {
+        bail!("usage: :s/pattern/replacement/[flags]");
+    }
+    do_substitute(cx, false, pattern, replacement, flags)
+}
+
 fn split_line(
     cx: &mut compositor::Context,
     _args: Args,
@@ -4447,6 +4597,17 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         },
     },
     TypableCommand {
+        name: "substitute",
+        aliases: &["s"],
+        doc: "Substitute: :s/pattern/replacement/[flags]. Also :%s/.../.../g for the whole file.",
+        fun: substitute,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (1, Some(1)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
         name: "split-line",
         aliases: &[],
         doc: "Split the current line at the cursor, keeping the cursor in place.",
@@ -4827,6 +4988,15 @@ fn execute_command_line(
     if command.parse::<usize>().is_ok() && rest.trim().is_empty() {
         let cmd = TYPABLE_COMMAND_MAP.get("goto").unwrap();
         return execute_command(cx, cmd, command, event);
+    }
+
+    // vim-style substitute: `:s/pat/rep/flags`, `:%s/pat/rep/g` (no space after
+    // the command name, so it does not reach the command map).
+    if let Some((whole, pattern, replacement, flags)) = parse_vim_substitute(input) {
+        if event != PromptEvent::Validate {
+            return Ok(());
+        }
+        return do_substitute(cx, whole, &pattern, &replacement, &flags);
     }
 
     match typed::TYPABLE_COMMAND_MAP.get(command) {

@@ -2750,5 +2750,13 @@
       "key:normal:space q s"
     ],
     "note": "spacemacs SPC q s -> write-quit-all"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_substitute",
+    "status": "ported",
+    "evidence": [
+      "typable:substitute"
+    ],
+    "note": "vim :s/:%s via :substitute (regex, /g, /i, backrefs) + dispatcher hook"
   }
 ]

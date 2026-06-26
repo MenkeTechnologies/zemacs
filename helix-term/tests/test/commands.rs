@@ -1153,3 +1153,27 @@ async fn split_line_keeps_cursor() -> anyhow::Result<()> {
 
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn substitute_first_match() -> anyhow::Result<()> {
+    test(("#[|f]#oo bar\n", ":s/oo/00/<ret>", "#[f|]#00 bar\n")).await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn substitute_global_flag() -> anyhow::Result<()> {
+    test(("#[|f]#oo boo\n", ":s/o/0/g<ret>", "#[f|]#00 b00\n")).await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn substitute_whole_file() -> anyhow::Result<()> {
+    test(("#[|a]#bc\nabc\n", ":%s/b/X/g<ret>", "#[a|]#Xc\naXc\n")).await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn substitute_backreference() -> anyhow::Result<()> {
+    test(("#[|f]#oozoo\n", ":s/(o+)/[\\1]/<ret>", "#[f|]#[oo]zoo\n")).await?;
+    Ok(())
+}
