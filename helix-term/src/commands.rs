@@ -572,6 +572,18 @@ impl MappableCommand {
         delete_textobject_around, "Delete around object (da)",
         yank_textobject_inner, "Yank inside object (yi)",
         yank_textobject_around, "Yank around object (ya)",
+        delete_find_char_forward, "Delete to next char (df)",
+        delete_till_char_forward, "Delete till next char (dt)",
+        delete_find_char_backward, "Delete to prev char (dF)",
+        delete_till_char_backward, "Delete till prev char (dT)",
+        change_find_char_forward, "Change to next char (cf)",
+        change_till_char_forward, "Change till next char (ct)",
+        change_find_char_backward, "Change to prev char (cF)",
+        change_till_char_backward, "Change till prev char (cT)",
+        yank_find_char_forward, "Yank to next char (yf)",
+        yank_till_char_forward, "Yank till next char (yt)",
+        yank_find_char_backward, "Yank to prev char (yF)",
+        yank_till_char_backward, "Yank till prev char (yT)",
         goto_next_function, "Goto next function",
         goto_prev_function, "Goto previous function",
         goto_next_class, "Goto next type definition",
@@ -1717,6 +1729,16 @@ fn find_char_line_ending_motion(
 }
 
 fn find_char(cx: &mut Context, direction: Direction, inclusive: bool, extend: bool) {
+    find_char_then(cx, direction, inclusive, extend, None)
+}
+
+fn find_char_then(
+    cx: &mut Context,
+    direction: Direction,
+    inclusive: bool,
+    extend: bool,
+    after: Option<fn(&mut Context)>,
+) {
     // TODO: count is reset to 1 before next key so we move it into the closure here.
     // Would be nice to carry over.
     let count = cx.count();
@@ -1774,7 +1796,50 @@ fn find_char(cx: &mut Context, direction: Direction, inclusive: bool, extend: bo
         };
 
         cx.editor.apply_motion(motion);
+        // Apply a pending operator (vim `d`/`c`/`y` + `f`/`t`/`F`/`T`).
+        if let Some(after) = after {
+            after(cx);
+        }
     })
+}
+
+// vim operator + find-char: extend to the target char (inclusive `f`/`F`,
+// exclusive `t`/`T`), then apply the operator. Makes `df,`, `dt)`, `ct"`, … work.
+fn delete_find_char_forward(cx: &mut Context) {
+    find_char_then(cx, Direction::Forward, true, true, Some(delete_selection));
+}
+fn delete_till_char_forward(cx: &mut Context) {
+    find_char_then(cx, Direction::Forward, false, true, Some(delete_selection));
+}
+fn delete_find_char_backward(cx: &mut Context) {
+    find_char_then(cx, Direction::Backward, true, true, Some(delete_selection));
+}
+fn delete_till_char_backward(cx: &mut Context) {
+    find_char_then(cx, Direction::Backward, false, true, Some(delete_selection));
+}
+fn change_find_char_forward(cx: &mut Context) {
+    find_char_then(cx, Direction::Forward, true, true, Some(change_selection));
+}
+fn change_till_char_forward(cx: &mut Context) {
+    find_char_then(cx, Direction::Forward, false, true, Some(change_selection));
+}
+fn change_find_char_backward(cx: &mut Context) {
+    find_char_then(cx, Direction::Backward, true, true, Some(change_selection));
+}
+fn change_till_char_backward(cx: &mut Context) {
+    find_char_then(cx, Direction::Backward, false, true, Some(change_selection));
+}
+fn yank_find_char_forward(cx: &mut Context) {
+    find_char_then(cx, Direction::Forward, true, true, Some(yank_textobject));
+}
+fn yank_till_char_forward(cx: &mut Context) {
+    find_char_then(cx, Direction::Forward, false, true, Some(yank_textobject));
+}
+fn yank_find_char_backward(cx: &mut Context) {
+    find_char_then(cx, Direction::Backward, true, true, Some(yank_textobject));
+}
+fn yank_till_char_backward(cx: &mut Context) {
+    find_char_then(cx, Direction::Backward, false, true, Some(yank_textobject));
 }
 
 fn find_till_char(cx: &mut Context) {

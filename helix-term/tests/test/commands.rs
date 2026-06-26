@@ -1236,3 +1236,29 @@ async fn vim_change_inner_paren() -> anyhow::Result<()> {
     .await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn vim_delete_find_char() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(helix_term::config::Config {
+            keys: helix_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        ("ab#[|c]#,de\n", "df,", "ab#[d|]#e\n"),
+    )
+    .await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn vim_change_till_char() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(helix_term::config::Config {
+            keys: helix_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        ("fo#[|o]#;x\n", "ct;Y", "foY#[;|]#x\n"),
+    )
+    .await?;
+    Ok(())
+}

@@ -190,6 +190,10 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "%" => [match_brackets, delete_selection],
             "i" => delete_textobject_inner,   // diw, di(, dip, ...
             "a" => delete_textobject_around,  // daw, da(, ...
+            "f" => delete_find_char_forward,  // df<c>
+            "t" => delete_till_char_forward,  // dt<c>
+            "F" => delete_find_char_backward, // dF<c>
+            "T" => delete_till_char_backward, // dT<c>
         },
 
         // --- operator-pending: change --------------------------------------
@@ -205,6 +209,10 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "^" => [collapse_selection, extend_to_first_nonwhitespace, change_selection],
             "i" => change_textobject_inner,   // ciw, ci(, cip, ...
             "a" => change_textobject_around,  // caw, ca(, ...
+            "f" => change_find_char_forward,  // cf<c>
+            "t" => change_till_char_forward,  // ct<c>
+            "F" => change_find_char_backward, // cF<c>
+            "T" => change_till_char_backward, // cT<c>
         },
 
         // --- operator-pending: yank ----------------------------------------
@@ -220,6 +228,10 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "G" => [collapse_selection, extend_to_last_line, yank, collapse_selection],
             "i" => yank_textobject_inner,     // yiw, yi(, yip, ...
             "a" => yank_textobject_around,    // yaw, ya(, ...
+            "f" => yank_find_char_forward,    // yf<c>
+            "t" => yank_till_char_forward,    // yt<c>
+            "F" => yank_find_char_backward,   // yF<c>
+            "T" => yank_till_char_backward,   // yT<c>
         },
 
         // --- indent operators ----------------------------------------------
