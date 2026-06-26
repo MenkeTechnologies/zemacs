@@ -1045,3 +1045,27 @@ async fn transpose_chars_noop_at_buffer_start() -> anyhow::Result<()> {
 
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn transpose_words_basic() -> anyhow::Result<()> {
+    test((
+        "#[|f]#oo bar!\n",
+        ":transpose-words<ret>",
+        "bar foo#[!|]#\n",
+    ))
+    .await?;
+
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn transpose_words_noop_single_word() -> anyhow::Result<()> {
+    test((
+        "#[|f]#oo\n",
+        ":transpose-words<ret>",
+        "#[|f]#oo\n",
+    ))
+    .await?;
+
+    Ok(())
+}

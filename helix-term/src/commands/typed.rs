@@ -2558,6 +2558,69 @@ fn transpose_chars(
     Ok(())
 }
 
+fn transpose_words(
+    cx: &mut compositor::Context,
+    _args: Args,
+    event: PromptEvent,
+) -> anyhow::Result<()> {
+    use helix_core::chars::char_is_word;
+
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+
+    let (view, doc) = current!(cx.editor);
+    let slice = doc.text().slice(..);
+    let len = slice.len_chars();
+    let cursor = doc.selection(view.id).primary().cursor(slice).min(len);
+
+    // End of the word at/before the cursor.
+    let mut w1_end = cursor;
+    while w1_end < len && char_is_word(slice.char(w1_end)) {
+        w1_end += 1;
+    }
+    if w1_end == cursor {
+        // Cursor was not inside a word; back up to the previous word's end.
+        while w1_end > 0 && !char_is_word(slice.char(w1_end - 1)) {
+            w1_end -= 1;
+        }
+    }
+    let mut w1_start = w1_end;
+    while w1_start > 0 && char_is_word(slice.char(w1_start - 1)) {
+        w1_start -= 1;
+    }
+    if w1_start == w1_end {
+        return Ok(()); // no word before
+    }
+
+    // The next word after the first.
+    let mut w2_start = w1_end;
+    while w2_start < len && !char_is_word(slice.char(w2_start)) {
+        w2_start += 1;
+    }
+    if w2_start >= len {
+        return Ok(()); // no word after
+    }
+    let mut w2_end = w2_start;
+    while w2_end < len && char_is_word(slice.char(w2_end)) {
+        w2_end += 1;
+    }
+
+    let word1: Tendril = slice.slice(w1_start..w1_end).chunks().collect();
+    let sep: Tendril = slice.slice(w1_end..w2_start).chunks().collect();
+    let word2: Tendril = slice.slice(w2_start..w2_end).chunks().collect();
+    let swapped: Tendril = format!("{word2}{sep}{word1}").into();
+
+    let transaction =
+        Transaction::change(doc.text(), std::iter::once((w1_start, w2_end, Some(swapped))));
+    doc.apply(&transaction, view.id);
+    // Point lands after the transposed pair (emacs behaviour). Region length is
+    // unchanged, so w2_end is still the end of the swapped span.
+    doc.set_selection(view.id, Selection::point(w2_end.min(doc.text().len_chars())));
+    doc.append_changes_to_history(view);
+    Ok(())
+}
+
 fn duplicate_line(
     cx: &mut compositor::Context,
     _args: Args,
@@ -4057,6 +4120,17 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         aliases: &[],
         doc: "Move the current line up by one (drag up).",
         fun: move_line_up,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "transpose-words",
+        aliases: &[],
+        doc: "Transpose the word before the cursor with the word after it.",
+        fun: transpose_words,
         completer: CommandCompleter::none(),
         signature: Signature {
             positionals: (0, Some(0)),

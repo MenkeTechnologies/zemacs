@@ -2408,6 +2408,14 @@
     "note": "spacemacs SPC x t l -> move-line-up"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_x_t_w",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x t w"
+    ],
+    "note": "spacemacs SPC x t w -> transpose-words"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_x_u",
     "status": "ported",
     "evidence": [
