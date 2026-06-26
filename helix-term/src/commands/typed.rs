@@ -2558,6 +2558,62 @@ fn transpose_chars(
     Ok(())
 }
 
+fn delete_blank_lines(
+    cx: &mut compositor::Context,
+    _args: Args,
+    event: PromptEvent,
+) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+
+    let (view, doc) = current!(cx.editor);
+    let slice = doc.text().slice(..);
+    let total = slice.len_lines();
+    let len = slice.len_chars();
+
+    let is_blank = |line: usize| {
+        let start = slice.line_to_char(line);
+        let end = line_ending::line_end_char_index(&slice, line);
+        slice.slice(start..end).chars().all(|c| c == ' ' || c == '\t')
+    };
+
+    // Collapse each run of consecutive blank lines down to a single blank line.
+    let mut changes = Vec::new();
+    let mut line = 0;
+    while line < total {
+        if is_blank(line) {
+            let mut run_end = line;
+            while run_end < total && is_blank(run_end) {
+                run_end += 1;
+            }
+            if run_end - line > 1 {
+                let del_start = slice.line_to_char(line + 1);
+                let del_end = if run_end < total {
+                    slice.line_to_char(run_end)
+                } else {
+                    len
+                };
+                if del_start < del_end {
+                    changes.push((del_start, del_end, None));
+                }
+            }
+            line = run_end;
+        } else {
+            line += 1;
+        }
+    }
+
+    if changes.is_empty() {
+        return Ok(());
+    }
+
+    let transaction = Transaction::change(doc.text(), changes.into_iter());
+    doc.apply(&transaction, view.id);
+    doc.append_changes_to_history(view);
+    Ok(())
+}
+
 fn uniquify_lines(
     cx: &mut compositor::Context,
     _args: Args,
@@ -4164,6 +4220,17 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         aliases: &[],
         doc: "Move the current line up by one (drag up).",
         fun: move_line_up,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "delete-blank-lines",
+        aliases: &[],
+        doc: "Collapse consecutive blank lines down to a single blank line.",
+        fun: delete_blank_lines,
         completer: CommandCompleter::none(),
         signature: Signature {
             positionals: (0, Some(0)),

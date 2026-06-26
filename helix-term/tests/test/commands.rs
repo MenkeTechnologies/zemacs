@@ -1081,3 +1081,15 @@ async fn uniquify_lines_removes_duplicates() -> anyhow::Result<()> {
 
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn delete_blank_lines_collapses_runs() -> anyhow::Result<()> {
+    test((
+        "#[|a]#\n\n\nb\n",
+        ":delete-blank-lines<ret>",
+        "#[|a]#\n\nb\n",
+    ))
+    .await?;
+
+    Ok(())
+}
