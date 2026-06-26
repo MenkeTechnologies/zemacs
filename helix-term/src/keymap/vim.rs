@@ -301,6 +301,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "s" | "C-s" => hsplit,
             "v" | "C-v" => vsplit,
             "w" | "C-w" => rotate_view,
+            "r" => rotate_view,
             "q" | "C-q" => wclose,
             "d" | "C-d" => wclose,
             "o" | "C-o" => wonly,
@@ -343,12 +344,14 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "/"     => global_search,              // SPC /   : search project
             "?"     => command_palette,            // SPC ?   : commands
             "'"     => last_picker,                // SPC '   : resume picker
+            ";"     => toggle_comments,            // SPC ;   : comment operator
 
             "f" => { "Files"
                 "f" => file_picker,                            // SPC f f
                 "r" => goto_last_modified_file,                // SPC f r
                 "t" => file_explorer,                          // SPC f t
                 "d" => file_explorer_in_current_buffer_directory, // SPC f d
+                "j" => file_explorer_in_current_buffer_directory, // SPC f j : dired
             },
             "b" => { "Buffers"
                 "b" => buffer_picker,              // SPC b b
@@ -362,6 +365,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "s" | "C-s" => hsplit,
                 "v" | "C-v" => vsplit,
                 "w" | "C-w" => rotate_view,
+                "r" => rotate_view,
                 "q" | "C-q" => wclose,
                 "d" | "C-d" => wclose,
                 "o" | "C-o" => wonly,
@@ -373,13 +377,17 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "s" => { "Search"
                 "s" => global_search,              // SPC s s
                 "f" => global_search,              // SPC s f
+                "b" => global_search,              // SPC s b
                 "p" => global_search,              // SPC s p
                 "j" => symbol_picker,              // SPC s j
+                "e" => select_references_to_symbol_under_cursor, // SPC s e : edit occurrences
                 "S" => workspace_symbol_picker,
             },
             "p" => { "Project"
                 "f" => file_picker,                // SPC p f
                 "p" => file_picker,                // SPC p p
+                "b" => buffer_picker,              // SPC p b : project buffer
+                "h" => file_picker,                // SPC p h : find file
                 "s" => global_search,              // SPC p s
                 "r" => goto_last_modified_file,    // SPC p r
             },
@@ -403,6 +411,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "$" => goto_line_end,              // SPC j $
                 "b" => jump_backward,              // SPC j b : back to prev location
                 "d" => file_explorer_in_current_buffer_directory, // SPC j d : dir listing
+                "c" => goto_last_change,           // SPC j c : go to last change
                 "k" => [move_visual_line_down, indent], // SPC j k : next line + indent
             },
             "g" => { "Goto (LSP)"

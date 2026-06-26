@@ -2104,6 +2104,30 @@
     "note": "reload file from disk"
   },
   {
+    "spec_id": "neovim.normal-mode.gu_lbrace_motion_rbrace",
+    "status": "partial",
+    "evidence": [
+      "key:normal:g U w"
+    ],
+    "note": "vim gU{motion} via gU/gu/g~ operator submap (motion subset: w/W/e/b/$/^/line)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.gu_lbrace_motion_rbrace_1",
+    "status": "partial",
+    "evidence": [
+      "key:normal:g u w"
+    ],
+    "note": "vim gu{motion} via gU/gu/g~ operator submap (motion subset: w/W/e/b/$/^/line)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.g_tilde_lbrace_motion_rbrace",
+    "status": "partial",
+    "evidence": [
+      "key:normal:g ~ w"
+    ],
+    "note": "vim g~{motion} via gU/gu/g~ operator submap (motion subset: w/W/e/b/$/^/line)"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_t_h_h",
     "status": "ported",
     "evidence": [
@@ -2192,6 +2216,14 @@
     "note": "spacemacs SPC j j -> jumplist_picker"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_j_c",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j c"
+    ],
+    "note": "spacemacs SPC j c -> goto_last_change"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_j_d",
     "status": "ported",
     "evidence": [
@@ -2270,6 +2302,14 @@
       "key:normal:space w o"
     ],
     "note": "spacemacs SPC w o -> wonly"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_r",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w r"
+    ],
+    "note": "spacemacs SPC w r -> rotate_view"
   },
   {
     "spec_id": "spacemacs.keybinding.spc_w_w",
@@ -2368,6 +2408,14 @@
     "note": "spacemacs SPC f f -> file_picker"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_f_j",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space f j"
+    ],
+    "note": "spacemacs SPC f j -> file_explorer_in_current_buffer_directory"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_f_r",
     "status": "ported",
     "evidence": [
@@ -2408,12 +2456,28 @@
     "note": "spacemacs SPC s s -> global_search"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_s_b",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s b"
+    ],
+    "note": "spacemacs SPC s b -> global_search"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_s_f",
     "status": "ported",
     "evidence": [
       "key:normal:space s f"
     ],
     "note": "spacemacs SPC s f -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_e",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s e"
+    ],
+    "note": "spacemacs SPC s e -> select_references_to_symbol_under_cursor"
   },
   {
     "spec_id": "spacemacs.keybinding.spc_x_tab",
@@ -2568,6 +2632,14 @@
     "note": "spacemacs SPC v -> expand_selection"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space ;"
+    ],
+    "note": "spacemacs SPC ; -> toggle_comments"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_c_l",
     "status": "ported",
     "evidence": [
@@ -2576,12 +2648,28 @@
     "note": "spacemacs SPC c l -> toggle_line_comments"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_p_b",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space p b"
+    ],
+    "note": "spacemacs SPC p b -> buffer_picker"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_p_f",
     "status": "ported",
     "evidence": [
       "key:normal:space p f"
     ],
     "note": "spacemacs SPC p f -> file_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_h",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space p h"
+    ],
+    "note": "spacemacs SPC p h -> file_picker"
   },
   {
     "spec_id": "spacemacs.keybinding.spc_p_p",
@@ -2662,29 +2750,5 @@
       "key:normal:space q s"
     ],
     "note": "spacemacs SPC q s -> write-quit-all"
-  },
-  {
-    "spec_id": "neovim.normal-mode.gu_lbrace_motion_rbrace",
-    "status": "partial",
-    "evidence": [
-      "key:normal:g U w"
-    ],
-    "note": "vim gU{motion} via gU/gu/g~ operator submap (motion subset: w/W/e/b/$/^/line)"
-  },
-  {
-    "spec_id": "neovim.normal-mode.gu_lbrace_motion_rbrace_1",
-    "status": "partial",
-    "evidence": [
-      "key:normal:g u w"
-    ],
-    "note": "vim gu{motion} via gU/gu/g~ operator submap (motion subset: w/W/e/b/$/^/line)"
-  },
-  {
-    "spec_id": "neovim.normal-mode.g_tilde_lbrace_motion_rbrace",
-    "status": "partial",
-    "evidence": [
-      "key:normal:g ~ w"
-    ],
-    "note": "vim g~{motion} via gU/gu/g~ operator submap (motion subset: w/W/e/b/$/^/line)"
   }
 ]
