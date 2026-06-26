@@ -2838,5 +2838,21 @@
       "typable:copy-lines"
     ],
     "note": "vim :t via :t{addr} (move/copy lines)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.quote_lbrace_register_rbrace",
+    "status": "ported",
+    "evidence": [
+      "key:normal:\""
+    ],
+    "note": "vim \"{register} register select for next y/d/p"
+  },
+  {
+    "spec_id": "neovim.normal-mode.quote_backtick_backtick_quote",
+    "status": "ported",
+    "evidence": [
+      "key:normal:\""
+    ],
+    "note": "vim \"``\" register select for next y/d/p"
   }
 ]

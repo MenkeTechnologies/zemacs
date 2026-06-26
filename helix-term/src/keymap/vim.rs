@@ -132,6 +132,9 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "`"  => goto_mark,       // `{a-z} jump to mark (exact)
         "'"  => goto_mark_line,  // '{a-z} jump to mark line
 
+        // --- registers ------------------------------------------------------
+        "\"" => select_register, // "{reg} select register for next y/d/p
+
         // --- screen motions -------------------------------------------------
         "H" => goto_window_top,
         "M" => goto_window_center,

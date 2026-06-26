@@ -1306,3 +1306,16 @@ async fn copy_lines_to_top() -> anyhow::Result<()> {
     test(("a\n#[|b]#\nc\n", ":t0<ret>", "#[b|]#\na\nb\nc\n")).await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn vim_named_register_yank_paste() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(helix_term::config::Config {
+            keys: helix_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        ("#[|x]#\ny\n", "\"ayyj\"ap", "x\ny\n#[x\n|]#"),
+    )
+    .await?;
+    Ok(())
+}
