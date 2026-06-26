@@ -2000,46 +2000,6 @@
     "note": "vim :goto is byte offset; zemacs goes to line"
   },
   {
-    "spec_id": "spacemacs.keybinding.spc_w_h",
-    "status": "ported",
-    "evidence": [
-      "key:normal:space w h"
-    ],
-    "note": "window left"
-  },
-  {
-    "spec_id": "spacemacs.keybinding.spc_w_j",
-    "status": "ported",
-    "evidence": [
-      "key:normal:space w j"
-    ],
-    "note": "window below"
-  },
-  {
-    "spec_id": "spacemacs.keybinding.spc_w_k",
-    "status": "ported",
-    "evidence": [
-      "key:normal:space w k"
-    ],
-    "note": "window above"
-  },
-  {
-    "spec_id": "spacemacs.keybinding.spc_w_l",
-    "status": "ported",
-    "evidence": [
-      "key:normal:space w l"
-    ],
-    "note": "window right"
-  },
-  {
-    "spec_id": "spacemacs.keybinding.spc_w_w",
-    "status": "ported",
-    "evidence": [
-      "key:normal:space w w"
-    ],
-    "note": "cycle windows"
-  },
-  {
     "spec_id": "emacs.command.find_file",
     "status": "ported",
     "evidence": [
@@ -2142,5 +2102,237 @@
       "typable:reload"
     ],
     "note": "reload file from disk"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_spc",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space space"
+    ],
+    "note": "spacemacs SPC SPC -> command_palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_j",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j j"
+    ],
+    "note": "spacemacs SPC j j -> jumplist_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_i",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j i"
+    ],
+    "note": "spacemacs SPC j i -> symbol_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_h",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w h"
+    ],
+    "note": "spacemacs SPC w h -> jump_view_left"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_j",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w j"
+    ],
+    "note": "spacemacs SPC w j -> jump_view_down"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_k",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w k"
+    ],
+    "note": "spacemacs SPC w k -> jump_view_up"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w l"
+    ],
+    "note": "spacemacs SPC w l -> jump_view_right"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_o",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w o"
+    ],
+    "note": "spacemacs SPC w o -> wonly"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_w",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w w"
+    ],
+    "note": "spacemacs SPC w w -> rotate_view"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_tab",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space tab"
+    ],
+    "note": "spacemacs SPC TAB -> goto_last_accessed_file"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_b",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b b"
+    ],
+    "note": "spacemacs SPC b b -> buffer_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_n",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b n"
+    ],
+    "note": "spacemacs SPC b n -> goto_next_buffer"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_m",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b m"
+    ],
+    "note": "spacemacs SPC b m -> changed_file_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b p"
+    ],
+    "note": "spacemacs SPC b p -> goto_previous_buffer"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space f d"
+    ],
+    "note": "spacemacs SPC f d -> file_explorer_in_current_buffer_directory"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_f",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space f f"
+    ],
+    "note": "spacemacs SPC f f -> file_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_t",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space f t"
+    ],
+    "note": "spacemacs SPC f t -> file_explorer"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s s"
+    ],
+    "note": "spacemacs SPC s s -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_f",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s f"
+    ],
+    "note": "spacemacs SPC s f -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_c_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space c l"
+    ],
+    "note": "spacemacs SPC c l -> toggle_line_comments"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_f",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space p f"
+    ],
+    "note": "spacemacs SPC p f -> file_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space p p"
+    ],
+    "note": "spacemacs SPC p p -> file_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_r",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space p r"
+    ],
+    "note": "spacemacs SPC p r -> goto_last_modified_file"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s p"
+    ],
+    "note": "spacemacs SPC s p -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_e_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space e l"
+    ],
+    "note": "spacemacs SPC e l -> diagnostics_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_e_n",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space e n"
+    ],
+    "note": "spacemacs SPC e n -> goto_next_diag"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_e_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space e p"
+    ],
+    "note": "spacemacs SPC e p -> goto_prev_diag"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_e",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space e ."
+    ],
+    "note": "spacemacs SPC e . -> goto_last_diag"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_c_c",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space c c"
+    ],
+    "note": "spacemacs SPC c c -> toggle_comments"
   }
 ]

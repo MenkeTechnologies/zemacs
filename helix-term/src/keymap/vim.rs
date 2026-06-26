@@ -223,24 +223,32 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "esc" => collapse_selection,
 
         // --- leader (space) — kept for pickers / LSP / commands ------------
+        // --- leader (space): spacemacs SPC tree ----------------------------
+        // Structured to mirror spacemacs' SPC keybinding tree. Only bindings
+        // that map to a real zemacs static command are present; spacemacs
+        // bindings needing a typable (`:w` save, `:q` quit, `:bd`) are not yet
+        // expressible in the keymap macro and remain tracked as absent.
         "," => keep_primary_selection,
-        "space" => { "Leader"
-            "f" => file_picker,
-            "b" => buffer_picker,
-            "j" => jumplist_picker,
-            "s" => symbol_picker,
-            "S" => workspace_symbol_picker,
-            "d" => diagnostics_picker,
-            "/" => global_search,
-            "k" => hover,
-            "r" => rename_symbol,
-            "a" => code_action,
-            "'" => last_picker,
-            "y" => yank_to_clipboard,
-            "p" => paste_clipboard_after,
-            "P" => paste_clipboard_before,
-            "?" => command_palette,
-            "c" => toggle_comments,
+        "space" => { "Leader (spacemacs SPC)"
+            "space" => command_palette,            // SPC SPC : M-x
+            "tab"   => goto_last_accessed_file,    // SPC TAB : alternate buffer
+            ":"     => command_mode,               // SPC :   : Ex command
+            "/"     => global_search,              // SPC /   : search project
+            "?"     => command_palette,            // SPC ?   : commands
+            "'"     => last_picker,                // SPC '   : resume picker
+
+            "f" => { "Files"
+                "f" => file_picker,                            // SPC f f
+                "r" => goto_last_modified_file,                // SPC f r
+                "t" => file_explorer,                          // SPC f t
+                "d" => file_explorer_in_current_buffer_directory, // SPC f d
+            },
+            "b" => { "Buffers"
+                "b" => buffer_picker,              // SPC b b
+                "n" => goto_next_buffer,           // SPC b n
+                "p" => goto_previous_buffer,       // SPC b p
+                "m" => changed_file_picker,        // SPC b m
+            },
             // Kept identical to the `C-w` window submap (see aliased-modes test).
             "w" => { "Window"
                 "s" | "C-s" => hsplit,
@@ -252,6 +260,50 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "j" | "C-j" => jump_view_down,
                 "k" | "C-k" => jump_view_up,
                 "l" | "C-l" => jump_view_right,
+            },
+            "s" => { "Search"
+                "s" => global_search,              // SPC s s
+                "f" => global_search,              // SPC s f
+                "p" => global_search,              // SPC s p
+                "j" => symbol_picker,              // SPC s j
+                "S" => workspace_symbol_picker,
+            },
+            "p" => { "Project"
+                "f" => file_picker,                // SPC p f
+                "p" => file_picker,                // SPC p p
+                "s" => global_search,              // SPC p s
+                "r" => goto_last_modified_file,    // SPC p r
+            },
+            "e" => { "Errors"
+                "l" => diagnostics_picker,             // SPC e l
+                "L" => workspace_diagnostics_picker,   // SPC e L
+                "n" => goto_next_diag,                 // SPC e n
+                "p" => goto_prev_diag,                 // SPC e p
+                "f" => goto_first_diag,                // SPC e f
+                "." => goto_last_diag,
+            },
+            "c" => { "Comments"
+                "l" => toggle_line_comments,       // SPC c l
+                "c" => toggle_comments,            // SPC c c
+                "b" => toggle_block_comments,      // SPC c b
+            },
+            "j" => { "Jump"
+                "i" => symbol_picker,              // SPC j i
+                "j" => jumplist_picker,            // SPC j j
+            },
+            "g" => { "Goto (LSP)"
+                "d" => goto_definition,
+                "D" => goto_declaration,
+                "r" => goto_reference,
+                "i" => goto_implementation,
+                "y" => goto_type_definition,
+            },
+            "l" => { "LSP"
+                "r" => rename_symbol,              // SPC l r
+                "a" => code_action,                // SPC l a
+                "k" => hover,                      // SPC l k
+                "s" => signature_help,             // SPC l s
+                "f" => format_selections,          // SPC l f
             },
         },
     });
@@ -392,6 +444,30 @@ mod tests {
         assert_eq!(cmd_name(resolve(n, "x").unwrap()), Some("delete_selection"));
         assert_eq!(cmd_name(resolve(n, "i").unwrap()), Some("insert_mode"));
         assert_eq!(cmd_name(resolve(n, "a").unwrap()), Some("append_mode"));
+    }
+
+    #[test]
+    fn spacemacs_leader_tree_bound() {
+        let km = default();
+        let n = &km[&Mode::Normal];
+        // spacemacs SPC tree resolves to the expected zemacs commands.
+        assert_eq!(cmd_name(resolve(n, "space f f").unwrap()), Some("file_picker"));
+        assert_eq!(
+            cmd_name(resolve(n, "space b b").unwrap()),
+            Some("buffer_picker")
+        );
+        assert_eq!(
+            cmd_name(resolve(n, "space space").unwrap()),
+            Some("command_palette")
+        );
+        assert_eq!(
+            cmd_name(resolve(n, "space e n").unwrap()),
+            Some("goto_next_diag")
+        );
+        assert_eq!(
+            cmd_name(resolve(n, "space s s").unwrap()),
+            Some("global_search")
+        );
     }
 
     #[test]
