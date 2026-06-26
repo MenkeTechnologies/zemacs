@@ -985,3 +985,39 @@ async fn duplicate_line_last_no_trailing_newline() -> anyhow::Result<()> {
 
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn move_line_down_middle() -> anyhow::Result<()> {
+    test((
+        "#[|a]#aa\nbbb\nccc\n",
+        ":move-line-down<ret>",
+        "bbb\n#[a|]#aa\nccc\n",
+    ))
+    .await?;
+
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn move_line_up_middle() -> anyhow::Result<()> {
+    test((
+        "aaa\n#[|b]#bb\nccc\n",
+        ":move-line-up<ret>",
+        "#[b|]#bb\naaa\nccc\n",
+    ))
+    .await?;
+
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn move_line_down_into_last_no_newline() -> anyhow::Result<()> {
+    test((
+        "#[|a]#aa\nbbb",
+        ":move-line-down<ret>",
+        "bbb\n#[a|]#aa",
+    ))
+    .await?;
+
+    Ok(())
+}

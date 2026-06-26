@@ -53,6 +53,8 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space t w",   "Toggles", ":toggle whitespace.render all none"),    // whitespace
     ("space x d w", "Text",    ":delete-trailing-whitespace"),           // SPC x d w
     ("space x l d", "Text",    ":duplicate-line"),                       // SPC x l d
+    ("space x J",   "Text",    ":move-line-down"),                       // SPC x J : drag down
+    ("space x K",   "Text",    ":move-line-up"),                         // SPC x K : drag up
 ];
 
 /// Insert `cmd` at `path` under `root`, creating intermediate submap nodes

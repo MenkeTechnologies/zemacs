@@ -2360,6 +2360,22 @@
     "note": "spacemacs SPC x d w -> delete-trailing-whitespace"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_x_j",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x J"
+    ],
+    "note": "spacemacs SPC x J -> move-line-down"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_k",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x K"
+    ],
+    "note": "spacemacs SPC x K -> move-line-up"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_x_l_d",
     "status": "ported",
     "evidence": [

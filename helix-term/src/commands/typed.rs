@@ -2425,6 +2425,95 @@ fn language(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> any
     Ok(())
 }
 
+/// Swap consecutive line `upper` with the line below it, keeping the primary
+/// cursor on the line it started on. `cursor_on_upper` selects which of the two
+/// swapped lines the cursor follows (true = the originally-upper line).
+fn swap_lines(cx: &mut compositor::Context, upper: usize, cursor_on_upper: bool) {
+    let (view, doc) = current!(cx.editor);
+    let line_ending = doc.line_ending.as_str();
+    let slice = doc.text().slice(..);
+    let total_lines = slice.len_lines();
+
+    if upper + 1 >= total_lines {
+        return;
+    }
+
+    let start = slice.line_to_char(upper);
+    let mid = slice.line_to_char(upper + 1);
+    let end = slice.line_to_char((upper + 2).min(total_lines));
+
+    let first: Tendril = slice.slice(start..mid).chunks().collect();
+    let second: Tendril = slice.slice(mid..end).chunks().collect();
+    if second.is_empty() {
+        // The line below is the phantom trailing empty line — nothing to swap.
+        return;
+    }
+
+    // Build "second then first". If `second` is the last line (no trailing
+    // newline) move `first`'s ending in front of it so line structure is kept.
+    let swapped: Tendril = if second.ends_with('\n') {
+        format!("{second}{first}").into()
+    } else {
+        let body = first
+            .strip_suffix('\n')
+            .map(|s| s.strip_suffix('\r').unwrap_or(s))
+            .unwrap_or(&first);
+        format!("{second}{line_ending}{body}").into()
+    };
+
+    // Preserve the cursor's column on whichever line it followed.
+    let cursor = doc.selection(view.id).primary().cursor(slice);
+    let cursor_line = if cursor_on_upper { upper } else { upper + 1 };
+    let col = cursor.saturating_sub(slice.line_to_char(cursor_line));
+
+    let transaction = Transaction::change(doc.text(), std::iter::once((start, end, Some(swapped))));
+    doc.apply(&transaction, view.id);
+
+    // After the swap the followed line sits at the opposite index.
+    let new_slice = doc.text().slice(..);
+    let new_line = if cursor_on_upper { upper + 1 } else { upper };
+    let line_start = new_slice.line_to_char(new_line);
+    let line_end = line_ending::line_end_char_index(&new_slice, new_line);
+    let new_cursor = (line_start + col).min(line_end);
+    doc.set_selection(view.id, Selection::point(new_cursor));
+    doc.append_changes_to_history(view);
+}
+
+fn move_line_down(
+    cx: &mut compositor::Context,
+    _args: Args,
+    event: PromptEvent,
+) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    let (view, doc) = current!(cx.editor);
+    let slice = doc.text().slice(..);
+    let line = slice.char_to_line(doc.selection(view.id).primary().cursor(slice));
+    // Swap this line with the one below; cursor follows the originally-upper line.
+    swap_lines(cx, line, true);
+    Ok(())
+}
+
+fn move_line_up(
+    cx: &mut compositor::Context,
+    _args: Args,
+    event: PromptEvent,
+) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    let (view, doc) = current!(cx.editor);
+    let slice = doc.text().slice(..);
+    let line = slice.char_to_line(doc.selection(view.id).primary().cursor(slice));
+    if line == 0 {
+        return Ok(());
+    }
+    // Swap the line above with this line; cursor follows the originally-lower line.
+    swap_lines(cx, line - 1, false);
+    Ok(())
+}
+
 fn duplicate_line(
     cx: &mut compositor::Context,
     _args: Args,
@@ -3905,6 +3994,28 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         completer: CommandCompleter::positional(&[completers::setting]),
         signature: Signature {
             positionals: (1, Some(1)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "move-line-down",
+        aliases: &[],
+        doc: "Move the current line down by one (drag down).",
+        fun: move_line_down,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "move-line-up",
+        aliases: &[],
+        doc: "Move the current line up by one (drag up).",
+        fun: move_line_up,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
             ..Signature::DEFAULT
         },
     },
