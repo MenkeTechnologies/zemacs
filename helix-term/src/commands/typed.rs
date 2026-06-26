@@ -2425,6 +2425,43 @@ fn language(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> any
     Ok(())
 }
 
+fn duplicate_line(
+    cx: &mut compositor::Context,
+    _args: Args,
+    event: PromptEvent,
+) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+
+    let (view, doc) = current!(cx.editor);
+    let line_ending = doc.line_ending.as_str();
+    let slice = doc.text().slice(..);
+
+    let cursor = doc.selection(view.id).primary().cursor(slice);
+    let line = slice.char_to_line(cursor);
+    let from = slice.line_to_char(line);
+    let to = if line + 1 < slice.len_lines() {
+        slice.line_to_char(line + 1)
+    } else {
+        slice.len_chars()
+    };
+
+    let line_text: Tendril = slice.slice(from..to).chunks().collect();
+    // Insert a copy as a whole new line below. If the current line has no
+    // trailing newline (last line), prepend one so the copy lands on its own line.
+    let dup: Tendril = if line_text.ends_with('\n') {
+        line_text
+    } else {
+        format!("{line_ending}{line_text}").into()
+    };
+
+    let transaction = Transaction::change(doc.text(), std::iter::once((to, to, Some(dup))));
+    doc.apply(&transaction, view.id);
+    doc.append_changes_to_history(view);
+    Ok(())
+}
+
 fn delete_trailing_whitespace(
     cx: &mut compositor::Context,
     _args: Args,
@@ -3868,6 +3905,17 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         completer: CommandCompleter::positional(&[completers::setting]),
         signature: Signature {
             positionals: (1, Some(1)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "duplicate-line",
+        aliases: &["dup"],
+        doc: "Duplicate the current line below.",
+        fun: duplicate_line,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
             ..Signature::DEFAULT
         },
     },

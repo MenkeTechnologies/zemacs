@@ -961,3 +961,27 @@ async fn delete_trailing_whitespace_removes_eol_spaces() -> anyhow::Result<()> {
 
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn duplicate_line_middle() -> anyhow::Result<()> {
+    test((
+        "#[|a]#bc\ndef\n",
+        ":duplicate-line<ret>",
+        "#[|a]#bc\nabc\ndef\n",
+    ))
+    .await?;
+
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn duplicate_line_last_no_trailing_newline() -> anyhow::Result<()> {
+    test((
+        "abc\n#[|x]#yz",
+        ":duplicate-line<ret>",
+        "abc\n#[|x]#yz\nxyz",
+    ))
+    .await?;
+
+    Ok(())
+}
