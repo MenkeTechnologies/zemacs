@@ -11,6 +11,15 @@
 rustflags = ["--cfg", "tokio_unstable", "-C", "target-feature=-crt-static"]
 
 
+# Bake the in-repo runtime/ directory (grammars, queries, themes, tutor) in as
+# the build-time fallback runtime path, so a directly-launched `zemacs` binary
+# finds syntax highlighting/queries without a wrapper, env var, or symlink.
+# `relative = true` resolves against the workspace root, so this stays portable
+# across checkouts. It is a fallback (priority below the user config dir), so it
+# never overrides a real user runtime.
+[env]
+HELIX_DEFAULT_RUNTIME = { value = "runtime", relative = true }
+
 [alias]
 xtask = "run --package xtask --"
 integration-test = "test --features integration --profile integration --workspace --test integration"

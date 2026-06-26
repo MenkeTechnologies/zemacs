@@ -38,7 +38,7 @@ async fn main_impl() -> Result<i32> {
 {}
 
 USAGE:
-    hx [FLAGS] [files]...
+    zemacs [FLAGS] [files]...
 
 ARGS:
     <files>...    Set the input file to use, position can also be specified via file[:row[:col]]
@@ -64,7 +64,7 @@ FLAGS:
     +[N]                           Open the first given file at line number N, or the last line, if
                                    N is not specified.
 ",
-            env!("CARGO_PKG_NAME"),
+            "zemacs",
             VERSION_AND_GIT_HASH,
             env!("CARGO_PKG_AUTHORS"),
             env!("CARGO_PKG_DESCRIPTION"),
@@ -74,7 +74,7 @@ FLAGS:
     }
 
     if args.display_version {
-        println!("helix {}", VERSION_AND_GIT_HASH);
+        println!("zemacs {}", VERSION_AND_GIT_HASH);
         std::process::exit(0);
     }
 
