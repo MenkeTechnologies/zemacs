@@ -326,6 +326,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "n" => goto_next_buffer,           // SPC b n
                 "p" => goto_previous_buffer,       // SPC b p
                 "m" => changed_file_picker,        // SPC b m
+                "Y" => [select_all, yank_to_clipboard, collapse_selection], // SPC b Y
             },
             // Kept identical to the `C-w` window submap (see aliased-modes test).
             "w" => { "Window"
@@ -373,6 +374,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "$" => goto_line_end,              // SPC j $
                 "b" => jump_backward,              // SPC j b : back to prev location
                 "d" => file_explorer_in_current_buffer_directory, // SPC j d : dir listing
+                "k" => [move_visual_line_down, indent], // SPC j k : next line + indent
             },
             "g" => { "Goto (LSP)"
                 "d" => goto_definition,
@@ -391,6 +393,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "v" => expand_selection,               // SPC v : expand region
             "x" => { "Text"
                 "u" => switch_to_lowercase,        // SPC x u : lowercase
+                "tab" => indent,                   // SPC x TAB : indent region
                 "a" => { "Align"
                     "a" => align_selections,       // SPC x a a : align region
                 },
@@ -584,6 +587,24 @@ mod tests {
                 "{chord_str} should be a typable command"
             );
         }
+    }
+
+    #[test]
+    fn spacemacs_composite_bindings_are_sequences() {
+        let km = default();
+        let n = &km[&Mode::Normal];
+        for chord in ["space j k", "space b Y"] {
+            let leaf =
+                resolve(n, chord).unwrap_or_else(|| panic!("{chord} did not resolve"));
+            assert!(
+                matches!(leaf, KeyTrie::Sequence(_)),
+                "{chord} should be a command sequence"
+            );
+        }
+        assert_eq!(
+            cmd_name(resolve(n, "space x tab").unwrap()),
+            Some("indent")
+        );
     }
 
     #[test]

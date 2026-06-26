@@ -2208,6 +2208,14 @@
     "note": "spacemacs SPC j i -> symbol_picker"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_j_k",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j k"
+    ],
+    "note": "spacemacs SPC j k -> move_visual_line_down"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_j_n",
     "status": "ported",
     "evidence": [
@@ -2336,6 +2344,14 @@
     "note": "spacemacs SPC b s -> new"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_b_y",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b Y"
+    ],
+    "note": "spacemacs SPC b Y -> select_all"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_f_d",
     "status": "ported",
     "evidence": [
@@ -2398,6 +2414,14 @@
       "key:normal:space s f"
     ],
     "note": "spacemacs SPC s f -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_tab",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x tab"
+    ],
+    "note": "spacemacs SPC x TAB -> indent"
   },
   {
     "spec_id": "spacemacs.keybinding.spc_x_a_a",
