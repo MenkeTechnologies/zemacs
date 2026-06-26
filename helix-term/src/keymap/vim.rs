@@ -43,6 +43,7 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space q Q", "Quit",    ":quit-all!"),        // SPC q Q : force quit
     ("space q s", "Quit",    ":write-quit-all"),   // SPC q s : save and quit
     ("space f T", "Files",   ":theme"),            // SPC T n / theme
+    ("space x l s", "Text",  ":sort"),             // SPC x l s : sort lines
 ];
 
 /// Insert `cmd` at `path` under `root`, creating intermediate submap nodes
@@ -356,6 +357,16 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "k" => hover,                      // SPC l k
                 "s" => signature_help,             // SPC l s
                 "f" => format_selections,          // SPC l f
+            },
+            "v" => expand_selection,               // SPC v : expand region
+            "x" => { "Text"
+                "u" => switch_to_lowercase,        // SPC x u : lowercase
+                "a" => { "Align"
+                    "a" => align_selections,       // SPC x a a : align region
+                },
+            },
+            "r" => { "Resume / registers"
+                "l" => last_picker,                // SPC r l : resume picker
             },
         },
     });

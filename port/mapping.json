@@ -2272,6 +2272,14 @@
     "note": "spacemacs SPC f t -> file_explorer"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_r_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space r l"
+    ],
+    "note": "spacemacs SPC r l -> last_picker"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_s_s",
     "status": "ported",
     "evidence": [
@@ -2286,6 +2294,38 @@
       "key:normal:space s f"
     ],
     "note": "spacemacs SPC s f -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_a",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x a a"
+    ],
+    "note": "spacemacs SPC x a a -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_l_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x l s"
+    ],
+    "note": "spacemacs SPC x l s -> sort"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_u",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x u"
+    ],
+    "note": "spacemacs SPC x u -> switch_to_lowercase"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_v",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space v"
+    ],
+    "note": "spacemacs SPC v -> expand_selection"
   },
   {
     "spec_id": "spacemacs.keybinding.spc_c_l",
