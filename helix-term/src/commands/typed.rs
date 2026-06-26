@@ -2558,6 +2558,93 @@ fn transpose_chars(
     Ok(())
 }
 
+/// Split a symbol into lowercase words on `_`, `-`, and camelCase boundaries.
+fn split_symbol_words(s: &str) -> Vec<String> {
+    let mut words = Vec::new();
+    let mut cur = String::new();
+    let mut prev: Option<char> = None;
+    for c in s.chars() {
+        if c == '_' || c == '-' {
+            if !cur.is_empty() {
+                words.push(std::mem::take(&mut cur));
+            }
+        } else if c.is_uppercase() && prev.is_some_and(|p| p.is_lowercase() || p.is_numeric()) {
+            if !cur.is_empty() {
+                words.push(std::mem::take(&mut cur));
+            }
+            cur.push(c);
+        } else {
+            cur.push(c);
+        }
+        prev = Some(c);
+    }
+    if !cur.is_empty() {
+        words.push(cur);
+    }
+    words.iter().map(|w| w.to_lowercase()).collect()
+}
+
+fn capitalize(w: &str) -> String {
+    let mut chars = w.chars();
+    match chars.next() {
+        Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
+        None => String::new(),
+    }
+}
+
+fn change_case(
+    cx: &mut compositor::Context,
+    args: Args,
+    event: PromptEvent,
+) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+
+    let style = args[0].to_lowercase();
+
+    let (view, doc) = current!(cx.editor);
+    let slice = doc.text().slice(..);
+    let len = slice.len_chars();
+    let cursor = doc.selection(view.id).primary().cursor(slice).min(len);
+
+    let is_sym = |c: char| c.is_alphanumeric() || c == '_' || c == '-';
+    let mut start = cursor;
+    while start > 0 && is_sym(slice.char(start - 1)) {
+        start -= 1;
+    }
+    let mut end = cursor;
+    while end < len && is_sym(slice.char(end)) {
+        end += 1;
+    }
+    if start == end {
+        return Ok(()); // no symbol under cursor
+    }
+
+    let sym: String = slice.slice(start..end).chunks().collect();
+    let words = split_symbol_words(&sym);
+    let result = match style.as_str() {
+        "snake" => words.join("_"),
+        "kebab" => words.join("-"),
+        "camel" => words
+            .iter()
+            .enumerate()
+            .map(|(i, w)| if i == 0 { w.clone() } else { capitalize(w) })
+            .collect::<String>(),
+        "pascal" => words.iter().map(|w| capitalize(w)).collect::<String>(),
+        other => bail!("Unknown case style `{other}` (use camel|snake|kebab|pascal)"),
+    };
+
+    let transaction = Transaction::change(
+        doc.text(),
+        std::iter::once((start, end, Some(Tendril::from(result.as_str())))),
+    );
+    doc.apply(&transaction, view.id);
+    doc.set_selection(view.id, Selection::point(start.min(doc.text().len_chars())));
+    doc.append_changes_to_history(view);
+    Ok(())
+}
+
 fn just_one_space(
     cx: &mut compositor::Context,
     _args: Args,
@@ -4259,6 +4346,17 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         completer: CommandCompleter::none(),
         signature: Signature {
             positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "change-case",
+        aliases: &[],
+        doc: "Change the symbol under the cursor to camel|snake|kebab|pascal case.",
+        fun: change_case,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (1, Some(1)),
             ..Signature::DEFAULT
         },
     },

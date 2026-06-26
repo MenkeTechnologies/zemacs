@@ -2376,6 +2376,30 @@
     "note": "spacemacs SPC x d SPC -> just-one-space"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_x_i_c",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x i c"
+    ],
+    "note": "spacemacs SPC x i c -> change-case camel"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_i_k",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x i k"
+    ],
+    "note": "spacemacs SPC x i k -> change-case kebab"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_i_u",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x i u"
+    ],
+    "note": "spacemacs SPC x i u -> change-case snake"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_x_j",
     "status": "ported",
     "evidence": [
