@@ -124,6 +124,15 @@ def parse_keymap():
         elif m.group(4):  # merge_nodes: layer onto existing map
             body, _ = brace_body(m.end())
             _walk_keymap(body, [], result[m.group(4)])
+
+    # Bindings inserted programmatically after macro construction (typable `:`
+    # commands the macro cannot express) are declared in a parseable table:
+    #   ("space f s", "Files", ":write"),
+    for tm in re.finditer(
+        r'\(\s*"(space [^"]+)"\s*,\s*"[^"]*"\s*,\s*"(:?[a-z][a-z0-9!_-]*)"\s*\)', src
+    ):
+        chord, cmd = tm.group(1), tm.group(2).lstrip(":")
+        result["normal"][chord] = cmd
     return result
 
 

@@ -2192,6 +2192,14 @@
     "note": "spacemacs SPC b b -> buffer_picker"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_b_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b d"
+    ],
+    "note": "spacemacs SPC b d -> buffer-close"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_b_n",
     "status": "ported",
     "evidence": [
@@ -2216,6 +2224,14 @@
     "note": "spacemacs SPC b p -> goto_previous_buffer"
   },
   {
+    "spec_id": "spacemacs.keybinding.spc_b_r",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b R"
+    ],
+    "note": "spacemacs SPC b R -> reload"
+  },
+  {
     "spec_id": "spacemacs.keybinding.spc_f_d",
     "status": "ported",
     "evidence": [
@@ -2230,6 +2246,22 @@
       "key:normal:space f f"
     ],
     "note": "spacemacs SPC f f -> file_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_r",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space f R"
+    ],
+    "note": "spacemacs SPC f R -> move"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space f s"
+    ],
+    "note": "spacemacs SPC f s -> write"
   },
   {
     "spec_id": "spacemacs.keybinding.spc_f_t",
@@ -2334,5 +2366,21 @@
       "key:normal:space c c"
     ],
     "note": "spacemacs SPC c c -> toggle_comments"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_q_q",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space q q"
+    ],
+    "note": "spacemacs SPC q q -> quit-all"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_q_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space q s"
+    ],
+    "note": "spacemacs SPC q s -> write-quit-all"
   }
 ]

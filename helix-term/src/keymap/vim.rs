@@ -21,12 +21,64 @@
 use std::collections::HashMap;
 
 use super::macros::keymap;
-use super::{KeyTrie, Mode};
+use super::{KeyTrie, KeyTrieNode, MappableCommand, Mode};
 use helix_core::hashmap;
+use helix_view::input::KeyEvent;
+use indexmap::IndexMap;
+
+/// spacemacs SPC bindings that resolve to typable (`:`) commands. The keymap
+/// macro can only express static commands, so these are inserted after macro
+/// construction. Format: (chord, submap label, command). The chord uses the
+/// same space-joined notation the port report parses, so coverage stays honest.
+#[rustfmt::skip]
+const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
+    ("space f s", "Files",   ":write"),            // SPC f s : save
+    ("space f S", "Files",   ":write-all"),        // SPC f S : save all
+    ("space f R", "Files",   ":move"),             // SPC f R : rename file
+    ("space b d", "Buffers", ":buffer-close"),     // SPC b d : kill buffer
+    ("space b D", "Buffers", ":buffer-close-others"), // SPC b C-d / others
+    ("space b R", "Buffers", ":reload"),           // SPC b R : revert
+    ("space b N", "Buffers", ":new"),              // SPC b N : new buffer
+    ("space q q", "Quit",    ":quit-all"),         // SPC q q : quit
+    ("space q Q", "Quit",    ":quit-all!"),        // SPC q Q : force quit
+    ("space q s", "Quit",    ":write-quit-all"),   // SPC q s : save and quit
+    ("space f T", "Files",   ":theme"),            // SPC T n / theme
+];
+
+/// Insert `cmd` at `path` under `root`, creating intermediate submap nodes
+/// (labelled `label`) as needed. `cmd` may be a `:typable` or static command.
+fn add_command(root: &mut KeyTrieNode, path: &[KeyEvent], label: &str, cmd: &str) {
+    let (head, rest) = path.split_first().expect("non-empty key path");
+    if rest.is_empty() {
+        root.insert(
+            *head,
+            KeyTrie::MappableCommand(cmd.parse::<MappableCommand>().expect("valid command")),
+        );
+        return;
+    }
+    let child = root
+        .entry(*head)
+        .or_insert_with(|| KeyTrie::Node(KeyTrieNode::new(label, IndexMap::new())));
+    if let KeyTrie::Node(child_node) = child {
+        add_command(child_node, rest, label, cmd);
+    }
+}
+
+fn chord(s: &str) -> Vec<KeyEvent> {
+    s.split(' ').map(|k| k.parse().expect("valid key")).collect()
+}
+
+fn add_spacemacs_typables(normal: &mut KeyTrie) {
+    if let KeyTrie::Node(root) = normal {
+        for (ch, label, cmd) in SPACEMACS_TYPABLE {
+            add_command(root, &chord(ch), label, cmd);
+        }
+    }
+}
 
 #[rustfmt::skip]
 pub fn default() -> HashMap<Mode, KeyTrie> {
-    let normal = keymap!({ "Normal mode"
+    let mut normal = keymap!({ "Normal mode"
         // --- left-hand motions ---------------------------------------------
         "h" | "left"  => move_char_left,
         "j" | "down"  => move_visual_line_down,
@@ -392,6 +444,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "pagedown" => page_down,
     });
 
+    add_spacemacs_typables(&mut normal);
+
     hashmap!(
         Mode::Normal => normal,
         Mode::Select => select,
@@ -468,6 +522,23 @@ mod tests {
             cmd_name(resolve(n, "space s s").unwrap()),
             Some("global_search")
         );
+    }
+
+    #[test]
+    fn spacemacs_typable_bindings_inserted() {
+        let km = default();
+        let n = &km[&Mode::Normal];
+        // SPC f s / SPC q q etc. resolve to typable commands inserted post-macro.
+        for (chord_str, _, cmd) in SPACEMACS_TYPABLE {
+            let leaf = resolve(n, chord_str)
+                .unwrap_or_else(|| panic!("{chord_str} did not resolve"));
+            match leaf {
+                KeyTrie::MappableCommand(MappableCommand::Typable { name, .. }) => {
+                    assert_eq!(format!(":{name}"), *cmd, "wrong typable for {chord_str}");
+                }
+                other => panic!("{chord_str} should be a typable command, got {other:?}"),
+            }
+        }
     }
 
     #[test]
