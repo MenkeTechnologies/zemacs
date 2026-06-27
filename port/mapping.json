@@ -3710,5 +3710,29 @@
       "key:normal:g N"
     ],
     "note": "vim gN: select the previous match of the last search pattern (search_prev). Partial: cgN/dgN approximate via the selection."
+  },
+  {
+    "spec_id": "neovim.normal-mode.gq_lbrace_motion_rbrace",
+    "status": "partial",
+    "evidence": [
+      "key:normal:g q q"
+    ],
+    "note": "vim gq{motion}: reformat text. zemacs reformats the motion's lines via the LSP formatter (vim uses formatprg/textwidth); same intent, different mechanism."
+  },
+  {
+    "spec_id": "neovim.normal-mode.gw_lbrace_motion_rbrace",
+    "status": "partial",
+    "evidence": [
+      "key:normal:g w w"
+    ],
+    "note": "vim gw{motion}: reformat text and keep cursor; via LSP formatter (partial, like gq)."
+  },
+  {
+    "spec_id": "neovim.visual-mode.gq",
+    "status": "partial",
+    "evidence": [
+      "key:select:g q"
+    ],
+    "note": "vim visual gq: format the highlighted lines via the LSP formatter (partial: not textwidth wrapping)"
   }
 ]

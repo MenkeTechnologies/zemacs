@@ -318,6 +318,18 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "$" => [collapse_selection, extend_to_line_end, switch_case, collapse_selection],
                 "^" => [collapse_selection, extend_to_first_nonwhitespace, switch_case, collapse_selection],
             },
+            // gq{motion} / gw{motion}: reformat text. zemacs reformats via the
+            // LSP formatter (vim uses formatprg/textwidth) — partial but same intent.
+            "q" => { "Format"
+                "q" => [extend_to_line_bounds, format_selections, collapse_selection],
+                "j" => [extend_line_below, extend_to_line_bounds, format_selections, collapse_selection],
+                "G" => [extend_to_last_line, extend_to_line_bounds, format_selections, collapse_selection],
+            },
+            "w" => { "Format"
+                "w" => [extend_to_line_bounds, format_selections, collapse_selection],
+                "j" => [extend_line_below, extend_to_line_bounds, format_selections, collapse_selection],
+                "G" => [extend_to_last_line, extend_to_line_bounds, format_selections, collapse_selection],
+            },
 
             "g" => goto_file_start,
             "&" => repeat_substitute_global,   // g& repeat last :s whole file
@@ -354,7 +366,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "z" => align_view_center,
             "t" => align_view_top,
             "b" => align_view_bottom,
-            "c" => align_view_center,
+            // NB: vim zc closes a fold; zemacs has no fold engine, so it stays
+            // unbound rather than aliasing to a non-vim action (was align center).
             "." => [align_view_center, goto_first_nonwhitespace], // z. center + first non-blank
             "-" => [align_view_bottom, goto_first_nonwhitespace], // z- bottom + first non-blank
             "ret" => [align_view_top, goto_first_nonwhitespace],  // z<CR> top + first non-blank
@@ -600,6 +613,12 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "D" | "X" => [extend_to_line_bounds, delete_selection, normal_mode],
         "Y"       => [extend_to_line_bounds, yank, collapse_selection, normal_mode],
         "C" | "S" | "R" => [extend_to_line_bounds, change_selection],
+
+        // gq / gw: reformat the highlighted lines (LSP formatter)
+        "g" => { "Goto"
+            "q" => [format_selections, normal_mode],
+            "w" => [format_selections, normal_mode],
+        },
 
         "C-a" => increment,
         "C-x" => decrement,
