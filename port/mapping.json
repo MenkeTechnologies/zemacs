@@ -3686,5 +3686,13 @@
       "key:normal:] f"
     ],
     "note": "vim ]f: same as gf: open the file under the cursor (goto_file)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ga",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g a"
+    ],
+    "note": "vim ga: print the ascii/unicode value of the character under the cursor (bound to :character-info)"
   }
 ]

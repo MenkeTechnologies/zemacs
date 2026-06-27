@@ -100,6 +100,7 @@ const VIM_TYPABLE: &[(&str, &str, &str)] = &[
     ("Z Z", "Quit", ":write-quit"),   // ZZ: write if changed and close
     ("Z Q", "Quit", ":quit!"),        // ZQ: close without writing
     ("g J", "Goto", ":join!"),        // gJ: join lines without a space
+    ("g a", "Ascii", ":character-info"), // ga: print value of char under cursor
 ];
 
 fn add_spacemacs_typables(normal: &mut KeyTrie) {
@@ -322,7 +323,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "&" => repeat_substitute_global,   // g& repeat last :s whole file
             ";" => goto_last_modification,     // g; goto last change position
             "E" => move_prev_long_word_end,    // gE back to end of previous WORD
-            "e" => goto_last_line,
+            "e" => move_prev_word_end,         // ge back to end of previous word
             "j" => move_line_down,
             "k" => move_line_up,
             "h" => goto_line_start,
@@ -340,7 +341,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "v" => reselect_visual,            // gv reselect last visual area
             "f" => goto_file,
             "x" => goto_file,                 // gx: open file/URL under cursor (goto_file opens URLs externally)
-            "a" => goto_last_accessed_file,
+            // ga (print char ascii/unicode value) is bound via VIM_TYPABLE to
+            // :character-info — vim's ga, not helix's goto-last-accessed-file.
             "m" => goto_last_modified_file,
             "n" => goto_next_buffer,
             "p" => goto_previous_buffer,
