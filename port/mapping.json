@@ -3478,5 +3478,181 @@
       "key:normal:g x"
     ],
     "note": "vim gx: open file/URL under cursor. Bound to goto_file, which opens URLs externally and files in-editor. Partial: gx in vim is URL-only (gf is files); zemacs gx==gf handles both."
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_h",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w H"
+    ],
+    "note": "vim CTRL-W H: move current window to the far left (swap_view_left)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_j",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w J"
+    ],
+    "note": "vim CTRL-W J: move current window to the very bottom (swap_view_down)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_k",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w K"
+    ],
+    "note": "vim CTRL-W K: move current window to the very top (swap_view_up)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w L"
+    ],
+    "note": "vim CTRL-W L: move current window to the far right (swap_view_right)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_r",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w R"
+    ],
+    "note": "vim CTRL-W R: rotate windows upwards (rotate_view_reverse)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w s"
+    ],
+    "note": "vim CTRL-W S: same as CTRL-W s (hsplit)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_c",
+    "status": "partial",
+    "evidence": [
+      "key:normal:C-w d"
+    ],
+    "note": "vim CTRL-W c: close current window; zemacs uses C-w d (wclose)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_h_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w h"
+    ],
+    "note": "vim CTRL-W h: go to window left (jump_view_left)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_j_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w j"
+    ],
+    "note": "vim CTRL-W j: go to window down (jump_view_down)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_k_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w k"
+    ],
+    "note": "vim CTRL-W k: go to window up (jump_view_up)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_l_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w l"
+    ],
+    "note": "vim CTRL-W l: go to window right (jump_view_right)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_o",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w o"
+    ],
+    "note": "vim CTRL-W o: close all but current window (wonly)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_q",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w q"
+    ],
+    "note": "vim CTRL-W q: quit/close current window (wclose)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_r_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w r"
+    ],
+    "note": "vim CTRL-W r: rotate windows downwards (rotate_view)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_s_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w s"
+    ],
+    "note": "vim CTRL-W s: split window horizontally (hsplit)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_v",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w v"
+    ],
+    "note": "vim CTRL-W v: split window vertically (vsplit)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_w_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w w"
+    ],
+    "note": "vim CTRL-W w: cycle to next window (rotate_view)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_x",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w x"
+    ],
+    "note": "vim CTRL-W x: exchange current window with the next (transpose_view)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_lt_down_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w down"
+    ],
+    "note": "vim CTRL-W <Down>: go to window down (jump_view_down)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_lt_up_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w up"
+    ],
+    "note": "vim CTRL-W <Up>: go to window up (jump_view_up)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_lt_left_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w left"
+    ],
+    "note": "vim CTRL-W <Left>: go to window left (jump_view_left)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_lt_right_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w right"
+    ],
+    "note": "vim CTRL-W <Right>: go to window right (jump_view_right)"
   }
 ]

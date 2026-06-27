@@ -6,14 +6,14 @@
 <p class=muted>The keybinding subset of the <a href='port_report.html'>port report</a>. Counts only the key-press surface — vim/neovim normal/visual/insert/cmdline keys, the GNU Emacs Key Index, and the Spacemacs <code>SPC</code> tree. <b>ported</b> = the same key does the equivalent thing in zemacs.</p>
 <div class=kpi>
 <div class=card><b>2254</b>cited keybindings</div>
-<div class=card><b class=ported>270</b>ported (12.0%)</div>
-<div class=card><b class=partial>71</b>partial (3.1%)</div>
-<div class=card><b class=absent>1913</b>absent</div>
+<div class=card><b class=ported>291</b>ported (12.9%)</div>
+<div class=card><b class=partial>72</b>partial (3.2%)</div>
+<div class=card><b class=absent>1891</b>absent</div>
 </div>
 <h2>By source</h2><table>
 <tr><th>Source</th><th>Keybindings</th><th>Ported</th><th>Partial</th><th>Progress</th></tr>
 <tr><td>emacs</td><td class=n>1124</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
-<tr><td>neovim</td><td class=n>715</td><td class='n ported'>192</td><td class='n partial'>71</td><td><div class="bar"><div class="fill" style="width:26.9%"></div><span>26.9%</span></div></td></tr>
+<tr><td>neovim</td><td class=n>715</td><td class='n ported'>213</td><td class='n partial'>72</td><td><div class="bar"><div class="fill" style="width:29.8%"></div><span>29.8%</span></div></td></tr>
 <tr><td>spacemacs</td><td class=n>415</td><td class='n ported'>78</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:18.8%"></div><span>18.8%</span></div></td></tr>
 </table>
 <h2>By source / category</h2><table>
@@ -21,7 +21,7 @@
 <tr><td>emacs</td><td>keybinding</td><td class=n>1124</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
 <tr><td>neovim</td><td>cmdline-editing</td><td class=n>53</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
 <tr><td>neovim</td><td>insert-mode</td><td class=n>98</td><td class='n ported'>20</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:20.4%"></div><span>20.4%</span></div></td></tr>
-<tr><td>neovim</td><td>normal-mode</td><td class=n>479</td><td class='n ported'>146</td><td class='n partial'>33</td><td><div class="bar"><div class="fill" style="width:30.5%"></div><span>30.5%</span></div></td></tr>
+<tr><td>neovim</td><td>normal-mode</td><td class=n>479</td><td class='n ported'>167</td><td class='n partial'>34</td><td><div class="bar"><div class="fill" style="width:34.9%"></div><span>34.9%</span></div></td></tr>
 <tr><td>neovim</td><td>visual-mode</td><td class=n>85</td><td class='n ported'>26</td><td class='n partial'>38</td><td><div class="bar"><div class="fill" style="width:30.6%"></div><span>30.6%</span></div></td></tr>
 <tr><td>spacemacs</td><td>keybinding</td><td class=n>415</td><td class='n ported'>78</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:18.8%"></div><span>18.8%</span></div></td></tr>
 </table>
@@ -1311,7 +1311,7 @@
 <tr><td>^ CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:i_^_CTRL-D</td></tr>
 <tr><td>{char1}&lt;BS&gt;{char2}</td><td class=absent>absent</td><td class=muted>index.txt:i_digraph</td></tr>
 </table></details>
-<details><summary>neovim / normal-mode <span class=muted>(479 keys · <span class=ported>146 ported</span> · <span class=partial>33 partial</span>)</span></summary>
+<details><summary>neovim / normal-mode <span class=muted>(479 keys · <span class=ported>167 ported</span> · <span class=partial>34 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
 <tr><td>!!{filter}</td><td class=ported>ported</td><td class=muted>index.txt:!!</td></tr>
 <tr><td>!{motion}{filter}</td><td class=ported>ported</td><td class=muted>index.txt:!</td></tr>
@@ -1358,6 +1358,27 @@
 <tr><td>CTRL-O</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-O</td></tr>
 <tr><td>CTRL-R</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-R</td></tr>
 <tr><td>CTRL-U</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-U</td></tr>
+<tr><td>CTRL-W &lt;Down&gt;</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_<Down></td></tr>
+<tr><td>CTRL-W &lt;Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_<Left></td></tr>
+<tr><td>CTRL-W &lt;Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_<Right></td></tr>
+<tr><td>CTRL-W &lt;Up&gt;</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_<Up></td></tr>
+<tr><td>CTRL-W H</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_H</td></tr>
+<tr><td>CTRL-W J</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_J</td></tr>
+<tr><td>CTRL-W K</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_K</td></tr>
+<tr><td>CTRL-W L</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_L</td></tr>
+<tr><td>CTRL-W R</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_R</td></tr>
+<tr><td>CTRL-W S</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_S</td></tr>
+<tr><td>CTRL-W h</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_h</td></tr>
+<tr><td>CTRL-W j</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_j</td></tr>
+<tr><td>CTRL-W k</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_k</td></tr>
+<tr><td>CTRL-W l</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_l</td></tr>
+<tr><td>CTRL-W o</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_o</td></tr>
+<tr><td>CTRL-W q</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_q</td></tr>
+<tr><td>CTRL-W r</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_r</td></tr>
+<tr><td>CTRL-W s</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_s</td></tr>
+<tr><td>CTRL-W v</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_v</td></tr>
+<tr><td>CTRL-W w</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_w</td></tr>
+<tr><td>CTRL-W x</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_x</td></tr>
 <tr><td>CTRL-X</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-X</td></tr>
 <tr><td>CTRL-Y</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-Y</td></tr>
 <tr><td>CTRL-Z</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-Z</td></tr>
@@ -1464,6 +1485,7 @@
 <tr><td>&lt;{motion}</td><td class=partial>partial</td><td class=muted>index.txt:<</td></tr>
 <tr><td>&gt;{motion}</td><td class=partial>partial</td><td class=muted>index.txt:></td></tr>
 <tr><td>?&lt;CR&gt;</td><td class=partial>partial</td><td class=muted>index.txt:?<CR></td></tr>
+<tr><td>CTRL-W c</td><td class=partial>partial</td><td class=muted>index.txt:CTRL-W_c</td></tr>
 <tr><td>["x]C</td><td class=partial>partial</td><td class=muted>index.txt:C</td></tr>
 <tr><td>["x]D</td><td class=partial>partial</td><td class=muted>index.txt:D</td></tr>
 <tr><td>["x]Y</td><td class=partial>partial</td><td class=muted>index.txt:Y</td></tr>
@@ -1555,10 +1577,6 @@
 <tr><td>CTRL-W +</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_+</td></tr>
 <tr><td>CTRL-W -</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_-</td></tr>
 <tr><td>CTRL-W &lt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_<</td></tr>
-<tr><td>CTRL-W &lt;Down&gt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_<Down></td></tr>
-<tr><td>CTRL-W &lt;Left&gt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_<Left></td></tr>
-<tr><td>CTRL-W &lt;Right&gt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_<Right></td></tr>
-<tr><td>CTRL-W &lt;Up&gt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_<Up></td></tr>
 <tr><td>CTRL-W =</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_=</td></tr>
 <tr><td>CTRL-W &gt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_></td></tr>
 <tr><td>CTRL-W CTRL-B</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-B</td></tr>
@@ -1585,20 +1603,13 @@
 <tr><td>CTRL-W CTRL-^</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-^</td></tr>
 <tr><td>CTRL-W CTRL-_</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-_</td></tr>
 <tr><td>CTRL-W F</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_F</td></tr>
-<tr><td>CTRL-W H</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_H</td></tr>
-<tr><td>CTRL-W J</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_J</td></tr>
-<tr><td>CTRL-W K</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_K</td></tr>
-<tr><td>CTRL-W L</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_L</td></tr>
 <tr><td>CTRL-W P</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_P</td></tr>
-<tr><td>CTRL-W R</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_R</td></tr>
-<tr><td>CTRL-W S</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_S</td></tr>
 <tr><td>CTRL-W T</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_T</td></tr>
 <tr><td>CTRL-W W</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_W</td></tr>
 <tr><td>CTRL-W ]</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_]</td></tr>
 <tr><td>CTRL-W ^</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_^</td></tr>
 <tr><td>CTRL-W _</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W__</td></tr>
 <tr><td>CTRL-W b</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_b</td></tr>
-<tr><td>CTRL-W c</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_c</td></tr>
 <tr><td>CTRL-W d</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_d</td></tr>
 <tr><td>CTRL-W f</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_f</td></tr>
 <tr><td>CTRL-W g &lt;Tab&gt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_g<Tab></td></tr>
@@ -1609,21 +1620,10 @@
 <tr><td>CTRL-W g f</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_gf</td></tr>
 <tr><td>CTRL-W g t</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_gt</td></tr>
 <tr><td>CTRL-W g }</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_g}</td></tr>
-<tr><td>CTRL-W h</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_h</td></tr>
 <tr><td>CTRL-W i</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_i</td></tr>
-<tr><td>CTRL-W j</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_j</td></tr>
-<tr><td>CTRL-W k</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_k</td></tr>
-<tr><td>CTRL-W l</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_l</td></tr>
 <tr><td>CTRL-W n</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_n</td></tr>
-<tr><td>CTRL-W o</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_o</td></tr>
 <tr><td>CTRL-W p</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_p</td></tr>
-<tr><td>CTRL-W q</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_q</td></tr>
-<tr><td>CTRL-W r</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_r</td></tr>
-<tr><td>CTRL-W s</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_s</td></tr>
 <tr><td>CTRL-W t</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_t</td></tr>
-<tr><td>CTRL-W v</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_v</td></tr>
-<tr><td>CTRL-W w</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_w</td></tr>
-<tr><td>CTRL-W x</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_x</td></tr>
 <tr><td>CTRL-W z</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_z</td></tr>
 <tr><td>CTRL-W {char}</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W</td></tr>
 <tr><td>CTRL-W |</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_bar</td></tr>

@@ -389,6 +389,16 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "j" | "C-j" => jump_view_down,
             "k" | "C-k" => jump_view_up,
             "l" | "C-l" => jump_view_right,
+            "left"  => jump_view_left,
+            "down"  => jump_view_down,
+            "up"    => jump_view_up,
+            "right" => jump_view_right,
+            "H" => swap_view_left,            // C-w H: move window to the far left
+            "J" => swap_view_down,            // C-w J: move window to the very bottom
+            "K" => swap_view_up,              // C-w K: move window to the very top
+            "L" => swap_view_right,           // C-w L: move window to the far right
+            "R" => rotate_view_reverse,       // C-w R: rotate windows upwards
+            "x" | "C-x" => transpose_view,    // C-w x: exchange current window with next
         },
 
         // --- scrolling / jumps ---------------------------------------------
@@ -453,6 +463,16 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "j" | "C-j" => jump_view_down,
                 "k" | "C-k" => jump_view_up,
                 "l" | "C-l" => jump_view_right,
+                "left"  => jump_view_left,
+                "down"  => jump_view_down,
+                "up"    => jump_view_up,
+                "right" => jump_view_right,
+                "H" => swap_view_left,
+                "J" => swap_view_down,
+                "K" => swap_view_up,
+                "L" => swap_view_right,
+                "R" => rotate_view_reverse,
+                "x" | "C-x" => transpose_view,
             },
             "s" => { "Search"
                 "s" => global_search,              // SPC s s
@@ -668,6 +688,33 @@ mod tests {
         assert_eq!(cmd_name(resolve(n, "x").unwrap()), Some("delete_selection"));
         assert_eq!(cmd_name(resolve(n, "i").unwrap()), Some("insert_mode"));
         assert_eq!(cmd_name(resolve(n, "a").unwrap()), Some("append_mode"));
+    }
+
+    #[test]
+    fn vim_window_family_bound() {
+        let km = default();
+        let n = &km[&Mode::Normal];
+        // vim CTRL-W window moves map onto helix's view commands.
+        assert_eq!(cmd_name(resolve(n, "C-w H").unwrap()), Some("swap_view_left"));
+        assert_eq!(cmd_name(resolve(n, "C-w J").unwrap()), Some("swap_view_down"));
+        assert_eq!(cmd_name(resolve(n, "C-w K").unwrap()), Some("swap_view_up"));
+        assert_eq!(
+            cmd_name(resolve(n, "C-w L").unwrap()),
+            Some("swap_view_right")
+        );
+        assert_eq!(
+            cmd_name(resolve(n, "C-w R").unwrap()),
+            Some("rotate_view_reverse")
+        );
+        assert_eq!(
+            cmd_name(resolve(n, "C-w x").unwrap()),
+            Some("transpose_view")
+        );
+        // CTRL-W + arrow navigates like CTRL-W h/j/k/l.
+        assert_eq!(
+            cmd_name(resolve(n, "C-w left").unwrap()),
+            Some("jump_view_left")
+        );
     }
 
     #[test]
