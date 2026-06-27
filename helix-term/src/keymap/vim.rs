@@ -296,6 +296,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "g" => goto_file_start,
             "&" => repeat_substitute_global,   // g& repeat last :s whole file
             ";" => goto_last_modification,     // g; goto last change position
+            "E" => move_prev_long_word_end,    // gE back to end of previous WORD
             "e" => goto_last_line,
             "j" => move_line_down,
             "k" => move_line_up,
@@ -328,12 +329,16 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "d" => goto_prev_diag,
             "g" => goto_prev_change,
             "f" => goto_prev_function,
+            "m" => goto_prev_function,    // [m back to start of member/function
+            "/" => goto_prev_comment,     // [/ previous comment
         },
         "]" => { "Next"
             "]" => goto_next_paragraph,
             "d" => goto_next_diag,
             "g" => goto_next_change,
             "f" => goto_next_function,
+            "m" => goto_next_function,    // ]m forward to next member/function
+            "/" => goto_next_comment,     // ]/ next comment
         },
 
         // --- window commands (C-w) -----------------------------------------

@@ -3206,5 +3206,45 @@
       "key:normal:V"
     ],
     "note": "vim V -> extend_to_line_bounds"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_slash",
+    "status": "ported",
+    "evidence": [
+      "key:normal:[ /"
+    ],
+    "note": "vim [/ -> goto_prev_comment"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_m",
+    "status": "partial",
+    "evidence": [
+      "key:normal:[ m"
+    ],
+    "note": "vim [m -> goto_prev_function"
+  },
+  {
+    "spec_id": "neovim.normal-mode.rbracket_slash",
+    "status": "ported",
+    "evidence": [
+      "key:normal:] /"
+    ],
+    "note": "vim ]/ -> goto_next_comment"
+  },
+  {
+    "spec_id": "neovim.normal-mode.rbracket_m",
+    "status": "partial",
+    "evidence": [
+      "key:normal:] m"
+    ],
+    "note": "vim ]m -> goto_next_function"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ge",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g E"
+    ],
+    "note": "vim gE -> move_prev_long_word_end"
   }
 ]
