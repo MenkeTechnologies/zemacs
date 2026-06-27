@@ -58,7 +58,7 @@ jobs:
       # build.rs fetches + compiles the tree-sitter grammars for ${target} into
       # runtime/grammars during the build (Cargo.lock is gitignored, no --locked).
       - name: Build zemacs
-        run: cargo build --release --bin zemacs --target ${{ matrix.target }}
+        run: cargo build --locked --release --bin zemacs --target ${{ matrix.target }}
 
       - name: Package (binary + runtime)
         shell: bash
