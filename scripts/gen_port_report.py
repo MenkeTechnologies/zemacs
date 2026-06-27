@@ -145,6 +145,16 @@ def parse_keymap():
     ):
         chord, cmd = tm.group(1), tm.group(2).lstrip(":")
         result["normal"][chord] = cmd
+
+    # `.` dot-repeat is handled specially in EditorView (ui/editor.rs), not via a
+    # keymap binding or a command, so detect that hardcoded handler directly.
+    editor_view = os.path.join(HELIX_TERM, "ui", "editor.rs")
+    try:
+        ev = open(editor_view, encoding="utf-8").read()
+        if "key!('.')" in ev and "last_insert" in ev:
+            result["normal"]["."] = "repeat_last_insert (EditorView)"
+    except OSError:
+        pass
     return result
 
 
