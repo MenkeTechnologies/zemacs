@@ -135,6 +135,9 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         // --- registers ------------------------------------------------------
         "\"" => select_register, // "{reg} select register for next y/d/p
 
+        // --- repeat last substitute -----------------------------------------
+        "&" => repeat_substitute, // & repeat last :s on current line
+
         // --- screen motions -------------------------------------------------
         "H" => goto_window_top,
         "M" => goto_window_center,

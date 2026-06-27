@@ -587,6 +587,7 @@ impl MappableCommand {
         set_mark, "Set mark (m{a-z})",
         goto_mark, "Goto mark exact (`{a-z})",
         goto_mark_line, "Goto mark line ('{a-z})",
+        repeat_substitute, "Repeat last :substitute (&)",
         goto_next_function, "Goto next function",
         goto_prev_function, "Goto previous function",
         goto_next_class, "Goto next type definition",
@@ -1843,6 +1844,17 @@ fn goto_mark_impl(cx: &mut Context, to_line_start: bool) {
         }
     });
     cx.editor.autoinfo = Some(Info::new("Goto mark", &[("a-z", "mark name")]));
+}
+
+/// vim `&`: repeat the last `:substitute` on the current line.
+fn repeat_substitute(cx: &mut Context) {
+    let Some((pattern, replacement, flags)) = cx.editor.last_substitute.clone() else {
+        cx.editor.set_error("No previous substitute");
+        return;
+    };
+    if let Err(err) = do_substitute(cx.editor, false, &pattern, &replacement, &flags) {
+        cx.editor.set_error(err.to_string());
+    }
 }
 
 fn goto_mark(cx: &mut Context) {

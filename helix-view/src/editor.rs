@@ -1285,6 +1285,8 @@ pub struct Editor {
 
     pub count: Option<std::num::NonZeroUsize>,
     pub selected_register: Option<char>,
+    /// The last `:substitute` (pattern, replacement, flags), for vim `&` repeat.
+    pub last_substitute: Option<(String, String, String)>,
     pub registers: Registers,
     pub macro_recording: Option<(char, Vec<KeyEvent>)>,
     pub macro_replaying: Vec<char>,
@@ -1435,6 +1437,7 @@ impl Editor {
             write_count: 0,
             count: None,
             selected_register: None,
+            last_substitute: None,
             macro_recording: None,
             macro_replaying: Vec::new(),
             theme: theme_loader.default(),

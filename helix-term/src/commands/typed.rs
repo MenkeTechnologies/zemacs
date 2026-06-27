@@ -2758,8 +2758,8 @@ fn parse_vim_substitute(input: &str) -> Option<(bool, String, String, String)> {
 
 /// Run a substitute over the target lines. `whole_file` selects the whole
 /// buffer; otherwise the lines spanned by the primary selection are used.
-fn do_substitute(
-    cx: &mut compositor::Context,
+pub(crate) fn do_substitute(
+    editor: &mut helix_view::Editor,
     whole_file: bool,
     pattern: &str,
     replacement: &str,
@@ -2774,7 +2774,14 @@ fn do_substitute(
         .map_err(|e| anyhow!("invalid pattern: {e}"))?;
     let rep = vim_replacement_to_regex(replacement);
 
-    let (view, doc) = current!(cx.editor);
+    // Remember for vim `&` (repeat last substitute).
+    editor.last_substitute = Some((
+        pattern.to_string(),
+        replacement.to_string(),
+        flags.to_string(),
+    ));
+
+    let (view, doc) = current!(editor);
     let slice = doc.text().slice(..);
     let total = slice.len_lines();
 
@@ -3312,7 +3319,7 @@ fn substitute(
     if pattern.is_empty() {
         bail!("usage: :s/pattern/replacement/[flags]");
     }
-    do_substitute(cx, false, pattern, replacement, flags)
+    do_substitute(cx.editor, false, pattern, replacement, flags)
 }
 
 fn split_line(
@@ -5549,7 +5556,7 @@ fn execute_command_line(
         if event != PromptEvent::Validate {
             return Ok(());
         }
-        return do_substitute(cx, whole, &pattern, &replacement, &flags);
+        return do_substitute(cx.editor, whole, &pattern, &replacement, &flags);
     }
 
     // vim-style global: `:g/pat/d`, `:g!/pat/d`, `:v/pat/d`.

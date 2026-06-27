@@ -1343,3 +1343,16 @@ async fn ex_yank_put_line() -> anyhow::Result<()> {
     test(("#[|a]#\nb\n", ":y<ret>:put<ret>", "a\n#[a|]#\nb\n")).await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn vim_repeat_substitute() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(helix_term::config::Config {
+            keys: helix_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        ("#[|f]#oo\nfoo\n", ":s/o/0/g<ret>j&", "f00\n#[f|]#00\n"),
+    )
+    .await?;
+    Ok(())
+}

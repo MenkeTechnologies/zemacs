@@ -2902,5 +2902,13 @@
       "typable:put"
     ],
     "note": "vim :put register paste as lines"
+  },
+  {
+    "spec_id": "neovim.normal-mode.amp",
+    "status": "ported",
+    "evidence": [
+      "key:normal:&"
+    ],
+    "note": "vim & repeat last :s on current line"
   }
 ]
