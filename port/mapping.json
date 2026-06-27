@@ -3470,5 +3470,13 @@
       "key:select:R"
     ],
     "note": "vim visual R: delete highlighted lines and start insert (linewise change)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.gx",
+    "status": "partial",
+    "evidence": [
+      "key:normal:g x"
+    ],
+    "note": "vim gx: open file/URL under cursor. Bound to goto_file, which opens URLs externally and files in-editor. Partial: gx in vim is URL-only (gf is files); zemacs gx==gf handles both."
   }
 ]

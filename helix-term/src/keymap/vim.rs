@@ -339,6 +339,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "i" => insert_at_last_insert,      // gi insert at last insert position
             "v" => reselect_visual,            // gv reselect last visual area
             "f" => goto_file,
+            "x" => goto_file,                 // gx: open file/URL under cursor (goto_file opens URLs externally)
             "a" => goto_last_accessed_file,
             "m" => goto_last_modified_file,
             "n" => goto_next_buffer,
