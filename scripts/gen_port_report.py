@@ -380,7 +380,7 @@ def write_html(stats, src_agg, agg, broken, rows):
         )
 
     h = []
-    h.append("<!doctype html><html lang=en><head><meta charset=utf-8>")
+    h.append("<!doctype html><html lang=en><head><meta charset=\"utf-8\">")
     h.append("<meta name=viewport content='width=device-width,initial-scale=1'>")
     h.append("<title>zemacs port report</title>")
     h.append(
@@ -570,7 +570,7 @@ def write_keybinding_report(rows):
             f'<span>{p:.1f}%</span></div>'
         )
 
-    h = ["<!doctype html><html lang=en><head><meta charset=utf-8>"]
+    h = ["<!doctype html><html lang=en><head><meta charset=\"utf-8\">"]
     h.append("<meta name=viewport content='width=device-width,initial-scale=1'>")
     h.append("<title>zemacs keybinding coverage</title>")
     h.append(
