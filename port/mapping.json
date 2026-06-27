@@ -3262,5 +3262,45 @@
       "key:normal:Z Q"
     ],
     "note": "vim ZQ -> :quit!"
+  },
+  {
+    "spec_id": "neovim.normal-mode.at_lbrace_a_z_rbrace",
+    "status": "ported",
+    "evidence": [
+      "key:normal:@"
+    ],
+    "note": "vim @{a-z} macro vim_replay_macro"
+  },
+  {
+    "spec_id": "neovim.normal-mode.at_at",
+    "status": "ported",
+    "evidence": [
+      "key:normal:@"
+    ],
+    "note": "vim @@ macro vim_replay_macro"
+  },
+  {
+    "spec_id": "neovim.normal-mode.q_lbrace_0_9a_za_z_quote_rbrace",
+    "status": "ported",
+    "evidence": [
+      "key:normal:q"
+    ],
+    "note": "vim q{0-9a-zA-Z\"} macro vim_record_macro"
+  },
+  {
+    "spec_id": "neovim.normal-mode.q",
+    "status": "ported",
+    "evidence": [
+      "key:normal:q"
+    ],
+    "note": "vim q macro vim_record_macro"
+  },
+  {
+    "spec_id": "neovim.normal-mode.q_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:Q"
+    ],
+    "note": "vim Q macro replay_macro"
   }
 ]

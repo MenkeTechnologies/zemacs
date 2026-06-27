@@ -1431,3 +1431,17 @@ async fn vim_plus_first_nonblank() -> anyhow::Result<()> {
     .await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn vim_macro_record_replay() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(helix_term::config::Config {
+            keys: helix_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        // qa: record into a; x: delete char; q: stop; @a: replay -> delete next.
+        ("#[|a]#bcde\n", "qaxq@a", "#[c|]#de\n"),
+    )
+    .await?;
+    Ok(())
+}

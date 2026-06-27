@@ -175,6 +175,11 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "-"         => [move_visual_line_up, goto_first_nonwhitespace],
         "_"         => goto_first_nonwhitespace,
 
+        // --- macros ---------------------------------------------------------
+        "q" => vim_record_macro,  // q{reg} record (q again to stop)
+        "@" => vim_replay_macro,  // @{reg} replay
+        "Q" => replay_macro,      // Q replay last/default register
+
         // --- misc ----------------------------------------------------------
         "K" => hover,   // keyword lookup (LSP hover)
 

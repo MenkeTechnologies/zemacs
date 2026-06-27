@@ -589,6 +589,8 @@ impl MappableCommand {
         goto_mark_line, "Goto mark line ('{a-z})",
         repeat_substitute, "Repeat last :substitute (&)",
         repeat_substitute_global, "Repeat last :substitute on whole file (g&)",
+        vim_record_macro, "Record macro into register (q{reg})",
+        vim_replay_macro, "Replay macro from register (@{reg})",
         goto_next_function, "Goto next function",
         goto_prev_function, "Goto previous function",
         goto_next_class, "Goto next type definition",
@@ -1845,6 +1847,35 @@ fn goto_mark_impl(cx: &mut Context, to_line_start: bool) {
         }
     });
     cx.editor.autoinfo = Some(Info::new("Goto mark", &[("a-z", "mark name")]));
+}
+
+// vim macros: `q{reg}` starts recording into a register (and `q` again stops);
+// `@{reg}` replays it. The register char is captured interactively so the vim
+// `qa` / `@a` syntax works (helix natively selects the register with `"`).
+fn vim_record_macro(cx: &mut Context) {
+    if cx.editor.macro_recording.is_some() {
+        record_macro(cx); // stop recording
+        return;
+    }
+    cx.editor.autoinfo = Some(Info::new("Record macro", &[("a-z0-9\"", "register")]));
+    cx.on_next_key(move |cx, event| {
+        cx.editor.autoinfo = None;
+        if let Some(ch) = event.char() {
+            cx.register = Some(ch);
+            record_macro(cx);
+        }
+    });
+}
+
+fn vim_replay_macro(cx: &mut Context) {
+    cx.editor.autoinfo = Some(Info::new("Replay macro", &[("a-z0-9@\"", "register")]));
+    cx.on_next_key(move |cx, event| {
+        cx.editor.autoinfo = None;
+        if let Some(ch) = event.char() {
+            cx.register = Some(ch);
+            replay_macro(cx);
+        }
+    });
 }
 
 /// vim `&` / `g&`: repeat the last `:substitute` on the current line / whole file.
