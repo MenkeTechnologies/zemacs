@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-HELIX_RUNTIME=/usr/lib/helix/runtime exec /usr/lib/helix/hx "$@"
+ZEMACS_RUNTIME=/usr/lib/zemacs/runtime exec /usr/lib/zemacs/hx "$@"

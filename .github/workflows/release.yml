@@ -158,7 +158,7 @@ jobs:
           linux_blocks=$( { emit on_intel x86_64-unknown-linux-gnu "$SHA_X86_LINUX"; emit on_arm aarch64-unknown-linux-gnu "$SHA_ARM_LINUX"; } )
           {
             printf 'class Zemacs < Formula\n'
-            printf '  desc "Modal text editor in Rust — vim/emacs keymaps on the Helix engine"\n'
+            printf '  desc "Modal text editor in Rust — vim/emacs keymaps"\n'
             printf '  homepage "https://github.com/MenkeTechnologies/zemacs"\n'
             printf '  license "MPL-2.0"\n'
             printf '  version "%s"\n\n' "$V"

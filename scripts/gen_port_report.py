@@ -31,7 +31,7 @@ from collections import defaultdict
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "port", "data")
 MAPPING = os.path.join(ROOT, "port", "mapping.json")
-HELIX_TERM = os.path.join(ROOT, "helix-term", "src")
+ZEMACS_TERM = os.path.join(ROOT, "zemacs-term", "src")
 OUT_HTML = os.path.join(ROOT, "docs", "port_report.html")
 OUT_MD = os.path.join(ROOT, "docs", "port_report.md")
 # Also emitted as an mdBook chapter so it publishes to gh-pages.
@@ -54,7 +54,7 @@ KEYBIND_CATS = {
 # --------------------------------------------------------------------------
 def parse_static_commands():
     """Return {name: doc} for every entry in the static_commands! invocation."""
-    path = os.path.join(HELIX_TERM, "commands.rs")
+    path = os.path.join(ZEMACS_TERM, "commands.rs")
     src = open(path, encoding="utf-8").read()
     # Locate the macro INVOCATION (not the macro_rules! definition).
     m = re.search(r"\n\s*static_commands!\(", src)
@@ -80,7 +80,7 @@ def parse_static_commands():
 
 def parse_typable_commands():
     """Return {name} for every typable (:) command, including aliases."""
-    path = os.path.join(HELIX_TERM, "commands", "typed.rs")
+    path = os.path.join(ZEMACS_TERM, "commands", "typed.rs")
     src = open(path, encoding="utf-8").read()
     names = set()
     for cm in re.finditer(r'name:\s*"([a-z0-9!_-]+)"', src):
@@ -100,7 +100,7 @@ def parse_keymap():
     """
     # zemacs ships the vim keymap as the default (keymap/vim.rs), so the report
     # measures the keymap users actually get.
-    path = os.path.join(HELIX_TERM, "keymap", "vim.rs")
+    path = os.path.join(ZEMACS_TERM, "keymap", "vim.rs")
     src = open(path, encoding="utf-8").read()
     result = defaultdict(dict)
 
@@ -148,7 +148,7 @@ def parse_keymap():
 
     # `.` dot-repeat is handled specially in EditorView (ui/editor.rs), not via a
     # keymap binding or a command, so detect that hardcoded handler directly.
-    editor_view = os.path.join(HELIX_TERM, "ui", "editor.rs")
+    editor_view = os.path.join(ZEMACS_TERM, "ui", "editor.rs")
     try:
         ev = open(editor_view, encoding="utf-8").read()
         if "key!('.')" in ev and "last_insert" in ev:

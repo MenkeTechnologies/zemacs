@@ -1,0 +1,107 @@
+[package]
+name = "zemacs-term"
+description = "A post-modern text editor."
+include = ["src/**/*", "README.md"]
+default-run = "zemacs"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+categories.workspace = true
+repository.workspace = true
+homepage.workspace = true
+
+[package.metadata.deb]
+# generate a .deb in target/debian/ with the command: cargo deb --no-build
+name = "zemacs"
+assets = [
+  { source = "target/release/zemacs", dest = "/usr/lib/zemacs/", mode = "755" },
+  { source = "../contrib/hx_launcher.sh", dest = "/usr/bin/hx", mode = "755" },
+  { source = "../runtime/*", dest = "/usr/lib/zemacs/runtime/", mode = "644" },
+  { source = "../runtime/grammars/*", dest = "/usr/lib/zemacs/runtime/grammars/", mode = "644" }, # to avoid sources/
+  { source = "../runtime/queries/**/*", dest = "/usr/lib/zemacs/runtime/queries/", mode = "644" },
+  { source = "../runtime/themes/**/*", dest = "/usr/lib/zemacs/runtime/themes/", mode = "644" },
+  { source = "../README.md", dest = "/usr/share/doc/zemacs/", mode = "644" },
+  { source = "../contrib/completion/hx.bash", dest = "/usr/share/bash-completion/completions/hx", mode = "644" },
+  { source = "../contrib/completion/hx.fish", dest = "/usr/share/fish/vendor_completions.d/hx.fish", mode = "644" },
+  { source = "../contrib/completion/hx.zsh", dest = "/usr/share/zsh/vendor-completions/_hx", mode = "644" },
+  { source = "../contrib/Zemacs.desktop", dest = "/usr/share/applications/Zemacs.desktop", mode = "644" },
+  { source = "../contrib/zemacs.png", dest = "/usr/share/icons/hicolor/256x256/apps/zemacs.png", mode = "644" },
+]
+
+[features]
+default = ["git"]
+unicode-lines = ["zemacs-core/unicode-lines", "zemacs-view/unicode-lines"]
+integration = ["zemacs-event/integration_test"]
+git = ["zemacs-vcs/git"]
+
+[[bin]]
+name = "zemacs"
+path = "src/main.rs"
+
+[dependencies]
+zemacs-stdx = { path = "../zemacs-stdx" }
+zemacs-core = { path = "../zemacs-core" }
+zemacs-event = { path = "../zemacs-event" }
+zemacs-view = { path = "../zemacs-view" }
+zemacs-lsp = { path = "../zemacs-lsp" }
+zemacs-dap = { path = "../zemacs-dap" }
+zemacs-vcs = { path = "../zemacs-vcs" }
+zemacs-loader = { path = "../zemacs-loader" }
+
+anyhow = "1"
+once_cell = "1.21"
+
+tokio = { version = "1", features = ["rt", "rt-multi-thread", "io-util", "io-std", "time", "process", "macros", "fs", "parking_lot"] }
+tui = { path = "../zemacs-tui", package = "zemacs-tui", default-features = false, features = ["termina", "crossterm"] }
+termina = { workspace = true, features = ["event-stream"] }
+signal-hook = "0.4"
+tokio-stream = "0.1"
+futures-util = { version = "0.3", features = ["std", "async-await"], default-features = false }
+arc-swap.workspace = true
+termini = "1"
+indexmap = { version = "2.14", features = ["serde"] }
+
+# Logging
+log = { version = "0.4", features = ["std"] }
+
+# File picker
+nucleo.workspace = true
+ignore = "0.4"
+grep-regex = "0.1"
+grep-searcher = "0.1"
+regex = "1"
+grep-matcher = "0.1"
+# markdown doc rendering
+pulldown-cmark = { version = "0.13", default-features = false }
+thiserror.workspace = true
+
+# opening URLs
+open = "5.3.5"
+
+# config
+toml.workspace = true
+
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+
+dashmap = "6.2"
+
+parking_lot.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+crossterm = { version = "0.28", features = ["event-stream"] }
+
+[target.'cfg(not(windows))'.dependencies]  # https://github.com/vorner/signal-hook/issues/100
+signal-hook-tokio = { version = "0.4", features = ["futures-v0_3"] }
+libc = "0.2.186"
+
+[build-dependencies]
+zemacs-loader = { path = "../zemacs-loader" }
+
+[dev-dependencies]
+smallvec = "1.15"
+indoc = "2.0.6"
+tempfile.workspace = true
+same-file = "1.0.1"

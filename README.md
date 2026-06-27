@@ -11,17 +11,17 @@
 
 A modal text editor in Rust, forked from [Helix](https://github.com/helix-editor/helix).
 
-zemacs runs on the Helix engine — tree-sitter syntax, LSP, multiple
-selections — but targets **vim/emacs semantics**, not Helix's selection-first
+zemacs runs on the Zemacs engine — tree-sitter syntax, LSP, multiple
+selections — but targets **vim/emacs semantics**, not Zemacs's selection-first
 model. The default keymap is vim: the keys you press are the keys vim binds,
-including operator-pending edits (`dd`, `dw`, `cw`, `yy`) emulated on the Helix
+including operator-pending edits (`dd`, `dw`, `cw`, `yy`) emulated on the Zemacs
 engine. Build-out continues toward full vim coverage and emacs/Spacemacs-style
 functionality on top of that base.
 
 ## Status
 
-Early. Vendored Helix base (v25.7.1), binary renamed to `zemacs`, now shipping
-a **vim default keymap** (`helix-term/src/keymap/vim.rs`) in place of Helix's
+Early. Vendored Zemacs base (v25.7.1), binary renamed to `zemacs`, now shipping
+a **vim default keymap** (`zemacs-term/src/keymap/vim.rs`) in place of Zemacs's
 selection-first defaults. Build-out toward the Vim/Neovim + Emacs + Spacemacs
 feature set is in progress and tracked by the port report below.
 
@@ -79,5 +79,5 @@ The toolchain floats to `stable` (see `rust-toolchain.toml`).
 
 ## License
 
-Helix-derived source is licensed under the Mozilla Public License 2.0; see
+Zemacs-derived source is licensed under the Mozilla Public License 2.0; see
 `LICENSE`. Provenance and licensing details are in `ATTRIBUTION.md`.

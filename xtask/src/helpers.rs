@@ -1,7 +1,7 @@
 use std::path::{Path, PathBuf};
 
 use crate::path;
-use helix_term::health::TsFeature;
+use zemacs_term::health::TsFeature;
 
 /// Get the list of languages that support a particular tree-sitter
 /// based feature.

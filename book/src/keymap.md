@@ -29,7 +29,7 @@
 
 ## Normal mode
 
-Normal mode is the default mode when you launch helix. You can return to it from other modes by pressing the `Escape` key.
+Normal mode is the default mode when you launch zemacs. You can return to it from other modes by pressing the `Escape` key.
 
 ### Movement
 
@@ -100,7 +100,7 @@ Normal mode is the default mode when you launch helix. You can return to it from
 | `Ctrl-x`    | Decrement object (number) under cursor                               | `decrement`               |
 | `Q`         | Start/stop macro recording to the selected register (experimental)   | `record_macro`            |
 | `q`         | Play back a recorded macro from the selected register (experimental) | `replay_macro`            |
-| `Ctrl-z`    | Suspend Helix and return to the shell (resume with `fg`)             | `suspend`                 |
+| `Ctrl-z`    | Suspend Zemacs and return to the shell (resume with `fg`)             | `suspend`                 |
 
 #### Shell
 
@@ -392,7 +392,7 @@ These mappings are in the style of [vim-unimpaired](https://github.com/tpope/vim
 
 Accessed by typing `i` in [normal mode](#normal-mode).
 
-Insert mode bindings are minimal by default. Helix is designed to
+Insert mode bindings are minimal by default. Zemacs is designed to
 be a modal editor, and this is reflected in the user experience and internal
 mechanics. Changes to the text are only saved for undos when
 escaping from insert mode to normal mode.

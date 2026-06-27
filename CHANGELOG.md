@@ -849,7 +849,7 @@ Usability improvements:
 - Add formatter status to `--health` output ([#7986](https://github.com/helix-editor/helix/pull/7986))
 - Change path normalization strategy to not resolve symlinks ([#9330](https://github.com/helix-editor/helix/pull/9330))
 - Select subtree within injections in `:tree-sitter-subtree` ([#9309](https://github.com/helix-editor/helix/pull/9309))
-- Use tilde expansion and normalization for `$HELIX_RUNTIME` paths ([1bc7aac](https://github.com/helix-editor/helix/commit/1bc7aac))
+- Use tilde expansion and normalization for `$ZEMACS_RUNTIME` paths ([1bc7aac](https://github.com/helix-editor/helix/commit/1bc7aac))
 - Improve failure message for LSP goto references ([#9382](https://github.com/helix-editor/helix/pull/9382))
 - Use injection syntax trees for bracket matching ([5e0b3cc](https://github.com/helix-editor/helix/commit/5e0b3cc))
 - Respect injections in `:tree-sitter-highlight-name` ([8b6565c](https://github.com/helix-editor/helix/commit/8b6565c))

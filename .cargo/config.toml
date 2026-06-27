@@ -18,7 +18,7 @@ rustflags = ["--cfg", "tokio_unstable", "-C", "target-feature=-crt-static"]
 # across checkouts. It is a fallback (priority below the user config dir), so it
 # never overrides a real user runtime.
 [env]
-HELIX_DEFAULT_RUNTIME = { value = "runtime", relative = true }
+ZEMACS_DEFAULT_RUNTIME = { value = "runtime", relative = true }
 
 [alias]
 xtask = "run --package xtask --"

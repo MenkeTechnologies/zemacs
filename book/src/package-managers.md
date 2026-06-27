@@ -20,7 +20,7 @@
   - [Packably](#packably)
   - [MSYS2](#msys2)
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/helix-editor.svg)](https://repology.org/project/helix-editor/versions)
+[![Packaging status](https://repology.org/badge/vertical-allrepos/zemacs-editor.svg)](https://repology.org/project/zemacs-editor/versions)
 
 ## Linux
 
@@ -45,7 +45,7 @@ If you are running a system older than Ubuntu 22.04, Mint 21, or Debian 12, you 
 ### Fedora/RHEL
 
 ```sh
-sudo dnf install helix
+sudo dnf install zemacs
 ```
 
 ### Arch Linux extra
@@ -53,26 +53,26 @@ sudo dnf install helix
 Releases are available in the `extra` repository:
 
 ```sh
-sudo pacman -S helix
+sudo pacman -S zemacs
 ```
 
-> 💡 When installed from the `extra` repository, run Helix with `helix` instead of `hx`.
+> 💡 When installed from the `extra` repository, run Zemacs with `zemacs` instead of `hx`.
 >
 > For example:
 > ```sh
-> helix --health
+> zemacs --health
 > ```
 > to check health
 
-Additionally, a [helix-git](https://aur.archlinux.org/packages/helix-git/) package is available
+Additionally, a [zemacs-git](https://aur.archlinux.org/packages/zemacs-git/) package is available
 in the AUR, which builds the master branch.
 
 ### NixOS
 
-Helix is available in [nixpkgs](https://github.com/nixos/nixpkgs) through the `helix` attribute,
+Zemacs is available in [nixpkgs](https://github.com/nixos/nixpkgs) through the `zemacs` attribute,
 the unstable channel usually carries the latest release.
 
-Helix is also available as a [flake](https://wiki.nixos.org/wiki/Flakes) in the project
+Zemacs is also available as a [flake](https://wiki.nixos.org/wiki/Flakes) in the project
 root. Use `nix develop` to spin up a reproducible development shell. Outputs are
 cached for each push to master using [Cachix](https://www.cachix.org/). The
 flake is configured to automatically make use of this cache assuming the user
@@ -80,41 +80,41 @@ accepts the new settings on first use.
 
 If you are using a version of Nix without flakes enabled,
 [install Cachix CLI](https://docs.cachix.org/installation) and use
-`cachix use helix` to configure Nix to use cached outputs when possible.
+`cachix use zemacs` to configure Nix to use cached outputs when possible.
 
 ### Flatpak
 
-Helix is available on [Flathub](https://flathub.org/en-GB/apps/com.helix_editor.Helix):
+Zemacs is available on [Flathub](https://flathub.org/en-GB/apps/com.helix_editor.Zemacs):
 
 ```sh
-flatpak install flathub com.helix_editor.Helix
-flatpak run com.helix_editor.Helix
+flatpak install flathub com.helix_editor.Zemacs
+flatpak run com.helix_editor.Zemacs
 ```
 
 ### Snap
 
-Helix is available on [Snapcraft](https://snapcraft.io/helix) and can be installed with:
+Zemacs is available on [Snapcraft](https://snapcraft.io/zemacs) and can be installed with:
 
 ```sh
-snap install --classic helix
+snap install --classic zemacs
 ```
 
-This will install Helix as both `/snap/bin/helix` and `/snap/bin/hx`, so make sure `/snap/bin` is in your `PATH`.
+This will install Zemacs as both `/snap/bin/zemacs` and `/snap/bin/hx`, so make sure `/snap/bin` is in your `PATH`.
 
 ### AppImage
 
-Install Helix using the Linux [AppImage](https://appimage.org/) format.
+Install Zemacs using the Linux [AppImage](https://appimage.org/) format.
 Download the official Helix AppImage from the [latest releases](https://github.com/helix-editor/helix/releases/latest) page.
 
 ```sh
-chmod +x helix-*.AppImage # change permission for executable mode
-./helix-*.AppImage # run helix
+chmod +x zemacs-*.AppImage # change permission for executable mode
+./zemacs-*.AppImage # run zemacs
 ```
 
-You can optionally [add the `.desktop` file](./building-from-source.md#configure-the-desktop-shortcut). Helix must be installed in `PATH` with the name `hx`. For example:
+You can optionally [add the `.desktop` file](./building-from-source.md#configure-the-desktop-shortcut). Zemacs must be installed in `PATH` with the name `hx`. For example:
 ```sh
 mkdir -p "$HOME/.local/bin"
-mv helix-*.AppImage "$HOME/.local/bin/hx"
+mv zemacs-*.AppImage "$HOME/.local/bin/hx"
 ```
 
 and make sure `~/.local/bin` is in your `PATH`.
@@ -130,19 +130,19 @@ Checkout the [macOS](#homebrew-core) instructions below.
 Install the latest release:
 
 ```sh
-brew install helix
+brew install zemacs
 ```
 
 Or, install the latest nightly version:
 
 ```sh
-brew install --HEAD helix
+brew install --HEAD zemacs
 ```
 
 ### MacPorts
 
 ```sh
-sudo port install helix
+sudo port install zemacs
 ```
 
 ## Windows
@@ -155,25 +155,25 @@ Windows Package Manager winget command-line tool is by default available on Wind
 You can get [App Installer from the Microsoft Store](https://www.microsoft.com/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab). If it's already installed, make sure it is updated with the latest version.
 
 ```sh
-winget install Helix.Helix
+winget install Zemacs.Zemacs
 ```
 
 ### Scoop
 
 ```sh
-scoop install helix
+scoop install zemacs
 ```
 
 ### Chocolatey
 
 ```sh
-choco install helix
+choco install zemacs
 ```
 
 ### Packably
 
 ```sh
-packl install helix
+packl install zemacs
 ```
 
 ### MSYS2
@@ -181,5 +181,5 @@ packl install helix
 For 64-bit Windows 8.1 or above:
 
 ```sh
-pacman -S mingw-w64-ucrt-x86_64-helix
+pacman -S mingw-w64-ucrt-x86_64-zemacs
 ```

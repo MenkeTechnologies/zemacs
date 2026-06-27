@@ -1,24 +1,24 @@
 [workspace]
 resolver = "2"
 members = [
-  "helix-core",
-  "helix-view",
-  "helix-term",
-  "helix-tui",
-  "helix-lsp-types",
-  "helix-lsp",
-  "helix-event",
-  "helix-dap-types",
-  "helix-dap",
-  "helix-loader",
-  "helix-vcs",
-  "helix-parsec",
-  "helix-stdx",
+  "zemacs-core",
+  "zemacs-view",
+  "zemacs-term",
+  "zemacs-tui",
+  "zemacs-lsp-types",
+  "zemacs-lsp",
+  "zemacs-event",
+  "zemacs-dap-types",
+  "zemacs-dap",
+  "zemacs-loader",
+  "zemacs-vcs",
+  "zemacs-parsec",
+  "zemacs-stdx",
   "xtask",
 ]
 
 default-members = [
-  "helix-term"
+  "zemacs-term"
 ]
 
 [profile.release]
@@ -33,9 +33,9 @@ opt-level = 3
 
 [profile.integration]
 inherits = "test"
-package.helix-core.opt-level = 2
-package.helix-tui.opt-level = 2
-package.helix-term.opt-level = 2
+package.zemacs-core.opt-level = 2
+package.zemacs-tui.opt-level = 2
+package.zemacs-term.opt-level = 2
 
 [workspace.dependencies]
 tree-house = { version = "0.4", default-features = false }
@@ -68,7 +68,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Blaž Hrastnik <blaz@mxxn.io>"]
 categories = ["editor"]
-repository = "https://github.com/helix-editor/helix"
-homepage = "https://helix-editor.com"
+repository = "https://github.com/MenkeTechnologies/zemacs"
+homepage = "https://github.com/MenkeTechnologies/zemacs"
 license = "MPL-2.0"
 rust-version = "1.90"

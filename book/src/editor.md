@@ -39,7 +39,7 @@
 | `line-number` | Line number display: `absolute` simply shows each line's number, while `relative` shows the distance from the current line. When unfocused or in insert mode, `relative` will still show absolute line numbers | `"absolute"` |
 | `cursorline` | Highlight all lines with a cursor | `false` |
 | `cursorcolumn` | Highlight all columns with a cursor | `false` |
-| `continue-comments` | if helix should automatically add a line comment token if you create a new line inside a comment. | `true` |
+| `continue-comments` | if zemacs should automatically add a line comment token if you create a new line inside a comment. | `true` |
 | `gutters` | Gutters to display: Available are `diagnostics` and `diff` and `line-numbers` and `spacer` and `code-action-hint`, note that `diagnostics` also includes other features like breakpoints, 1-width padding will be inserted if gutters is non-empty | `["diagnostics", "spacer", "line-numbers", "spacer", "diff"]` |
 | `auto-completion` | Enable automatic pop up of auto-completion | `true` |
 | `path-completion` | Enable filepath completion. Show files and directories if an existing path at the cursor was recognized, either absolute or relative to the current opened document or current working directory (if the buffer is not yet saved). Defaults to true. | `true` |
@@ -56,7 +56,7 @@
 | `bufferline` | Renders a line at the top of the editor displaying open buffers. Can be `always`, `never` or `multiple` (only shown if more than one buffer is in use) | `"never"` |
 | `color-modes` | Whether to color the mode indicator with different colors depending on the mode itself | `false` |
 | `text-width` | Maximum line length. Used for the `:reflow` command and soft-wrapping if `soft-wrap.wrap-at-text-width` is set | `80` |
-| `workspace-lsp-roots` | Directories relative to the workspace root that are treated as LSP roots. Should only be set in `.helix/config.toml` | `[]` |
+| `workspace-lsp-roots` | Directories relative to the workspace root that are treated as LSP roots. Should only be set in `.zemacs/config.toml` | `[]` |
 | `default-line-ending` | The line ending to use for new documents. Can be `native`, `lf`, `crlf`, `ff`, `cr` or `nel`. `native` uses the platform's native line ending (`crlf` on Windows, otherwise `lf`). | `"native"` |
 | `insert-final-newline` | Whether to automatically insert a trailing line-ending on write if missing | `true` |
 | `atomic-save` | Whether to use atomic operations to write documents to disk. This prevents data loss if the editor is interrupted while writing the file, but may confuse some file watching/hot reloading programs. | `true` |
@@ -75,7 +75,7 @@
 
 ### `[editor.clipboard-provider]` Section
 
-Helix can be configured either to use a builtin clipboard configuration or to use
+Zemacs can be configured either to use a builtin clipboard configuration or to use
 a provided command.
 
 For instance, setting it to use OSC 52 termcodes, the configuration would be:
@@ -84,7 +84,7 @@ For instance, setting it to use OSC 52 termcodes, the configuration would be:
 clipboard-provider = "termcode"
 ```
 
-Alternatively, Helix can be configured to use arbitrary commands for clipboard integration:
+Alternatively, Zemacs can be configured to use arbitrary commands for clipboard integration:
 
 ```toml
 [editor.clipboard-provider.custom]
@@ -179,7 +179,7 @@ The following statusline elements can be configured:
 
 [^1]: By default, a progress spinner is shown in the statusline beside the file path.
 
-[^2]: You may also have to activate them in the language server config for them to appear, not just in Helix. Inlay hints in Helix are still being improved on and may be a little bit laggy/janky under some circumstances. Please report any bugs you see so we can fix them!
+[^2]: You may also have to activate them in the language server config for them to appear, not just in Zemacs. Inlay hints in Zemacs are still being improved on and may be a little bit laggy/janky under some circumstances. Please report any bugs you see so we can fix them!
 
 ### `[editor.cursor-shape]` Section
 
@@ -202,7 +202,7 @@ Valid values for these options are `block`, `bar`, `underline`, or `hidden`.
 ### `[editor.file-picker]` Section
 
 Set options for file picker and global search. Ignoring a file means it is
-not visible in the Helix file picker and global search.
+not visible in the Zemacs file picker and global search.
 
 All git related options are only enabled in a git repository.
 
@@ -220,9 +220,9 @@ All git related options are only enabled in a git repository.
 
 Ignore files can be placed locally as `.ignore` or put in your home directory as `~/.ignore`. They support the usual ignore and negative ignore (unignore) rules used in `.gitignore` files.
 
-Additionally, you can use Helix-specific ignore files by creating a local `.helix/ignore` file in the current workspace or a global `ignore` file located in your Helix config directory:
-- Linux and Mac: `~/.config/helix/ignore`
-- Windows: `%AppData%\helix\ignore`
+Additionally, you can use Zemacs-specific ignore files by creating a local `.zemacs/ignore` file in the current workspace or a global `ignore` file located in your Zemacs config directory:
+- Linux and Mac: `~/.config/zemacs/ignore`
+- Windows: `%AppData%\zemacs\ignore`
 
 Example:
 
@@ -237,7 +237,7 @@ Example:
 
 In addition to the options for the file picker and global search, a similar set of options is presented to configure the file explorer separately. However, unlike the file picker, the defaults are set to avoid ignoring most files.
 
-Note that the ignore files consulted by the file explorer when `ignore` is set to true are the same ones used by the file picker, including the aforementioned Helix-specific ignore files.
+Note that the ignore files consulted by the file explorer when `ignore` is set to true are the same ones used by the file picker, including the aforementioned Zemacs-specific ignore files.
 
 
 | Key | Description | Default |
@@ -558,11 +558,11 @@ prompt = false
 
 # "none":     prompt for every workspace.
 # "servers":  trust LSP and DAP launches but still gate local config and git;
-#             .helix/config.toml, .helix/languages.toml, etc. need :workspace-trust.
+#             .zemacs/config.toml, .zemacs/languages.toml, etc. need :workspace-trust.
 # "insecure": trust everything (discouraged).
 level = "servers"
 
-# Discouraged: skips .helix/ change detection and trusts anything that lands
+# Discouraged: skips .zemacs/ change detection and trusts anything that lands
 # under a matching path. `~` and environment variables are expanded.
 trusted = ["~/src/github.com/me/*"]
 ```

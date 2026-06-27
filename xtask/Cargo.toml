@@ -12,10 +12,10 @@ homepage.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-helix-term = { path = "../helix-term" }
-helix-core = { path = "../helix-core" }
-helix-view = { path = "../helix-view" }
-helix-loader = { path = "../helix-loader" }
-helix-stdx = { path = "../helix-stdx" }
+zemacs-term = { path = "../zemacs-term" }
+zemacs-core = { path = "../zemacs-core" }
+zemacs-view = { path = "../zemacs-view" }
+zemacs-loader = { path = "../zemacs-loader" }
+zemacs-stdx = { path = "../zemacs-stdx" }
 ropey.workspace = true
 toml.workspace = true
