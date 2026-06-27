@@ -3798,5 +3798,157 @@
       "key:normal:space w x"
     ],
     "note": "spacemacs SPC w x: bound in the SPC leader (transpose_view)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_u",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j u"
+    ],
+    "note": "spacemacs SPC j u: bound in the SPC leader (goto_file)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_c_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b C-d"
+    ],
+    "note": "spacemacs SPC b C-d: bound in the SPC leader (buffer-close-others)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_e",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b e"
+    ],
+    "note": "spacemacs SPC b e: bound in the SPC leader (reload)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_x",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space b x"
+    ],
+    "note": "spacemacs SPC b x: bound in the SPC leader (buffer-close)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_a_a",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s a a"
+    ],
+    "note": "spacemacs SPC s a a: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_g_g",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s g g"
+    ],
+    "note": "spacemacs SPC s g g: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_a_b",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s a b"
+    ],
+    "note": "spacemacs SPC s a b: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_g_b",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s g b"
+    ],
+    "note": "spacemacs SPC s g b: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_k_b",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s k b"
+    ],
+    "note": "spacemacs SPC s k b: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_a_f",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s a f"
+    ],
+    "note": "spacemacs SPC s a f: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_g_f",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s g f"
+    ],
+    "note": "spacemacs SPC s g f: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_k_f",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s k f"
+    ],
+    "note": "spacemacs SPC s k f: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_a_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s a d"
+    ],
+    "note": "spacemacs SPC s a d: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_g_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s g d"
+    ],
+    "note": "spacemacs SPC s g d: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_k_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s k d"
+    ],
+    "note": "spacemacs SPC s k d: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_a_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s a p"
+    ],
+    "note": "spacemacs SPC s a p: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_g_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s g p"
+    ],
+    "note": "spacemacs SPC s g p: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_k_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s k p"
+    ],
+    "note": "spacemacs SPC s k p: bound in the SPC leader (global_search)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_h",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s h"
+    ],
+    "note": "spacemacs SPC s h: bound in the SPC leader (select_references_to_symbol_under_cursor)"
   }
 ]

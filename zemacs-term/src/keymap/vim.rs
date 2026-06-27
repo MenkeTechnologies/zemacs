@@ -71,6 +71,9 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space h t",   "Help",    ":tutor"),                                // SPC h t : start the tutor
     ("space q a",   "Quit",    ":quit-all"),                             // SPC q a : quit all
     ("space q w",   "Quit",    ":write-quit"),                           // SPC q w : write & quit window
+    ("space b C-d", "Buffers", ":buffer-close-others"),                  // SPC b C-d : kill other buffers
+    ("space b x",   "Buffers", ":buffer-close"),                         // SPC b x : kill buffer & window
+    ("space b e",   "Buffers", ":reload"),                              // SPC b e : revert/erase to disk
 ];
 
 /// Insert `cmd` at `path` under `root`, creating intermediate submap nodes
@@ -514,7 +517,21 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "p" => global_search,              // SPC s p
                 "j" => symbol_picker,              // SPC s j
                 "e" => select_references_to_symbol_under_cursor, // SPC s e : edit occurrences
+                "h" => select_references_to_symbol_under_cursor, // SPC s h : highlight symbol
                 "S" => workspace_symbol_picker,
+                // ag / grep / ack search families all map to project-wide search.
+                "a" => { "ag"
+                    "a" => global_search, "b" => global_search, "d" => global_search,
+                    "f" => global_search, "p" => global_search,
+                },
+                "g" => { "grep"
+                    "g" => global_search, "b" => global_search, "f" => global_search,
+                    "d" => global_search, "p" => global_search,
+                },
+                "k" => { "ack"
+                    "b" => global_search, "d" => global_search,
+                    "f" => global_search, "p" => global_search,
+                },
             },
             "p" => { "Project"
                 "f" => file_picker,                // SPC p f
@@ -546,6 +563,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "d" => file_explorer_in_current_buffer_directory, // SPC j d : dir listing
                 "c" => goto_last_change,           // SPC j c : go to last change
                 "k" => [move_visual_line_down, indent], // SPC j k : next line + indent
+                "u" => goto_file,                  // SPC j u : jump to URL/file under cursor
             },
             "g" => { "Goto (LSP)"
                 "d" => goto_definition,
