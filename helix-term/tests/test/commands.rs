@@ -1411,3 +1411,10 @@ async fn ex_right_align() -> anyhow::Result<()> {
     test(("#[|a]#b\n", ":right 5<ret>", "   #[|a]#b\n")).await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn ex_undo_redo() -> anyhow::Result<()> {
+    // delete a line, :undo restores it, :redo re-deletes.
+    test(("#[|a]#\nb\n", ":d<ret>:undo<ret>", "#[|a]#\nb\n")).await?;
+    Ok(())
+}

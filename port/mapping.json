@@ -1608,30 +1608,6 @@
     "note": "set option"
   },
   {
-    "spec_id": "neovim.ex-command.colon_undo",
-    "status": "ported",
-    "evidence": [
-      "typable:u"
-    ],
-    "note": "undo"
-  },
-  {
-    "spec_id": "neovim.ex-command.colon_earlier",
-    "status": "ported",
-    "evidence": [
-      "typable:earlier"
-    ],
-    "note": "undo to earlier state"
-  },
-  {
-    "spec_id": "neovim.ex-command.colon_later",
-    "status": "ported",
-    "evidence": [
-      "typable:later"
-    ],
-    "note": "redo to later state"
-  },
-  {
     "spec_id": "neovim.ex-command.colon_bang",
     "status": "ported",
     "evidence": [
@@ -3118,5 +3094,53 @@
       "typable:right"
     ],
     "note": "vim :right align lines"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_cquit",
+    "status": "ported",
+    "evidence": [
+      "typable:cquit"
+    ],
+    "note": "vim :cq[uit] -> helix :cquit"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_diffget",
+    "status": "ported",
+    "evidence": [
+      "typable:diffget"
+    ],
+    "note": "vim :diffg[et] -> helix :diffget"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_earlier",
+    "status": "ported",
+    "evidence": [
+      "typable:earlier"
+    ],
+    "note": "vim :ea[rlier] -> helix :earlier"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_later",
+    "status": "ported",
+    "evidence": [
+      "typable:later"
+    ],
+    "note": "vim :lat[er] -> helix :later"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_redo",
+    "status": "ported",
+    "evidence": [
+      "typable:redo"
+    ],
+    "note": "vim :red[o] -> :redo"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_undo",
+    "status": "partial",
+    "evidence": [
+      "typable:undo"
+    ],
+    "note": "vim :u[ndo] -> :undo (:u abbrev taken by helix)"
   }
 ]

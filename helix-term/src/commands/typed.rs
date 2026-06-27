@@ -3588,6 +3588,24 @@ fn center_cmd(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> a
     align_lines(cx, args, event, AlignMode::Center)
 }
 
+fn undo_cmd(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    let (view, doc) = current!(cx.editor);
+    doc.undo(view);
+    Ok(())
+}
+
+fn redo_cmd(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    let (view, doc) = current!(cx.editor);
+    doc.redo(view);
+    Ok(())
+}
+
 fn retab(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
     if event != PromptEvent::Validate {
         return Ok(());
@@ -5437,6 +5455,22 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         fun: center_cmd,
         completer: CommandCompleter::none(),
         signature: Signature { positionals: (0, Some(1)), ..Signature::DEFAULT },
+    },
+    TypableCommand {
+        name: "undo",
+        aliases: &[],
+        doc: "Undo the last change (vim :undo).",
+        fun: undo_cmd,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
+    },
+    TypableCommand {
+        name: "redo",
+        aliases: &["red"],
+        doc: "Redo the last undone change (vim :redo).",
+        fun: redo_cmd,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
     },
     TypableCommand {
         name: "retab",
