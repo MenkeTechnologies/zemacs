@@ -3366,5 +3366,21 @@
       "key:normal:g v"
     ],
     "note": "vim gv reselect last visual area (edit-clamped)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.gj",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g J"
+    ],
+    "note": "vim gJ -> join!"
+  },
+  {
+    "spec_id": "neovim.normal-mode.z_lt_cr_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:z ret"
+    ],
+    "note": "vim z<CR> -> align_view_top"
   }
 ]

@@ -99,6 +99,7 @@ fn chord(s: &str) -> Vec<KeyEvent> {
 const VIM_TYPABLE: &[(&str, &str, &str)] = &[
     ("Z Z", "Quit", ":write-quit"),   // ZZ: write if changed and close
     ("Z Q", "Quit", ":quit!"),        // ZQ: close without writing
+    ("g J", "Goto", ":join!"),        // gJ: join lines without a space
 ];
 
 fn add_spacemacs_typables(normal: &mut KeyTrie) {
@@ -342,6 +343,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "c" => align_view_center,
             "." => [align_view_center, goto_first_nonwhitespace], // z. center + first non-blank
             "-" => [align_view_bottom, goto_first_nonwhitespace], // z- bottom + first non-blank
+            "ret" => [align_view_top, goto_first_nonwhitespace],  // z<CR> top + first non-blank
         },
 
         // --- bracket submaps (vim unimpaired-ish) --------------------------
