@@ -126,10 +126,11 @@ def parse_keymap():
             _walk_keymap(body, [], result[m.group(4)])
 
     # Bindings inserted programmatically after macro construction (typable `:`
-    # commands the macro cannot express) are declared in a parseable table:
-    #   ("space f s", "Files", ":write"),
+    # commands the macro cannot express) are declared in parseable tables:
+    #   ("space f s", "Files", ":write"),  ("Z Z", "Quit", ":write-quit"),
+    # Match any chord (first string) of a (chord, label, ":cmd") tuple.
     for tm in re.finditer(
-        r'\(\s*"(space [^"]+)"\s*,\s*"[^"]*"\s*,\s*"(:[^"]+)"\s*\)', src
+        r'\(\s*"([A-Za-z][^"]*)"\s*,\s*"[^"]*"\s*,\s*"(:[^"]+)"\s*\)', src
     ):
         chord, cmd = tm.group(1), tm.group(2).lstrip(":")
         result["normal"][chord] = cmd
