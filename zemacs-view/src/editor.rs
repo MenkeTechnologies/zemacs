@@ -1273,6 +1273,10 @@ type Diagnostics = BTreeMap<Uri, Vec<(lsp::Diagnostic, DiagnosticProvider)>>;
 pub struct Editor {
     /// Current editing mode.
     pub mode: Mode,
+    /// vim Replace mode (`R`): typed characters overtype existing ones instead
+    /// of being inserted. Only meaningful while `mode == Insert`; cleared on
+    /// return to Normal.
+    pub overwrite: bool,
     pub tree: Tree,
     pub next_document_id: DocumentId,
     pub documents: BTreeMap<DocumentId, Document>,
@@ -1429,6 +1433,7 @@ impl Editor {
 
         Self {
             mode: Mode::Normal,
+            overwrite: false,
             tree: Tree::new(area),
             next_document_id: DocumentId::default(),
             documents: BTreeMap::new(),
@@ -2535,6 +2540,9 @@ impl Editor {
     /// Switches the editor into normal mode.
     pub fn enter_normal_mode(&mut self) {
         use zemacs_core::graphemes;
+
+        // Replace mode is an insert-mode sub-state; always clear it on the way out.
+        self.overwrite = false;
 
         if self.mode == Mode::Normal {
             return;

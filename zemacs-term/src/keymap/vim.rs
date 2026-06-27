@@ -204,6 +204,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "s" => change_selection,            // substitute char
         "S" => [extend_to_line_bounds, change_selection],
         "r" => replace,
+        "R" => replace_mode,                // enter Replace mode (overtype)
         "J" => join_selections,
         "~" => switch_case,
         "p" => paste_after,

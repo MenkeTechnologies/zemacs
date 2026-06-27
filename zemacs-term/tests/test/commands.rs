@@ -1488,6 +1488,29 @@ async fn vim_dot_repeat_insert() -> anyhow::Result<()> {
 }
 
 #[tokio::test(flavor = "multi_thread")]
+async fn vim_replace_mode() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(zemacs_term::config::Config {
+            keys: zemacs_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        // R enters overtype: XY replace a,b; c is untouched.
+        ("#[a|]#bc\n", "RXY", "XY#[c|]#\n"),
+    )
+    .await?;
+    test_with_config(
+        AppBuilder::new().with_config(zemacs_term::config::Config {
+            keys: zemacs_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        // Overtyping past the line end appends (vim behavior).
+        ("#[a|]#\n", "RXY", "XY#[\n|]#"),
+    )
+    .await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
 async fn vim_goto_percent() -> anyhow::Result<()> {
     test_with_config(
         AppBuilder::new().with_config(zemacs_term::config::Config {

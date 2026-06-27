@@ -3758,5 +3758,13 @@
       "key:normal:%"
     ],
     "note": "vim {count}%: jump to {count} percent through the file, first non-blank (match_brackets_or_goto_percent; %% with no count still matches brackets)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.r",
+    "status": "partial",
+    "evidence": [
+      "key:normal:R"
+    ],
+    "note": "vim R: Replace mode (overtype). Typed chars overwrite existing ones, append at EOL. Partial: backspace does not yet restore the original overtyped characters (vim's restore-on-backspace)."
   }
 ]

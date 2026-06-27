@@ -399,6 +399,7 @@ impl MappableCommand {
         ensure_selections_forward, "Ensure all selections face forward",
         insert_mode, "Insert before selection",
         append_mode, "Append after selection",
+        replace_mode, "Enter Replace mode (overtype)",
         command_mode, "Enter command mode",
         file_picker, "Open file picker",
         file_picker_in_current_buffer_directory, "Open file picker at current buffer's directory",
@@ -3356,6 +3357,13 @@ fn insert_mode(cx: &mut Context) {
     doc.set_selection(view.id, selection);
 }
 
+// vim Replace mode (`R`): enter insert mode in overtype mode, so typed
+// characters replace existing ones until <esc>.
+fn replace_mode(cx: &mut Context) {
+    insert_mode(cx);
+    cx.editor.overwrite = true;
+}
+
 // inserts at the end of each selection
 fn append_mode(cx: &mut Context) {
     enter_insert_mode(cx);
@@ -4542,6 +4550,13 @@ pub mod insert {
     use zemacs_view::editor::SmartTabConfig;
 
     pub fn insert_char(cx: &mut Context, c: char) {
+        // vim Replace mode (`R`): overtype the character under the cursor rather
+        // than inserting, unless the cursor sits at the end of the line (where
+        // vim appends). Auto-pairs are bypassed while overtyping.
+        if cx.editor.overwrite {
+            return overtype_char(cx, c);
+        }
+
         let (view, doc) = current_ref!(cx.editor);
         let text = doc.text();
         let selection = doc.selection(view.id);
@@ -4564,6 +4579,35 @@ pub mod insert {
                         .or_else(|| Some(insert_char(*range, c)))
                 })
                 .unwrap_or_else(|| insert_char(*range, c))
+        });
+
+        let doc = doc_mut!(cx.editor, &doc.id());
+        doc.apply(&transaction, view.id);
+
+        zemacs_event::dispatch(PostInsertChar { c, cx });
+    }
+
+    /// Overtype the grapheme under each cursor with `c` (vim Replace mode). At a
+    /// line end the character is appended instead, matching vim.
+    pub fn overtype_char(cx: &mut Context, c: char) {
+        let (view, doc) = current_ref!(cx.editor);
+        let text = doc.text();
+        let slice = text.slice(..);
+        let selection = doc.selection(view.id);
+
+        let transaction = Transaction::change_by_and_with_selection(text, selection, |range| {
+            let cursor = range.cursor(slice);
+            let line = slice.char_to_line(cursor);
+            let line_end = line_end_char_index(&slice, line);
+            let t = Tendril::from_iter([c]);
+            // Replace the char under the cursor unless at end-of-line (append).
+            let end = if cursor < line_end {
+                graphemes::next_grapheme_boundary(slice, cursor)
+            } else {
+                cursor
+            };
+            // Advance the cursor past the overtyped character (vim moves right).
+            ((cursor, end, Some(t)), Some(Range::point(cursor + 1)))
         });
 
         let doc = doc_mut!(cx.editor, &doc.id());
