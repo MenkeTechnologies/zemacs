@@ -3246,5 +3246,21 @@
       "key:normal:g E"
     ],
     "note": "vim gE -> move_prev_long_word_end"
+  },
+  {
+    "spec_id": "neovim.normal-mode.zz",
+    "status": "ported",
+    "evidence": [
+      "key:normal:Z Z"
+    ],
+    "note": "vim ZZ -> :write-quit"
+  },
+  {
+    "spec_id": "neovim.normal-mode.zq",
+    "status": "ported",
+    "evidence": [
+      "key:normal:Z Q"
+    ],
+    "note": "vim ZQ -> :quit!"
   }
 ]

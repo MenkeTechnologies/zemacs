@@ -93,9 +93,17 @@ fn chord(s: &str) -> Vec<KeyEvent> {
     s.split(' ').map(|k| k.parse().expect("valid key")).collect()
 }
 
+/// vim normal-mode chords that resolve to typable commands (not expressible in
+/// the keymap macro). Inserted after macro construction.
+#[rustfmt::skip]
+const VIM_TYPABLE: &[(&str, &str, &str)] = &[
+    ("Z Z", "Quit", ":write-quit"),   // ZZ: write if changed and close
+    ("Z Q", "Quit", ":quit!"),        // ZQ: close without writing
+];
+
 fn add_spacemacs_typables(normal: &mut KeyTrie) {
     if let KeyTrie::Node(root) = normal {
-        for (ch, label, cmd) in SPACEMACS_TYPABLE {
+        for (ch, label, cmd) in SPACEMACS_TYPABLE.iter().chain(VIM_TYPABLE) {
             add_command(root, &chord(ch), label, cmd);
         }
     }
@@ -656,7 +664,7 @@ mod tests {
         let km = default();
         let n = &km[&Mode::Normal];
         // SPC f s / SPC q q etc. resolve to typable commands inserted post-macro.
-        for (chord_str, _, cmd) in SPACEMACS_TYPABLE {
+        for (chord_str, _, cmd) in SPACEMACS_TYPABLE.iter().chain(VIM_TYPABLE) {
             let leaf = resolve(n, chord_str)
                 .unwrap_or_else(|| panic!("{chord_str} did not resolve"));
             // The bound leaf must equal what the command string parses to, and
