@@ -156,6 +156,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         // --- paragraph motions ----------------------------------------------
         "{" => goto_prev_paragraph,
         "}" => goto_next_paragraph,
+        "(" => move_sentence_backward,   // ( back to start of sentence
+        ")" => move_sentence_forward,    // ) forward to next sentence
 
         // --- find char ------------------------------------------------------
         "f" => find_next_char,
@@ -582,6 +584,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "%"          => match_brackets,
         "{"          => goto_prev_paragraph,
         "}"          => goto_next_paragraph,
+        "("          => move_sentence_backward,
+        ")"          => move_sentence_forward,
 
         "f" => extend_next_char,
         "F" => extend_prev_char,

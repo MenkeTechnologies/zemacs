@@ -611,6 +611,8 @@ impl MappableCommand {
         goto_prev_entry, "Goto previous pairing",
         goto_next_paragraph, "Goto next paragraph",
         goto_prev_paragraph, "Goto previous paragraph",
+        move_sentence_forward, "Move to next sentence",
+        move_sentence_backward, "Move to previous sentence",
         dap_launch, "Launch debug target",
         dap_restart, "Restart debugging session",
         dap_toggle_breakpoint, "Toggle breakpoint",
@@ -1313,6 +1315,14 @@ fn goto_prev_paragraph(cx: &mut Context) {
 
 fn goto_next_paragraph(cx: &mut Context) {
     goto_para_impl(cx, movement::move_next_paragraph)
+}
+
+fn move_sentence_forward(cx: &mut Context) {
+    goto_para_impl(cx, movement::move_next_sentence)
+}
+
+fn move_sentence_backward(cx: &mut Context) {
+    goto_para_impl(cx, movement::move_prev_sentence)
 }
 
 fn goto_file_start(cx: &mut Context) {

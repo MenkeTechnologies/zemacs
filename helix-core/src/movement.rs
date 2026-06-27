@@ -353,6 +353,126 @@ pub fn move_next_paragraph(
     Range::new(anchor, head)
 }
 
+// ---- sentence motions (vim `(` / `)`) ------------
+//
+// A sentence is ended by `.`, `!` or `?` followed by the end of a line, or by a
+// space or tab. Any number of closing `)`, `]`, `"` and `'` characters may
+// appear after the `.`, `!` or `?` before the spaces. A blank line (paragraph
+// boundary) is also a sentence boundary. (vim `:help sentence`.)
+
+#[inline]
+fn is_sentence_end(c: char) -> bool {
+    matches!(c, '.' | '!' | '?')
+}
+
+#[inline]
+fn is_sentence_closer(c: char) -> bool {
+    matches!(c, ')' | ']' | '"' | '\'')
+}
+
+#[inline]
+fn is_sentence_space(c: char) -> bool {
+    matches!(c, ' ' | '\t' | '\n' | '\r')
+}
+
+/// Char index of the start of the next sentence at or after `pos`.
+/// Returns `slice.len_chars()` if no further sentence start exists.
+fn next_sentence_boundary(slice: RopeSlice, pos: usize) -> usize {
+    let len = slice.len_chars();
+    let mut i = pos;
+    while i < len {
+        let c = slice.char(i);
+        if is_sentence_end(c) {
+            let mut j = i + 1;
+            while j < len && is_sentence_closer(slice.char(j)) {
+                j += 1;
+            }
+            // The ender must be followed by whitespace or the end of the buffer.
+            if j >= len {
+                return len;
+            }
+            if is_sentence_space(slice.char(j)) {
+                let mut k = j;
+                while k < len && is_sentence_space(slice.char(k)) {
+                    k += 1;
+                }
+                return k;
+            }
+            i = j;
+        } else {
+            // A blank line is its own boundary: the start of the line after it.
+            if c == '\n' && i + 1 < len && slice.char(i + 1) == '\n' {
+                return i + 1;
+            }
+            i += 1;
+        }
+    }
+    len
+}
+
+/// Char index of the first character of the paragraph containing `pos`,
+/// used to bound the backward sentence scan to a single paragraph.
+fn current_paragraph_start(slice: RopeSlice, pos: usize) -> usize {
+    let mut line = slice.char_to_line(pos);
+    while line > 0 && !rope_is_line_ending(slice.line(line - 1)) {
+        line -= 1;
+    }
+    slice.line_to_char(line)
+}
+
+/// Char index of the start of the sentence before `pos` (or the start of the
+/// current sentence when `pos` is mid-sentence), bounded to this paragraph.
+fn prev_sentence_boundary(slice: RopeSlice, pos: usize) -> usize {
+    let para = current_paragraph_start(slice, pos);
+    let mut start = para;
+    let mut i = para;
+    while i < pos {
+        let nb = next_sentence_boundary(slice, i);
+        if nb <= i || nb >= pos {
+            break;
+        }
+        start = nb;
+        i = nb;
+    }
+    start
+}
+
+pub fn move_next_sentence(slice: RopeSlice, range: Range, count: usize, behavior: Movement) -> Range {
+    let len = slice.len_chars();
+    let mut pos = range.cursor(slice);
+    for _ in 0..count {
+        let nb = next_sentence_boundary(slice, pos);
+        if nb <= pos {
+            break;
+        }
+        pos = nb;
+    }
+    let head = pos.min(len.saturating_sub(1));
+    let anchor = if behavior == Movement::Move {
+        head
+    } else {
+        range.anchor
+    };
+    Range::new(anchor, head)
+}
+
+pub fn move_prev_sentence(slice: RopeSlice, range: Range, count: usize, behavior: Movement) -> Range {
+    let mut pos = range.cursor(slice);
+    for _ in 0..count {
+        let pb = prev_sentence_boundary(slice, pos);
+        if pb >= pos {
+            break;
+        }
+        pos = pb;
+    }
+    let anchor = if behavior == Movement::Move {
+        pos
+    } else {
+        range.anchor
+    };
+    Range::new(anchor, pos)
+}
+
 // ---- util ------------
 
 #[inline]
@@ -2198,5 +2318,56 @@ mod test {
             let actual = crate::test::plain(s.as_ref(), &selection);
             assert_eq!(actual, expected, "\nbefore: `{:?}`", before);
         }
+    }
+
+    #[test]
+    fn test_next_sentence_boundary() {
+        // "One. Two. Three." — starts at 0, 5, 10.
+        let text = Rope::from("One. Two. Three.");
+        let s = text.slice(..);
+        assert_eq!(next_sentence_boundary(s, 0), 5);
+        assert_eq!(next_sentence_boundary(s, 5), 10);
+        // No further sentence start past the last ender -> len.
+        assert_eq!(next_sentence_boundary(s, 10), s.len_chars());
+
+        // Newlines count as the whitespace after an ender.
+        let nl = Rope::from("Hi.\nBye.");
+        assert_eq!(next_sentence_boundary(nl.slice(..), 0), 4);
+
+        // Closing punctuation may follow the ender before the space.
+        let close = Rope::from("(Yes.)  No.");
+        // ender '.' at 4, closer ')' at 5, spaces 6-7, "No" at 8.
+        assert_eq!(next_sentence_boundary(close.slice(..), 0), 8);
+
+        // A blank line is its own boundary.
+        let para = Rope::from("a\n\nb");
+        assert_eq!(next_sentence_boundary(para.slice(..), 0), 2);
+    }
+
+    #[test]
+    fn test_prev_sentence_boundary() {
+        let text = Rope::from("One. Two. Three.");
+        let s = text.slice(..);
+        // From inside "Three" -> start of "Three" (10).
+        assert_eq!(prev_sentence_boundary(s, 12), 10);
+        // From exactly a sentence start -> the previous start.
+        assert_eq!(prev_sentence_boundary(s, 10), 5);
+        assert_eq!(prev_sentence_boundary(s, 5), 0);
+        // Within the first sentence -> paragraph start (0).
+        assert_eq!(prev_sentence_boundary(s, 2), 0);
+    }
+
+    #[test]
+    fn test_move_sentence_cursor() {
+        let text = Rope::from("One. Two. Three.");
+        let s = text.slice(..);
+        let r = Range::point(0);
+        let fwd = move_next_sentence(s, r, 1, Movement::Move);
+        assert_eq!(fwd.cursor(s), 5);
+        let back = move_prev_sentence(s, Range::point(10), 1, Movement::Move);
+        assert_eq!(back.cursor(s), 5);
+        // count repeats.
+        let two = move_next_sentence(s, Range::point(0), 2, Movement::Move);
+        assert_eq!(two.cursor(s), 10);
     }
 }

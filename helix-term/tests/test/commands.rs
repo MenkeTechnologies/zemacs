@@ -1488,6 +1488,29 @@ async fn vim_dot_repeat_insert() -> anyhow::Result<()> {
 }
 
 #[tokio::test(flavor = "multi_thread")]
+async fn vim_sentence_motions() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(helix_term::config::Config {
+            keys: helix_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        // ) jumps to the start of the next sentence ("Two").
+        ("#[O|]#ne. Two. Three.\n", ")", "One. #[T|]#wo. Three.\n"),
+    )
+    .await?;
+    test_with_config(
+        AppBuilder::new().with_config(helix_term::config::Config {
+            keys: helix_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        // ( from inside "Three" jumps back to its start.
+        ("One. Two. T#[h|]#ree.\n", "(", "One. Two. #[T|]#hree.\n"),
+    )
+    .await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
 async fn vim_visual_linewise_delete() -> anyhow::Result<()> {
     test_with_config(
         AppBuilder::new().with_config(helix_term::config::Config {

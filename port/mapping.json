@@ -3734,5 +3734,21 @@
       "key:select:g q"
     ],
     "note": "vim visual gq: format the highlighted lines via the LSP formatter (partial: not textwidth wrapping)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lparen",
+    "status": "ported",
+    "evidence": [
+      "key:normal:("
+    ],
+    "note": "vim (: cursor N sentences backward (move_sentence_backward); faithful vim sentence boundaries (.!? + closers + ws, blank line)"
+  },
+  {
+    "spec_id": "neovim.normal-mode.rparen",
+    "status": "ported",
+    "evidence": [
+      "key:normal:)"
+    ],
+    "note": "vim ): cursor N sentences forward (move_sentence_forward); faithful vim sentence boundaries (.!? + closers + ws, blank line)"
   }
 ]
