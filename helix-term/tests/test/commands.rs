@@ -1319,3 +1319,21 @@ async fn vim_named_register_yank_paste() -> anyhow::Result<()> {
     .await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn ex_indent_line() -> anyhow::Result<()> {
+    test(("#[|a]#bc\ndef\n", ":<gt><ret>", "\t#[|a]#bc\ndef\n")).await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn ex_dedent_line() -> anyhow::Result<()> {
+    test(("\t#[|a]#bc\ndef\n", ":<lt><ret>", "#[|a]#bc\ndef\n")).await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn ex_delete_line() -> anyhow::Result<()> {
+    test(("#[|a]#bc\ndef\n", ":d<ret>", "#[d|]#ef\n")).await?;
+    Ok(())
+}

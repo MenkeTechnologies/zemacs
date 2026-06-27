@@ -2854,5 +2854,45 @@
       "key:normal:\""
     ],
     "note": "vim \"``\" register select for next y/d/p"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_lt",
+    "status": "ported",
+    "evidence": [
+      "typable:dedent-lines"
+    ],
+    "note": "vim :< line op"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_gt",
+    "status": "ported",
+    "evidence": [
+      "typable:indent-lines"
+    ],
+    "note": "vim :> line op"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_delete",
+    "status": "ported",
+    "evidence": [
+      "typable:delete-lines"
+    ],
+    "note": "vim :d[elete] line op"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_dp",
+    "status": "ported",
+    "evidence": [
+      "typable:delete-lines"
+    ],
+    "note": "vim :d[elete]p line op"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_yank",
+    "status": "ported",
+    "evidence": [
+      "typable:yank-lines"
+    ],
+    "note": "vim :y[ank] line op"
   }
 ]

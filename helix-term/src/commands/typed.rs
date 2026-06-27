@@ -3129,6 +3129,114 @@ fn copy_lines(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> a
     line_op_command(cx, args, event, true)
 }
 
+/// The line range spanned by the primary selection.
+fn primary_line_range(doc: &helix_view::Document, view: helix_view::ViewId) -> (usize, usize) {
+    let slice = doc.text().slice(..);
+    let sel = doc.selection(view).primary();
+    let first = slice.char_to_line(sel.from());
+    let last = slice.char_to_line(sel.to().saturating_sub(1).max(sel.from()));
+    (first, last)
+}
+
+fn do_indent(cx: &mut compositor::Context, dedent: bool) -> anyhow::Result<()> {
+    let (view, doc) = current!(cx.editor);
+    let unit = doc.indent_style.as_str().to_string();
+    let indent_width = doc.indent_style.indent_width(doc.tab_width());
+    let tab_width = doc.tab_width();
+    let slice = doc.text().slice(..);
+    let (first, last) = primary_line_range(doc, view.id);
+
+    let mut changes = Vec::new();
+    for line in first..=last {
+        let lstart = slice.line_to_char(line);
+        let lend = line_ending::line_end_char_index(&slice, line);
+        if dedent {
+            // Remove up to one indent level worth of leading whitespace.
+            let mut width = 0;
+            let mut removed = 0;
+            for ch in slice.slice(lstart..lend).chars() {
+                if width >= indent_width {
+                    break;
+                }
+                match ch {
+                    ' ' => width += 1,
+                    '\t' => width += tab_width,
+                    _ => break,
+                }
+                removed += 1;
+            }
+            if removed > 0 {
+                changes.push((lstart, lstart + removed, None));
+            }
+        } else if lend > lstart {
+            // Indent non-empty lines only (vim `>` skips blank lines).
+            changes.push((lstart, lstart, Some(Tendril::from(unit.as_str()))));
+        }
+    }
+    if changes.is_empty() {
+        return Ok(());
+    }
+    let transaction = Transaction::change(doc.text(), changes.into_iter());
+    doc.apply(&transaction, view.id);
+    doc.append_changes_to_history(view);
+    Ok(())
+}
+
+fn indent_cmd(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    do_indent(cx, false)
+}
+fn dedent_cmd(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    do_indent(cx, true)
+}
+
+fn yank_lines(
+    cx: &mut compositor::Context,
+    _args: Args,
+    event: PromptEvent,
+    delete: bool,
+) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    let (start, end, text) = {
+        let (view, doc) = current!(cx.editor);
+        let slice = doc.text().slice(..);
+        let total = slice.len_lines();
+        let (first, last) = primary_line_range(doc, view.id);
+        let start = slice.line_to_char(first);
+        let end = if last + 1 < total {
+            slice.line_to_char(last + 1)
+        } else {
+            slice.len_chars()
+        };
+        let text: String = slice.slice(start..end).chunks().collect();
+        (start, end, text)
+    };
+
+    cx.editor.registers.write('"', vec![text])?;
+
+    if delete {
+        let (view, doc) = current!(cx.editor);
+        let transaction = Transaction::change(doc.text(), std::iter::once((start, end, None)));
+        doc.apply(&transaction, view.id);
+        doc.append_changes_to_history(view);
+    }
+    Ok(())
+}
+
+fn yank_lines_cmd(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    yank_lines(cx, args, event, false)
+}
+fn delete_lines_cmd(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    yank_lines(cx, args, event, true)
+}
+
 fn substitute(
     cx: &mut compositor::Context,
     args: Args,
@@ -4907,6 +5015,38 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         },
     },
     TypableCommand {
+        name: "delete-lines",
+        aliases: &["d", "del", "delete"],
+        doc: "Delete the current line(s) into the unnamed register (vim :d).",
+        fun: delete_lines_cmd,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
+    },
+    TypableCommand {
+        name: "yank-lines",
+        aliases: &["y", "ya", "yank"],
+        doc: "Yank the current line(s) into the unnamed register (vim :y).",
+        fun: yank_lines_cmd,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
+    },
+    TypableCommand {
+        name: "indent-lines",
+        aliases: &[],
+        doc: "Indent the current line(s) by one shiftwidth (vim :>).",
+        fun: indent_cmd,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
+    },
+    TypableCommand {
+        name: "dedent-lines",
+        aliases: &[],
+        doc: "Dedent the current line(s) by one shiftwidth (vim :<).",
+        fun: dedent_cmd,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
+    },
+    TypableCommand {
         name: "move-lines",
         aliases: &["m"],
         doc: "Move the current line to after line {address}: :m{addr} (e.g. :m0, :m$, :m.+2).",
@@ -5367,6 +5507,16 @@ fn execute_command_line(
             return Ok(());
         }
         return do_move_copy(cx, is_copy, &addr);
+    }
+
+    // vim-style range indent/dedent: `:>`, `:<` (the command-line tokenizer
+    // rejects `>`/`<` as command names, so handle them here).
+    let trimmed = input.trim_start();
+    if trimmed.starts_with('>') || trimmed.starts_with('<') {
+        if event != PromptEvent::Validate {
+            return Ok(());
+        }
+        return do_indent(cx, trimmed.starts_with('<'));
     }
 
     match typed::TYPABLE_COMMAND_MAP.get(command) {
