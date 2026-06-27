@@ -3078,5 +3078,13 @@
       "typable:set"
     ],
     "note": "vim ':set incsearch' partially works (off-state/value/semantic caveat)"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_join",
+    "status": "ported",
+    "evidence": [
+      "typable:join"
+    ],
+    "note": "vim :j join lines"
   }
 ]

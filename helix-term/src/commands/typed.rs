@@ -3458,6 +3458,73 @@ fn put_lines_above(cx: &mut compositor::Context, args: Args, event: PromptEvent)
     put_lines_impl(cx, args, event, true)
 }
 
+fn join_lines(
+    cx: &mut compositor::Context,
+    _args: Args,
+    event: PromptEvent,
+    with_space: bool,
+) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    let (view, doc) = current!(cx.editor);
+    let slice = doc.text().slice(..);
+    let len = slice.len_chars();
+    let total = slice.len_lines();
+    let real_last = if len > 0 && slice.char(len - 1) == '\n' {
+        total.saturating_sub(2)
+    } else {
+        total.saturating_sub(1)
+    };
+
+    let (first, last) = primary_line_range(doc, view.id);
+    // A single-line selection joins the current line with the next.
+    let last = if first == last {
+        (last + 1).min(real_last)
+    } else {
+        last
+    };
+    if last <= first {
+        return Ok(());
+    }
+
+    let mut changes = Vec::new();
+    let mut join_pos = slice.line_to_char(first);
+    for line in first..last {
+        let lend = line_ending::line_end_char_index(&slice, line);
+        let next_start = slice.line_to_char(line + 1);
+        let next_end = line_ending::line_end_char_index(&slice, line + 1);
+        let mut content = next_start;
+        while content < next_end && matches!(slice.char(content), ' ' | '\t') {
+            content += 1;
+        }
+        let sep: Tendril = if with_space && lend > slice.line_to_char(line) && content < next_end {
+            " ".into()
+        } else {
+            "".into()
+        };
+        join_pos = lend;
+        changes.push((lend, content, Some(sep)));
+    }
+
+    if changes.is_empty() {
+        return Ok(());
+    }
+    let transaction = Transaction::change(doc.text(), changes.into_iter());
+    doc.apply(&transaction, view.id);
+    let new_len = doc.text().len_chars();
+    doc.set_selection(view.id, Selection::point(join_pos.min(new_len)));
+    doc.append_changes_to_history(view);
+    Ok(())
+}
+
+fn join_lines_cmd(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    join_lines(cx, args, event, true)
+}
+fn join_lines_nospace_cmd(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    join_lines(cx, args, event, false)
+}
+
 fn yank_lines_cmd(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> anyhow::Result<()> {
     yank_lines(cx, args, event, false)
 }
@@ -5252,6 +5319,22 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
             positionals: (1, Some(1)),
             ..Signature::DEFAULT
         },
+    },
+    TypableCommand {
+        name: "join",
+        aliases: &["j"],
+        doc: "Join the current line(s) with the next, separated by a space (vim :j).",
+        fun: join_lines_cmd,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
+    },
+    TypableCommand {
+        name: "join!",
+        aliases: &["j!"],
+        doc: "Join the current line(s) with the next, no separating space (vim :j!).",
+        fun: join_lines_nospace_cmd,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
     },
     TypableCommand {
         name: "put",

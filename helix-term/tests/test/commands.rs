@@ -1375,3 +1375,15 @@ async fn ex_put_above() -> anyhow::Result<()> {
     test(("#[|a]#\nb\n", ":y<ret>j:put!<ret>", "a\n#[a|]#\nb\n")).await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn ex_join_lines() -> anyhow::Result<()> {
+    test(("#[|a]#\n  b\nc\n", ":j<ret>", "a#[ |]#b\nc\n")).await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
+async fn ex_join_lines_nospace() -> anyhow::Result<()> {
+    test(("#[|a]#\n  b\nc\n", ":j!<ret>", "a#[b|]#\nc\n")).await?;
+    Ok(())
+}
