@@ -55,7 +55,7 @@ python3 scripts/gen_port_report.py
 brew install MenkeTechnologies/menketech/zemacs
 ```
 
-Tagged releases (`git tag v25.7.1 && git push --tags`) build per-target tarballs
+Tagged releases (`git tag v0.1.0 && git push --tags`) build per-target tarballs
 (macOS arm64/x86_64, Linux arm64/x86_64) bundling the `zemacs` binary with its
 tree-sitter runtime, publish them to the GitHub release, and bump the
 [homebrew-menketech](https://github.com/MenkeTechnologies/homebrew-menketech)
