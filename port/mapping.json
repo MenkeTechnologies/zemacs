@@ -3086,5 +3086,13 @@
       "typable:join"
     ],
     "note": "vim :j join lines"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_retab",
+    "status": "partial",
+    "evidence": [
+      "typable:retab"
+    ],
+    "note": "vim :retab (tabs->spaces; tabstop-arg/spaces->tabs not supported)"
   }
 ]

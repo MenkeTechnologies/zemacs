@@ -3518,6 +3518,30 @@ fn join_lines(
     Ok(())
 }
 
+fn retab(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    let (view, doc) = current!(cx.editor);
+    let tab_width = doc.tab_width();
+    let spaces = Tendril::from(" ".repeat(tab_width).as_str());
+    let slice = doc.text().slice(..);
+
+    let mut changes = Vec::new();
+    for (i, ch) in slice.chars().enumerate() {
+        if ch == '\t' {
+            changes.push((i, i + 1, Some(spaces.clone())));
+        }
+    }
+    if changes.is_empty() {
+        return Ok(());
+    }
+    let transaction = Transaction::change(doc.text(), changes.into_iter());
+    doc.apply(&transaction, view.id);
+    doc.append_changes_to_history(view);
+    Ok(())
+}
+
 fn join_lines_cmd(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> anyhow::Result<()> {
     join_lines(cx, args, event, true)
 }
@@ -5319,6 +5343,14 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
             positionals: (1, Some(1)),
             ..Signature::DEFAULT
         },
+    },
+    TypableCommand {
+        name: "retab",
+        aliases: &[],
+        doc: "Replace tabs with spaces (tab-width per buffer) — vim :retab.",
+        fun: retab,
+        completer: CommandCompleter::none(),
+        signature: Signature { positionals: (0, Some(0)), ..Signature::DEFAULT },
     },
     TypableCommand {
         name: "join",

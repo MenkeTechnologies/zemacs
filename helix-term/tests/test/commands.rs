@@ -1387,3 +1387,9 @@ async fn ex_join_lines_nospace() -> anyhow::Result<()> {
     test(("#[|a]#\n  b\nc\n", ":j!<ret>", "a#[b|]#\nc\n")).await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn ex_retab_tabs_to_spaces() -> anyhow::Result<()> {
+    test(("#[|\t]#ab\n", ":retab<ret>", "#[|    ]#ab\n")).await?;
+    Ok(())
+}
