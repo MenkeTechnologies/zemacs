@@ -74,6 +74,7 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space b C-d", "Buffers", ":buffer-close-others"),                  // SPC b C-d : kill other buffers
     ("space b x",   "Buffers", ":buffer-close"),                         // SPC b x : kill buffer & window
     ("space b e",   "Buffers", ":reload"),                              // SPC b e : revert/erase to disk
+    ("space p k",   "Project", ":buffer-close-all"),                    // SPC p k : kill all project buffers
 ];
 
 /// Insert `cmd` at `path` under `root`, creating intermediate submap nodes
@@ -431,6 +432,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "-" => hsplit,                    // spacemacs SPC w - : split horizontally
             "c" => wclose,                    // spacemacs SPC w c : close window
             "m" => wonly,                     // spacemacs SPC w m : maximize (only)
+            "S" => hsplit,                    // spacemacs SPC w S / vim C-w S : split & focus
+            "V" => vsplit,                    // spacemacs SPC w V : vsplit & focus
         },
 
         // --- scrolling / jumps ---------------------------------------------
@@ -509,6 +512,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "-" => hsplit,
                 "c" => wclose,
                 "m" => wonly,
+                "S" => hsplit,
+                "V" => vsplit,
             },
             "s" => { "Search"
                 "s" => global_search,              // SPC s s
@@ -540,6 +545,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "h" => file_picker,                // SPC p h : find file
                 "s" => global_search,              // SPC p s
                 "r" => goto_last_modified_file,    // SPC p r
+                "t" => file_explorer,              // SPC p t : project tree (treemacs)
+                "d" => file_explorer,              // SPC p d : find directory
             },
             "e" => { "Errors"
                 "l" => diagnostics_picker,             // SPC e l
@@ -553,6 +560,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "l" => toggle_line_comments,       // SPC c l
                 "c" => toggle_comments,            // SPC c c
                 "b" => toggle_block_comments,      // SPC c b
+                "p" => toggle_comments,            // SPC c p : comment paragraph
             },
             "j" => { "Jump"
                 "i" => symbol_picker,              // SPC j i

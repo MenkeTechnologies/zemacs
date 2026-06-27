@@ -3982,5 +3982,53 @@
       "key:select:P"
     ],
     "note": "vim visual P: replace the highlighted area with the register (replace_with_yanked)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w S"
+    ],
+    "note": "spacemacs SPC w S: SPC leader -> hsplit"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_w_v",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space w V"
+    ],
+    "note": "spacemacs SPC w V: SPC leader -> vsplit"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_c_p",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space c p"
+    ],
+    "note": "spacemacs SPC c p: SPC leader -> toggle_comments (approximate)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_d",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space p d"
+    ],
+    "note": "spacemacs SPC p d: SPC leader -> file_explorer (approximate)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_k",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space p k"
+    ],
+    "note": "spacemacs SPC p k: SPC leader -> buffer-close-all (approximate)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_t",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space p t"
+    ],
+    "note": "spacemacs SPC p t: SPC leader -> file_explorer (approximate)"
   }
 ]
