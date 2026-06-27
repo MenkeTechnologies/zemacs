@@ -648,7 +648,10 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         ">"       => [indent, normal_mode],
         "<"       => [unindent, normal_mode],
         "o"       => flip_selections,
+        "O"       => flip_selections,          // move to the other corner/end of the selection
         "V"       => extend_to_line_bounds,
+        "P"       => replace_with_yanked,      // replace the highlighted area with a register
+        "=" => [format_selections, normal_mode], // reformat/reindent the highlighted lines
 
         // filter highlighted text through an external command (vim visual !)
         "!"       => [shell_pipe, normal_mode],
@@ -668,6 +671,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "C-x" => decrement,
 
         ":" => command_mode,
+        "C-c" => [save_visual_selection, collapse_selection, normal_mode], // stop Visual mode
         "esc" => [save_visual_selection, collapse_selection, normal_mode],
     });
 

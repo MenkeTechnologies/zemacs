@@ -3950,5 +3950,37 @@
       "key:normal:space s h"
     ],
     "note": "spacemacs SPC s h: bound in the SPC leader (select_references_to_symbol_under_cursor)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.ctrl_c",
+    "status": "ported",
+    "evidence": [
+      "key:select:C-c"
+    ],
+    "note": "vim visual CTRL-C: stop Visual mode (back to normal)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.eq",
+    "status": "partial",
+    "evidence": [
+      "key:select:="
+    ],
+    "note": "vim visual =: reformat/reindent the highlighted lines (format_selections, LSP-based)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.o",
+    "status": "ported",
+    "evidence": [
+      "key:select:O"
+    ],
+    "note": "vim visual O: move to the other end/corner of the selection (flip_selections)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.p",
+    "status": "ported",
+    "evidence": [
+      "key:select:P"
+    ],
+    "note": "vim visual P: replace the highlighted area with the register (replace_with_yanked)"
   }
 ]
