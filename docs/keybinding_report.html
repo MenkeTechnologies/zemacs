@@ -6,14 +6,14 @@
 <p class=muted>The keybinding subset of the <a href='port_report.html'>port report</a>. Counts only the key-press surface — vim/neovim normal/visual/insert/cmdline keys, the GNU Emacs Key Index, and the Spacemacs <code>SPC</code> tree. <b>ported</b> = the same key does the equivalent thing in zemacs.</p>
 <div class=kpi>
 <div class=card><b>2254</b>cited keybindings</div>
-<div class=card><b class=ported>261</b>ported (11.6%)</div>
+<div class=card><b class=ported>270</b>ported (12.0%)</div>
 <div class=card><b class=partial>70</b>partial (3.1%)</div>
-<div class=card><b class=absent>1923</b>absent</div>
+<div class=card><b class=absent>1914</b>absent</div>
 </div>
 <h2>By source</h2><table>
 <tr><th>Source</th><th>Keybindings</th><th>Ported</th><th>Partial</th><th>Progress</th></tr>
 <tr><td>emacs</td><td class=n>1124</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
-<tr><td>neovim</td><td class=n>715</td><td class='n ported'>183</td><td class='n partial'>70</td><td><div class="bar"><div class="fill" style="width:25.6%"></div><span>25.6%</span></div></td></tr>
+<tr><td>neovim</td><td class=n>715</td><td class='n ported'>192</td><td class='n partial'>70</td><td><div class="bar"><div class="fill" style="width:26.9%"></div><span>26.9%</span></div></td></tr>
 <tr><td>spacemacs</td><td class=n>415</td><td class='n ported'>78</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:18.8%"></div><span>18.8%</span></div></td></tr>
 </table>
 <h2>By source / category</h2><table>
@@ -21,8 +21,8 @@
 <tr><td>emacs</td><td>keybinding</td><td class=n>1124</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
 <tr><td>neovim</td><td>cmdline-editing</td><td class=n>53</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
 <tr><td>neovim</td><td>insert-mode</td><td class=n>98</td><td class='n ported'>20</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:20.4%"></div><span>20.4%</span></div></td></tr>
-<tr><td>neovim</td><td>normal-mode</td><td class=n>479</td><td class='n ported'>144</td><td class='n partial'>32</td><td><div class="bar"><div class="fill" style="width:30.1%"></div><span>30.1%</span></div></td></tr>
-<tr><td>neovim</td><td>visual-mode</td><td class=n>85</td><td class='n ported'>19</td><td class='n partial'>38</td><td><div class="bar"><div class="fill" style="width:22.4%"></div><span>22.4%</span></div></td></tr>
+<tr><td>neovim</td><td>normal-mode</td><td class=n>479</td><td class='n ported'>146</td><td class='n partial'>32</td><td><div class="bar"><div class="fill" style="width:30.5%"></div><span>30.5%</span></div></td></tr>
+<tr><td>neovim</td><td>visual-mode</td><td class=n>85</td><td class='n ported'>26</td><td class='n partial'>38</td><td><div class="bar"><div class="fill" style="width:30.6%"></div><span>30.6%</span></div></td></tr>
 <tr><td>spacemacs</td><td>keybinding</td><td class=n>415</td><td class='n ported'>78</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:18.8%"></div><span>18.8%</span></div></td></tr>
 </table>
 <p class=muted>Emacs is 0% because zemacs is a modal (vim) editor — Emacs default chords (<code>C-x C-f</code>, …) are intentionally not bound; the commands they invoke are tracked under the port report's emacs <code>command</code> category.</p>
@@ -1311,8 +1311,10 @@
 <tr><td>^ CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:i_^_CTRL-D</td></tr>
 <tr><td>{char1}&lt;BS&gt;{char2}</td><td class=absent>absent</td><td class=muted>index.txt:i_digraph</td></tr>
 </table></details>
-<details><summary>neovim / normal-mode <span class=muted>(479 keys · <span class=ported>144 ported</span> · <span class=partial>32 partial</span>)</span></summary>
+<details><summary>neovim / normal-mode <span class=muted>(479 keys · <span class=ported>146 ported</span> · <span class=partial>32 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
+<tr><td>!!{filter}</td><td class=ported>ported</td><td class=muted>index.txt:!!</td></tr>
+<tr><td>!{motion}{filter}</td><td class=ported>ported</td><td class=muted>index.txt:!</td></tr>
 <tr><td>"``"</td><td class=ported>ported</td><td class=muted>index.txt:``</td></tr>
 <tr><td>"{register}</td><td class=ported>ported</td><td class=muted>index.txt:quote</td></tr>
 <tr><td>#</td><td class=ported>ported</td><td class=muted>index.txt:#</td></tr>
@@ -1489,8 +1491,6 @@
 <tr><td>il</td><td class=partial>partial</td><td class=muted>index.txt:v_il</td></tr>
 <tr><td>is</td><td class=partial>partial</td><td class=muted>index.txt:v_is</td></tr>
 <tr><td>it</td><td class=partial>partial</td><td class=muted>index.txt:v_it</td></tr>
-<tr><td>!!{filter}</td><td class=absent>absent</td><td class=muted>index.txt:!!</td></tr>
-<tr><td>!{motion}{filter}</td><td class=absent>absent</td><td class=muted>index.txt:!</td></tr>
 <tr><td>''</td><td class=absent>absent</td><td class=muted>index.txt:''</td></tr>
 <tr><td>'(</td><td class=absent>absent</td><td class=muted>index.txt:'(</td></tr>
 <tr><td>')</td><td class=absent>absent</td><td class=muted>index.txt:')</td></tr>
@@ -1793,17 +1793,24 @@
 <tr><td>{count}&lt;Del&gt;</td><td class=absent>absent</td><td class=muted>index.txt:N<Del></td></tr>
 <tr><td>~{motion}</td><td class=absent>absent</td><td class=muted>index.txt:~</td></tr>
 </table></details>
-<details><summary>neovim / visual-mode <span class=muted>(85 keys · <span class=ported>19 ported</span> · <span class=partial>38 partial</span>)</span></summary>
+<details><summary>neovim / visual-mode <span class=muted>(85 keys · <span class=ported>26 ported</span> · <span class=partial>38 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
+<tr><td>!{filter}</td><td class=ported>ported</td><td class=muted>index.txt:v_!</td></tr>
 <tr><td>:</td><td class=ported>ported</td><td class=muted>index.txt:v_:</td></tr>
 <tr><td>&lt;</td><td class=ported>ported</td><td class=muted>index.txt:v_<</td></tr>
 <tr><td>&lt;Esc&gt;</td><td class=ported>ported</td><td class=muted>index.txt:v_<Esc></td></tr>
 <tr><td>&gt;</td><td class=ported>ported</td><td class=muted>index.txt:v_></td></tr>
+<tr><td>C</td><td class=ported>ported</td><td class=muted>index.txt:v_C</td></tr>
 <tr><td>CTRL-A</td><td class=ported>ported</td><td class=muted>index.txt:v_CTRL-A</td></tr>
 <tr><td>CTRL-X</td><td class=ported>ported</td><td class=muted>index.txt:v_CTRL-X</td></tr>
+<tr><td>D</td><td class=ported>ported</td><td class=muted>index.txt:v_D</td></tr>
 <tr><td>J</td><td class=ported>ported</td><td class=muted>index.txt:v_J</td></tr>
+<tr><td>R</td><td class=ported>ported</td><td class=muted>index.txt:v_R</td></tr>
+<tr><td>S</td><td class=ported>ported</td><td class=muted>index.txt:v_S</td></tr>
 <tr><td>U</td><td class=ported>ported</td><td class=muted>index.txt:v_U</td></tr>
 <tr><td>V</td><td class=ported>ported</td><td class=muted>index.txt:v_V</td></tr>
+<tr><td>X</td><td class=ported>ported</td><td class=muted>index.txt:v_X</td></tr>
+<tr><td>Y</td><td class=ported>ported</td><td class=muted>index.txt:v_Y</td></tr>
 <tr><td>c</td><td class=ported>ported</td><td class=muted>index.txt:v_c</td></tr>
 <tr><td>d</td><td class=ported>ported</td><td class=muted>index.txt:v_d</td></tr>
 <tr><td>o</td><td class=ported>ported</td><td class=muted>index.txt:v_o</td></tr>
@@ -1852,11 +1859,9 @@
 <tr><td>iw</td><td class=partial>partial</td><td class=muted>index.txt:v_iw</td></tr>
 <tr><td>i{</td><td class=partial>partial</td><td class=muted>index.txt:v_i{</td></tr>
 <tr><td>i}</td><td class=partial>partial</td><td class=muted>index.txt:v_i}</td></tr>
-<tr><td>!{filter}</td><td class=absent>absent</td><td class=muted>index.txt:v_!</td></tr>
 <tr><td>&lt;BS&gt;</td><td class=absent>absent</td><td class=muted>index.txt:v_<BS></td></tr>
 <tr><td>=</td><td class=absent>absent</td><td class=muted>index.txt:v_=</td></tr>
 <tr><td>A</td><td class=absent>absent</td><td class=muted>index.txt:v_b_A</td></tr>
-<tr><td>C</td><td class=absent>absent</td><td class=muted>index.txt:v_C</td></tr>
 <tr><td>CTRL-C</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-C</td></tr>
 <tr><td>CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-G</td></tr>
 <tr><td>CTRL-H</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-H</td></tr>
@@ -1865,15 +1870,10 @@
 <tr><td>CTRL-\ CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-\_CTRL-G</td></tr>
 <tr><td>CTRL-\ CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-\_CTRL-N</td></tr>
 <tr><td>CTRL-]</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-]</td></tr>
-<tr><td>D</td><td class=absent>absent</td><td class=muted>index.txt:v_D</td></tr>
 <tr><td>I</td><td class=absent>absent</td><td class=muted>index.txt:v_b_I</td></tr>
 <tr><td>K</td><td class=absent>absent</td><td class=muted>index.txt:v_K</td></tr>
 <tr><td>O</td><td class=absent>absent</td><td class=muted>index.txt:v_O</td></tr>
 <tr><td>P</td><td class=absent>absent</td><td class=muted>index.txt:v_P</td></tr>
-<tr><td>R</td><td class=absent>absent</td><td class=muted>index.txt:v_R</td></tr>
-<tr><td>S</td><td class=absent>absent</td><td class=muted>index.txt:v_S</td></tr>
-<tr><td>X</td><td class=absent>absent</td><td class=muted>index.txt:v_X</td></tr>
-<tr><td>Y</td><td class=absent>absent</td><td class=muted>index.txt:v_Y</td></tr>
 <tr><td>g CTRL-A</td><td class=absent>absent</td><td class=muted>index.txt:v_g_CTRL-A</td></tr>
 <tr><td>g CTRL-X</td><td class=absent>absent</td><td class=muted>index.txt:v_g_CTRL-X</td></tr>
 <tr><td>gJ</td><td class=absent>absent</td><td class=muted>index.txt:v_gJ</td></tr>

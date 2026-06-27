@@ -1486,3 +1486,17 @@ async fn vim_dot_repeat_insert() -> anyhow::Result<()> {
     .await?;
     Ok(())
 }
+
+#[tokio::test(flavor = "multi_thread")]
+async fn vim_visual_linewise_delete() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(helix_term::config::Config {
+            keys: helix_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        // v enters visual mode on line 2; D deletes the whole line linewise.
+        ("one\n#[t|]#wo\nthree\n", "vD", "one\n#[t|]#hree\n"),
+    )
+    .await?;
+    Ok(())
+}

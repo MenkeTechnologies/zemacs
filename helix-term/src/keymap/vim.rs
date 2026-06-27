@@ -272,6 +272,17 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         ">" => indent,
         "<" => unindent,
 
+        // --- filter operator (vim !{motion}{cmd}, !!{cmd}) -----------------
+        // vim `!` is always linewise: it selects the lines covered by the
+        // motion, then pipes them through an external command. shell_pipe
+        // prompts for the command and replaces the selection with its output.
+        "!" => { "filter"
+            "!" => [extend_to_line_bounds, shell_pipe],              // !! current line
+            "j" => [extend_line_below, extend_to_line_bounds, shell_pipe],
+            "k" => [extend_line_up, extend_to_line_bounds, shell_pipe],
+            "G" => [extend_to_last_line, extend_to_line_bounds, shell_pipe],
+        },
+
         // --- visual mode ----------------------------------------------------
         "v" => select_mode,
         "V" => [extend_to_line_bounds, select_mode],
@@ -554,6 +565,14 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "<"       => [unindent, normal_mode],
         "o"       => flip_selections,
         "V"       => extend_to_line_bounds,
+
+        // filter highlighted text through an external command (vim visual !)
+        "!"       => [shell_pipe, normal_mode],
+
+        // linewise visual operators: extend to whole lines, then act
+        "D" | "X" => [extend_to_line_bounds, delete_selection, normal_mode],
+        "Y"       => [extend_to_line_bounds, yank, collapse_selection, normal_mode],
+        "C" | "S" | "R" => [extend_to_line_bounds, change_selection],
 
         "C-a" => increment,
         "C-x" => decrement,

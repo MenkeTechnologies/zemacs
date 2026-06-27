@@ -3398,5 +3398,77 @@
       "key:normal:."
     ],
     "note": "vim . repeat-last-change (helix last_insert replay): insert-class changes (i/a/o/c + text) work; pure operator+motion repeat (dd, dw) is approximate"
+  },
+  {
+    "spec_id": "neovim.normal-mode.bang_lbrace_motion_rbrace_lbrace_filter_rbrace",
+    "status": "ported",
+    "evidence": [
+      "key:normal:! j"
+    ],
+    "note": "vim !{motion}{cmd} filter: linewise, pipes motion-covered lines through an external command via shell_pipe (!j/!k/!G); same key, same linewise semantics"
+  },
+  {
+    "spec_id": "neovim.normal-mode.bang_bang_lbrace_filter_rbrace",
+    "status": "ported",
+    "evidence": [
+      "key:normal:! !"
+    ],
+    "note": "vim !!{cmd}: filters the current line through an external command via shell_pipe"
+  },
+  {
+    "spec_id": "neovim.visual-mode.bang_lbrace_filter_rbrace",
+    "status": "ported",
+    "evidence": [
+      "key:select:!"
+    ],
+    "note": "vim visual !: filters the highlighted lines through an external command via shell_pipe"
+  },
+  {
+    "spec_id": "neovim.visual-mode.d",
+    "status": "ported",
+    "evidence": [
+      "key:select:D"
+    ],
+    "note": "vim visual D: delete the highlighted lines (linewise)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.x",
+    "status": "ported",
+    "evidence": [
+      "key:select:X"
+    ],
+    "note": "vim visual X: delete the highlighted lines (linewise)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.y",
+    "status": "ported",
+    "evidence": [
+      "key:select:Y"
+    ],
+    "note": "vim visual Y: yank the highlighted lines (linewise)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.c",
+    "status": "ported",
+    "evidence": [
+      "key:select:C"
+    ],
+    "note": "vim visual C: delete highlighted lines and start insert (linewise change)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.s",
+    "status": "ported",
+    "evidence": [
+      "key:select:S"
+    ],
+    "note": "vim visual S: delete highlighted lines and start insert (linewise change)"
+  },
+  {
+    "spec_id": "neovim.visual-mode.r",
+    "status": "ported",
+    "evidence": [
+      "key:select:R"
+    ],
+    "note": "vim visual R: delete highlighted lines and start insert (linewise change)"
   }
 ]
