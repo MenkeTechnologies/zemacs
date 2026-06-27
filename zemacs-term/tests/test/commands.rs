@@ -1488,6 +1488,20 @@ async fn vim_dot_repeat_insert() -> anyhow::Result<()> {
 }
 
 #[tokio::test(flavor = "multi_thread")]
+async fn vim_wrap_sexp() -> anyhow::Result<()> {
+    test_with_config(
+        AppBuilder::new().with_config(zemacs_term::config::Config {
+            keys: zemacs_term::keymap::vim::default(),
+            ..Default::default()
+        }),
+        // select "bc", then SPC k w wraps it in parens -> a(bc)d
+        ("a#[bc|]#d\n", "<space>kw", "a#[(bc)|]#d\n"),
+    )
+    .await?;
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread")]
 async fn vim_replace_mode() -> anyhow::Result<()> {
     test_with_config(
         AppBuilder::new().with_config(zemacs_term::config::Config {

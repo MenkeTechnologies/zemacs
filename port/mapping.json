@@ -4070,5 +4070,93 @@
       "key:normal:space r y"
     ],
     "note": "spacemacs SPC r y: kill-ring browser (register_picker)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_j",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space k j"
+    ],
+    "note": "spacemacs SPC k j: tree-sitter sexp -> shrink_selection (approximate)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_k",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space k k"
+    ],
+    "note": "spacemacs SPC k k: tree-sitter sexp -> expand_selection (approximate)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k l"
+    ],
+    "note": "spacemacs SPC k l: tree-sitter sexp -> select_next_sibling"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_h",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k h"
+    ],
+    "note": "spacemacs SPC k h: tree-sitter sexp -> select_prev_sibling"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k $"
+    ],
+    "note": "spacemacs SPC k $: tree-sitter sexp -> move_parent_node_end"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_0",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k 0"
+    ],
+    "note": "spacemacs SPC k 0: tree-sitter sexp -> move_parent_node_start"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_u",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k U"
+    ],
+    "note": "spacemacs SPC k U: tree-sitter sexp -> expand_selection"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_i",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k I"
+    ],
+    "note": "spacemacs SPC k I: tree-sitter sexp -> move_parent_node_start"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_w",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k w"
+    ],
+    "note": "spacemacs SPC k w: tree-sitter sexp -> wrap_sexp"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_v",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k v"
+    ],
+    "note": "spacemacs SPC k v: tree-sitter sexp -> select_mode"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_y",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k y"
+    ],
+    "note": "spacemacs SPC k y: tree-sitter sexp -> expand_selection"
   }
 ]

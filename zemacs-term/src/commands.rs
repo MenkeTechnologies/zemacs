@@ -411,6 +411,7 @@ impl MappableCommand {
         buffer_picker, "Open buffer picker",
         jumplist_picker, "Open jumplist picker",
         register_picker, "Browse registers and paste the chosen one",
+        wrap_sexp, "Wrap the selection in parentheses",
         symbol_picker, "Open symbol picker",
         syntax_symbol_picker, "Open symbol picker from syntax information",
         lsp_or_syntax_symbol_picker, "Open symbol picker from LSP or syntax information",
@@ -6101,6 +6102,22 @@ fn select_next_sibling(cx: &mut Context) {
 
 fn select_prev_sibling(cx: &mut Context) {
     select_sibling_impl(cx, object::select_prev_sibling)
+}
+
+/// Surround each selection with parentheses (paredit-style `wrap`). An empty
+/// selection produces `()` with the cursor between the parens.
+fn wrap_sexp(cx: &mut Context) {
+    let (view, doc) = current!(cx.editor);
+    let text = doc.text();
+    let slice = text.slice(..);
+    let selection = doc.selection(view.id);
+    let transaction = Transaction::change_by_selection(text, selection, |range| {
+        let from = range.from();
+        let to = range.to();
+        let wrapped = format!("({})", slice.slice(from..to));
+        (from, to, Some(wrapped.into()))
+    });
+    doc.apply(&transaction, view.id);
 }
 
 fn move_node_bound_impl(cx: &mut Context, dir: Direction, movement: Movement) {

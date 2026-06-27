@@ -608,6 +608,25 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "r" => file_explorer,              // SPC a r : ranger (file browser)
                 "f" => file_explorer,              // SPC a f : file tree
             },
+            "k" => { "Lisp (sexp)"
+                // navigation maps onto the tree-sitter node commands
+                "0" => move_parent_node_start,     // SPC k 0 : beginning of sexp
+                "$" => move_parent_node_end,       // SPC k $ : end of sexp
+                "U" => expand_selection,           // SPC k U : up to parent sexp
+                "I" => [move_parent_node_start, insert_mode], // SPC k I : begin + insert
+                "h" => select_prev_sibling,        // SPC k h : previous symbol
+                "l" => select_next_sibling,        // SPC k l : next symbol
+                "j" => shrink_selection,           // SPC k j : into child
+                "k" => expand_selection,           // SPC k k : out to parent
+                "y" => [expand_selection, yank, collapse_selection], // SPC k y : copy expression
+                "v" => select_mode,                // SPC k v : visual select
+                "w" => wrap_sexp,                  // SPC k w : wrap with parens
+                "d" => { "Delete"
+                    "x" => [expand_selection, delete_selection], // SPC k dx : delete sexp
+                    "s" => [expand_selection, delete_selection], // SPC k ds : delete symbol
+                    "w" => [collapse_selection, extend_next_word_start, delete_selection], // SPC k dw
+                },
+            },
             "h" => { "Help"
                 "k" => command_palette,            // SPC h k : describe key / commands
                 "?" => command_palette,            // SPC h ? : list bindings
