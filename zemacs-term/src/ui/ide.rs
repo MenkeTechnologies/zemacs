@@ -30,6 +30,29 @@ fn disp_width(s: &str) -> u16 {
         .sum()
 }
 
+/// Split `line` into display-width-`w` chunks (char-boundary safe) for soft-wrapping run output.
+fn wrap_chunks(line: &str, w: usize) -> Vec<&str> {
+    if line.is_empty() || w == 0 {
+        return Vec::new();
+    }
+    let mut chunks = Vec::new();
+    let mut start = 0;
+    let mut cw = 0usize;
+    for (idx, ch) in line.char_indices() {
+        let chw = if (ch as u32) >= 0x1F000 { 2 } else { 1 };
+        if cw + chw > w && idx > start {
+            chunks.push(&line[start..idx]);
+            start = idx;
+            cw = 0;
+        }
+        cw += chw;
+    }
+    if start < line.len() {
+        chunks.push(&line[start..]);
+    }
+    chunks
+}
+
 #[derive(PartialEq, Clone, Copy)]
 enum Focus {
     Editor,
@@ -42,6 +65,7 @@ enum Focus {
 enum BottomTab {
     Problems,
     Run,
+    Git,
     Registers,
     Todo,
     Marks,
@@ -51,6 +75,7 @@ enum BottomTab {
 enum BottomHit {
     TabProblems,
     TabRun,
+    TabGit,
     TabRegisters,
     TabTodo,
     TabMarks,
@@ -135,6 +160,28 @@ pub struct Ide {
     structure_rect: Rect,
     problems_rect: Rect,
     stripe_rect: Rect,
+
+    // vim-airline / JetBrains-style bottom status bar
+    status_mode: u8, // 0 Normal, 1 Select/Visual, 2 Insert
+    status_path: String,
+    status_pct: u16,
+    status_lncol: (usize, usize),
+    status_sel: usize,
+    status_carets: usize,
+    status_lang: String,
+    status_lsp: bool,
+    status_encoding: String,
+    status_indent: String,
+    status_modified: bool,
+    status_branch: String,
+    status_branch_dir: Option<std::path::PathBuf>,
+
+    // VCS / Git changes tab (JetBrains "Commit" tool window)
+    git_changes: Vec<(String, String, std::path::PathBuf)>, // (XY code, display, abs path)
+    git_last: Option<std::time::Instant>,
+
+    // Run console: total soft-wrapped visual rows last frame (for scroll clamping)
+    run_total_vis: usize,
 }
 
 fn empty_rect() -> Rect {
@@ -185,6 +232,22 @@ impl Ide {
             structure_rect: empty_rect(),
             problems_rect: empty_rect(),
             stripe_rect: empty_rect(),
+            status_mode: 0,
+            status_path: String::new(),
+            status_pct: 0,
+            status_lncol: (1, 1),
+            status_sel: 0,
+            status_carets: 1,
+            status_lang: String::new(),
+            status_lsp: false,
+            status_encoding: String::new(),
+            status_indent: String::new(),
+            status_modified: false,
+            status_branch: String::new(),
+            status_branch_dir: None,
+            git_changes: Vec::new(),
+            git_last: None,
+            run_total_vis: 0,
         }
     }
 
@@ -432,6 +495,7 @@ impl Ide {
                     {
                         Some(BottomHit::TabProblems) => self.bottom_tab = BottomTab::Problems,
                         Some(BottomHit::TabRun) => self.bottom_tab = BottomTab::Run,
+                        Some(BottomHit::TabGit) => self.bottom_tab = BottomTab::Git,
                         Some(BottomHit::TabRegisters) => self.bottom_tab = BottomTab::Registers,
                         Some(BottomHit::TabTodo) => self.bottom_tab = BottomTab::Todo,
                         Some(BottomHit::TabMarks) => self.bottom_tab = BottomTab::Marks,
@@ -482,6 +546,19 @@ impl Ide {
                 }
                 if in_rect(&self.problems_rect, col, row)
                     && row > self.problems_rect.y
+                    && self.bottom_tab == BottomTab::Git
+                {
+                    let idx = (row - self.problems_rect.y - 1) as usize;
+                    if let Some((_, _, path)) = self.git_changes.get(idx) {
+                        if path.is_file() {
+                            self.focus = Focus::Editor;
+                            return IdeAction::OpenFile(path.clone());
+                        }
+                    }
+                    return IdeAction::None;
+                }
+                if in_rect(&self.problems_rect, col, row)
+                    && row > self.problems_rect.y
                     && self.bottom_tab == BottomTab::Marks
                 {
                     let idx = (row - self.problems_rect.y - 1) as usize;
@@ -516,6 +593,27 @@ impl Ide {
                     self.project.scroll_sel(down);
                 } else if in_rect(&self.structure_rect, col, row) {
                     step(&mut self.structure_sel, self.structure.len(), down);
+                } else if in_rect(&self.problems_rect, col, row) && self.bottom_tab == BottomTab::Run {
+                    // scroll the run console; reaching the bottom re-enables tail-follow
+                    if let Some(run) = &self.run {
+                        let mut s = run.lock().unwrap();
+                        let h = self.problems_rect.height.saturating_sub(1) as usize;
+                        let max_top = self.run_total_vis.saturating_sub(h);
+                        let cur = if s.follow { max_top } else { s.scroll.min(max_top) };
+                        if down {
+                            let nt = cur + 3;
+                            if nt >= max_top {
+                                s.follow = true;
+                                s.scroll = max_top;
+                            } else {
+                                s.follow = false;
+                                s.scroll = nt;
+                            }
+                        } else {
+                            s.follow = false;
+                            s.scroll = cur.saturating_sub(3);
+                        }
+                    }
                 } else if in_rect(&self.problems_rect, col, row) {
                     step(&mut self.problems_sel, self.problems.len(), down);
                 }
@@ -555,6 +653,15 @@ impl Ide {
 
         let full = area;
         let mut rest = area;
+
+        // bottom-most: JetBrains status bar spans the full width below everything else
+        let statusbar = if rest.height > 6 {
+            let sb = Rect::new(rest.x, rest.y + rest.height - 1, rest.width, 1);
+            rest = Rect::new(rest.x, rest.y, rest.width, rest.height - 1);
+            Some(sb)
+        } else {
+            None
+        };
 
         // left column: project (top) + structure (bottom); drag the seam to resize, collapse to a rail
         if self.left_collapsed {
@@ -671,7 +778,118 @@ impl Ide {
             }
         }
 
+        if let Some(sb) = statusbar {
+            self.render_statusbar(surface, theme, sb);
+        }
+
         rest
+    }
+
+    /// vim-airline powerline status bar: ❮mode❯❮paste❯❮⎇ branch❯❮path❯ … ❮ft❯❮enc❯❮pos❯.
+    /// Segments are coloured pills joined by powerline separators ( / ), mode colour by Normal/
+    /// Insert/Visual, just like the classic airline theme.
+    fn render_statusbar(&mut self, surface: &mut Surface, theme: &zemacs_view::Theme, area: Rect) {
+        use zemacs_view::graphics::{Color, Modifier, Style};
+
+        const SEP_R: &str = "\u{e0b0}"; //  solid right separator
+        const SEP_L: &str = "\u{e0b2}"; //  solid left separator
+        const GIT: &str = "\u{e0a0}"; //  branch glyph
+        const LN: &str = "\u{e0a1}"; //  line-number glyph
+
+        // Colours come from the active theme's statusline scopes; the RGB values are only
+        // fallbacks for themes that leave a given scope unstyled.
+        let bgfg = |style: Style, fb_bg: Color, fb_fg: Color| {
+            (style.bg.unwrap_or(fb_bg), style.fg.unwrap_or(fb_fg))
+        };
+        let (mode_txt, mode_scope, fb_mode) = match self.status_mode {
+            2 => ("INSERT", "ui.statusline.insert", Color::Rgb(0x00, 0xb3, 0xd7)),
+            1 => ("VISUAL", "ui.statusline.select", Color::Rgb(0xff, 0x8c, 0x00)),
+            _ => ("NORMAL", "ui.statusline.normal", Color::Rgb(0x9e, 0xd0, 0x10)),
+        };
+        let blackfg = Color::Rgb(0x10, 0x12, 0x16);
+        let (mode_bg, mode_fg) = bgfg(theme.get(mode_scope), fb_mode, blackfg);
+        let (gray, grayfg) = bgfg(
+            theme.get("ui.statusline"),
+            Color::Rgb(0x45, 0x45, 0x4d),
+            Color::Rgb(0xd2, 0xd2, 0xd8),
+        );
+        let (dark, darkfg) = bgfg(
+            theme.get("ui.statusline.inactive"),
+            Color::Rgb(0x28, 0x28, 0x2f),
+            Color::Rgb(0x9c, 0x9c, 0xa6),
+        );
+        let warn = theme.get("warning").fg.unwrap_or(Color::Rgb(0x7a, 0xa8, 0x10));
+        let fill = theme.get("ui.statusline").bg.unwrap_or(Color::Rgb(0x1b, 0x1b, 0x20));
+        let seg = |bg: Color, fg: Color| Style::default().bg(bg).fg(fg);
+
+        surface.clear_with(area, seg(fill, darkfg));
+        let bold = Modifier::BOLD;
+
+        // ── left segments ──────────────────────────────────────────────
+        let mut left: Vec<(String, Style)> = Vec::new();
+        left.push((format!(" {mode_txt} "), seg(mode_bg, mode_fg).add_modifier(bold)));
+        if self.status_modified {
+            // airline's secondary section (where PASTE/spell live) — here: modified flag
+            left.push((" + ".to_string(), seg(warn, mode_fg).add_modifier(bold)));
+        }
+        if !self.status_branch.is_empty() {
+            left.push((format!(" {GIT} {} ", self.status_branch), seg(gray, grayfg)));
+        }
+        if !self.status_path.is_empty() {
+            left.push((format!(" {} ", self.status_path), seg(dark, darkfg)));
+        }
+
+        // ── right segments (display order left→right) ──────────────────
+        let mut right: Vec<(String, Style)> = Vec::new();
+        if !self.status_lang.is_empty() {
+            right.push((format!(" {} ", self.status_lang), seg(dark, darkfg)));
+        }
+        if !self.status_encoding.is_empty() {
+            right.push((format!(" {} ", self.status_encoding), seg(gray, grayfg)));
+        }
+        let (ln, co) = self.status_lncol;
+        right.push((
+            format!(" {}%  {LN} {}:{} ", self.status_pct, ln, co),
+            seg(mode_bg, mode_fg).add_modifier(bold),
+        ));
+
+        let right_edge = area.x + area.width;
+
+        // draw left, separators point right () into the next segment's bg
+        let mut x = area.x;
+        for i in 0..left.len() {
+            let (text, style) = &left[i];
+            if x >= right_edge {
+                break;
+            }
+            let avail = (right_edge - x) as usize;
+            surface.set_stringn(x, area.y, text, avail, *style);
+            x += (disp_width(text) as u16).min(right_edge - x);
+            if x >= right_edge {
+                break;
+            }
+            let next_bg = left.get(i + 1).and_then(|(_, s)| s.bg).unwrap_or(fill);
+            surface.set_stringn(x, area.y, SEP_R, 1, Style::default().fg(style.bg.unwrap_or(fill)).bg(next_bg));
+            x += 1;
+        }
+
+        // draw right→left, separators point left () with the segment's bg as fg
+        let mut rx = right_edge;
+        for i in (0..right.len()).rev() {
+            let (text, style) = &right[i];
+            let w = disp_width(text) as u16;
+            if rx <= x + w {
+                break; // would collide with the left cluster
+            }
+            rx -= w;
+            surface.set_stringn(rx, area.y, text, w as usize, *style);
+            if rx <= x {
+                break;
+            }
+            rx -= 1;
+            let left_bg = if i == 0 { fill } else { right[i - 1].1.bg.unwrap_or(fill) };
+            surface.set_stringn(rx, area.y, SEP_L, 1, Style::default().fg(style.bg.unwrap_or(fill)).bg(left_bg));
+        }
     }
 
     fn refresh(&mut self, cx: &mut crate::compositor::Context) {
@@ -763,8 +981,58 @@ impl Ide {
                 .collect();
         }
 
+        self.status_mode = match cx.editor.mode() {
+            zemacs_view::document::Mode::Normal => 0,
+            zemacs_view::document::Mode::Select => 1,
+            zemacs_view::document::Mode::Insert => 2,
+        };
+
         let (view, doc) = current_ref!(cx.editor);
         self.view_top_line = doc.text().char_to_line(doc.view_offset(view.id).anchor);
+        self.status_path = doc.display_name().to_string();
+
+        // status-bar snapshot (JetBrains bottom bar): Ln/Col, selection count, language, LSP, encoding
+        let text = doc.text().slice(..);
+        let sel = doc.selection(view.id);
+        let cursor = sel.primary().cursor(text);
+        let line = text.char_to_line(cursor);
+        let col = cursor - text.line_to_char(line);
+        self.status_lncol = (line + 1, col + 1);
+        self.status_pct = if self.total_lines <= 1 {
+            0
+        } else {
+            ((line * 100) / (self.total_lines - 1)).min(100) as u16
+        };
+        self.status_sel = sel.ranges().iter().map(|r| r.len()).sum();
+        self.status_carets = sel.len();
+        self.status_lang = doc.language_name().unwrap_or("plain text").to_string();
+        self.status_lsp = doc.language_servers().next().is_some();
+        self.status_encoding = doc.encoding().name().to_string();
+        self.status_indent = match doc.indent_style {
+            zemacs_core::indent::IndentStyle::Tabs => "Tab".to_string(),
+            zemacs_core::indent::IndentStyle::Spaces(n) => format!("{n} sp"),
+        };
+        self.status_modified = doc.is_modified();
+        // git branch — walk up from the file's dir to a .git, read HEAD (cheap; cached by dir)
+        let dir = doc
+            .path()
+            .and_then(|p| p.parent().map(|d| d.to_path_buf()))
+            .unwrap_or_else(|| std::path::PathBuf::from("."));
+        if self.status_branch_dir.as_deref() != Some(dir.as_path()) {
+            self.status_branch = git_branch(&dir).unwrap_or_default();
+            self.status_branch_dir = Some(dir);
+        }
+
+        // VCS changes — only while the Git tab is open, throttled so big repos don't stall the frame
+        if self.bottom_tab == BottomTab::Git {
+            let stale = self.git_last.map_or(true, |t| t.elapsed().as_millis() > 800);
+            if stale {
+                if let Some(dir) = self.status_branch_dir.clone() {
+                    self.git_changes = git_status(&dir);
+                }
+                self.git_last = Some(std::time::Instant::now());
+            }
+        }
     }
 
     fn render_structure(&mut self, surface: &mut Surface, theme: &zemacs_view::Theme) {
@@ -781,10 +1049,15 @@ impl Ide {
             theme.get("comment")
         });
         let chevron = if self.fold_structure { "▸" } else { "▾" };
+        let count_style = crate::ui::rat::to_rat_style(theme.get("keyword")).add_modifier(RMod::BOLD);
+        // The ratatui render blits an offscreen buffer, so empty rows would clobber our clear_with
+        // back to a transparent bg — paint the whole block with the panel background to prevent that.
         let block = Block::default()
             .borders(Borders::TOP)
             .border_style(crate::ui::rat::to_rat_style(theme.get("ui.window")))
-            .title(Span::styled(format!(" {chevron} STRUCTURE "), title_style));
+            .style(crate::ui::rat::to_rat_style(theme.get("ui.background")))
+            .title(Span::styled(format!(" {chevron} STRUCTURE "), title_style))
+            .title(Line::from(Span::styled(format!(" {} ", self.structure.len()), count_style)).right_aligned());
 
         if self.fold_structure {
             crate::ui::rat::render(block, area, surface);
@@ -797,15 +1070,18 @@ impl Ide {
         }
 
         let base = crate::ui::rat::to_rat_style(theme.get("ui.text"));
-        let kind_style = crate::ui::rat::to_rat_style(theme.get("function"));
         let sel_style = crate::ui::rat::to_rat_style(theme.get("ui.selection")).add_modifier(RMod::BOLD);
 
         let items: Vec<ListItem> = self
             .structure
             .iter()
             .map(|o| {
+                let (glyph, scope) = kind_glyph(&o.kind);
+                let icon = crate::ui::rat::to_rat_style(theme.get(scope)).add_modifier(RMod::BOLD);
+                // members (methods/fields/…) indent one level under their containers
+                let indent = if is_member_kind(&o.kind) { "  " } else { "" };
                 ListItem::new(Line::from(vec![
-                    Span::styled(format!(" {} ", short_kind(&o.kind)), kind_style),
+                    Span::styled(format!(" {indent}{glyph} "), icon),
                     Span::styled(o.name.clone(), base),
                 ]))
             })
@@ -818,6 +1094,23 @@ impl Ide {
 
         self.structure_state.select(Some(self.structure_sel));
         crate::ui::rat::render_stateful(list, area, surface, &mut self.structure_state);
+
+        // ratatui scrollbar on the right edge when the outline overflows
+        let body_h = area.height.saturating_sub(1) as usize;
+        if self.structure.len() > body_h && body_h > 0 {
+            use ratatui::widgets::{Scrollbar, ScrollbarOrientation, ScrollbarState};
+            let track = Rect::new(area.x, area.y + 1, area.width, area.height - 1);
+            let mut sbs = ScrollbarState::new(self.structure.len())
+                .position(self.structure_state.offset())
+                .viewport_content_length(body_h);
+            let sb = Scrollbar::new(ScrollbarOrientation::VerticalRight)
+                .begin_symbol(None)
+                .end_symbol(None)
+                .thumb_symbol("▐")
+                .thumb_style(crate::ui::rat::to_rat_style(theme.get("ui.selection")))
+                .track_symbol(None);
+            crate::ui::rat::render_stateful(sb, track, surface, &mut sbs);
+        }
     }
 
     /// Top run/debug toolbar: ▶ Run · ◼ Stop · ⟳ Rerun · 🐞 Debug + the active run config.
@@ -886,6 +1179,13 @@ impl Ide {
         self.bottom_hits.push((x, x + rw, BottomHit::TabRun));
         x += rw + 1;
 
+        // Git / VCS changes tab
+        let vlabel = format!(" GIT {} ", self.git_changes.len());
+        let vw = vlabel.chars().count() as u16;
+        surface.set_stringn(x, area.y, &vlabel, area.width as usize, if self.bottom_tab == BottomTab::Git { on } else { off });
+        self.bottom_hits.push((x, x + vw, BottomHit::TabGit));
+        x += vw + 1;
+
         // Registers tab (LOTR)
         let glabel = format!(" REGISTERS {} ", self.registers.len());
         let gw = glabel.chars().count() as u16;
@@ -935,6 +1235,7 @@ impl Ide {
         match self.bottom_tab {
             BottomTab::Problems => self.render_problems_body(surface, theme, body),
             BottomTab::Run => self.render_run_body(surface, theme, body),
+            BottomTab::Git => self.render_git_body(surface, theme, body),
             BottomTab::Registers => self.render_registers_body(surface, theme, body),
             BottomTab::Todo => self.render_todo_body(surface, theme, body),
             BottomTab::Marks => self.render_marks_body(surface, theme, body),
@@ -987,7 +1288,7 @@ impl Ide {
     fn render_problems_body(&mut self, surface: &mut Surface, theme: &zemacs_view::Theme, body: Rect) {
         use ratatui::layout::Constraint;
         use ratatui::style::Modifier as RMod;
-        use ratatui::widgets::{Cell, Row, Table};
+        use ratatui::widgets::{Block, Cell, Row, Table};
         if body.height == 0 {
             return;
         }
@@ -1015,10 +1316,59 @@ impl Ide {
             [Constraint::Length(1), Constraint::Length(6), Constraint::Min(8)],
         )
         .column_spacing(1)
+        .block(Block::default().style(crate::ui::rat::to_rat_style(theme.get("ui.background"))))
         .row_highlight_style(sel)
         .highlight_symbol("› ");
         self.problems_state.select(Some(self.problems_sel));
         crate::ui::rat::render_stateful(table, body, surface, &mut self.problems_state);
+
+        let body_h = body.height as usize;
+        if self.problems.len() > body_h && body_h > 0 {
+            use ratatui::widgets::{Scrollbar, ScrollbarOrientation, ScrollbarState};
+            let mut sbs = ScrollbarState::new(self.problems.len())
+                .position(self.problems_state.offset())
+                .viewport_content_length(body_h);
+            let sb = Scrollbar::new(ScrollbarOrientation::VerticalRight)
+                .begin_symbol(None)
+                .end_symbol(None)
+                .thumb_symbol("▐")
+                .thumb_style(crate::ui::rat::to_rat_style(theme.get("ui.selection")))
+                .track_symbol(None);
+            crate::ui::rat::render_stateful(sb, body, surface, &mut sbs);
+        }
+    }
+
+    fn render_git_body(&mut self, surface: &mut Surface, theme: &zemacs_view::Theme, body: Rect) {
+        let height = body.height as usize;
+        if height == 0 {
+            return;
+        }
+        if self.git_changes.is_empty() {
+            let msg = if self.status_branch.is_empty() {
+                "  not a git repository"
+            } else {
+                "  working tree clean ✓"
+            };
+            surface.set_stringn(body.x, body.y, msg, body.width as usize, theme.get("comment"));
+            return;
+        }
+        let base = theme.get("ui.text");
+        for (i, (code, disp, _)) in self.git_changes.iter().enumerate() {
+            if i >= height {
+                break;
+            }
+            let y = body.y + i as u16;
+            // colour by status: added=green, modified=yellow, deleted=red, untracked=dim
+            let st = match code.trim() {
+                "A" | "AM" => theme.get("diff.plus"),
+                "D" => theme.get("diff.minus"),
+                "??" => theme.get("comment"),
+                _ => theme.get("diff.delta"),
+            };
+            surface.set_stringn(body.x + 1, y, &code.replace(' ', "·"), 3, st);
+            let rest: String = disp.chars().skip(2).collect();
+            surface.set_stringn(body.x + 4, y, &rest, body.width.saturating_sub(4) as usize, base);
+        }
     }
 
     fn render_marks_body(&mut self, surface: &mut Surface, theme: &zemacs_view::Theme, body: Rect) {
@@ -1052,17 +1402,49 @@ impl Ide {
         };
         let s = run.lock().unwrap();
         let height = body.height as usize;
+        let w = body.width.max(1) as usize;
         if height == 0 {
             return;
         }
         let base = theme.get("ui.text");
-        // tail-follow: show the last `height` lines
-        let start = s.lines.len().saturating_sub(height);
-        for (i, line) in s.lines[start..].iter().enumerate() {
-            if i >= height {
-                break;
+
+        // Soft-wrap: every output line occupies ceil(width/w) visual rows (≥1).
+        let line_vis = |line: &str| -> usize {
+            let dw = disp_width(line) as usize;
+            if dw == 0 { 1 } else { dw.div_ceil(w) }
+        };
+        let total_vis: usize = s.lines.iter().map(|l| line_vis(l)).sum::<usize>().max(1);
+        self.run_total_vis = total_vis;
+        let max_top = total_vis.saturating_sub(height);
+        // tail-follow unless the user scrolled up
+        let top = if s.follow { max_top } else { s.scroll.min(max_top) };
+
+        let mut vis = 0usize;
+        'lines: for line in &s.lines {
+            for chunk in wrap_chunks(line, w) {
+                if vis >= top + height {
+                    break 'lines;
+                }
+                if vis >= top {
+                    surface.set_stringn(body.x, body.y + (vis - top) as u16, chunk, w, base);
+                }
+                vis += 1;
             }
-            surface.set_stringn(body.x, body.y + i as u16, line, body.width as usize, base);
+            // empty line still consumes one visual row
+            if line.is_empty() {
+                vis += 1;
+            }
+        }
+
+        // scrollbar thumb on the right edge when content overflows
+        if total_vis > height && body.width > 1 {
+            let track_x = body.x + body.width - 1;
+            let thumb_h = (height * height / total_vis).max(1);
+            let thumb_y = if max_top == 0 { 0 } else { top * (height - thumb_h) / max_top };
+            let bar = theme.get("ui.selection");
+            for k in 0..thumb_h {
+                surface.set_stringn(track_x, body.y + (thumb_y + k) as u16, "▐", 1, bar);
+            }
         }
     }
 
@@ -1165,14 +1547,27 @@ fn step(sel: &mut usize, len: usize, down: bool) {
     }
 }
 
-fn short_kind(kind: &str) -> &str {
+/// Outline kind → (icon glyph, theme scope for its colour). JetBrains-style coloured symbol icons.
+fn kind_glyph(kind: &str) -> (&'static str, &'static str) {
     match kind {
-        "function" | "method" => "ƒ",
-        "class" | "struct" | "interface" | "enum" => "◇",
-        "module" | "namespace" => "▣",
-        "constant" | "variable" | "field" => "•",
-        _ => "·",
+        "function" | "method" => ("ƒ", "function"),
+        "constructor" => ("ƒ", "constructor"),
+        "class" | "struct" => ("◇", "type"),
+        "interface" | "trait" => ("◈", "type.builtin"),
+        "enum" => ("▤", "type.enum"),
+        "module" | "namespace" => ("▣", "keyword"),
+        "constant" => ("π", "constant"),
+        "variable" | "field" | "property" | "member" => ("•", "variable"),
+        "macro" => ("#", "function.macro"),
+        _ => ("›", "comment"),
     }
+}
+
+fn is_member_kind(kind: &str) -> bool {
+    matches!(
+        kind,
+        "method" | "field" | "property" | "constant" | "variable" | "member" | "constructor"
+    )
 }
 
 fn sev_mark(sev: Severity, theme: &zemacs_view::Theme) -> (&'static str, zemacs_view::graphics::Style) {
@@ -1187,4 +1582,55 @@ fn sev_mark(sev: Severity, theme: &zemacs_view::Theme) -> (&'static str, zemacs_
 /// Build via `Selection::single` so callers can apply a goto in one place.
 pub fn goto_selection(from: usize, to: usize) -> Selection {
     Selection::single(from, to)
+}
+
+/// Current git branch for `start`: walk up to a `.git`, read `HEAD`. Returns the short branch name
+/// (or a 7-char hash for a detached HEAD). Cheap enough to call when the active directory changes.
+fn git_branch(start: &std::path::Path) -> Option<String> {
+    let mut cur = Some(start);
+    while let Some(dir) = cur {
+        let head = dir.join(".git").join("HEAD");
+        if let Ok(content) = std::fs::read_to_string(&head) {
+            let t = content.trim();
+            return Some(match t.strip_prefix("ref: refs/heads/") {
+                Some(branch) => branch.to_string(),
+                None => t.chars().take(7).collect(),
+            });
+        }
+        cur = dir.parent();
+    }
+    None
+}
+
+/// `git status --porcelain` for the repo containing `dir`, as (XY code, "XY  path", abs path) rows.
+fn git_status(dir: &std::path::Path) -> Vec<(String, String, std::path::PathBuf)> {
+    let out = std::process::Command::new("git")
+        .arg("-C")
+        .arg(dir)
+        .args(["status", "--porcelain", "--no-renames"])
+        .output();
+    let Ok(out) = out else { return Vec::new() };
+    if !out.status.success() {
+        return Vec::new();
+    }
+    // resolve paths against the repo root, not `dir`
+    let root = std::process::Command::new("git")
+        .arg("-C")
+        .arg(dir)
+        .args(["rev-parse", "--show-toplevel"])
+        .output()
+        .ok()
+        .and_then(|o| String::from_utf8(o.stdout).ok())
+        .map(|s| std::path::PathBuf::from(s.trim().to_string()))
+        .unwrap_or_else(|| dir.to_path_buf());
+    String::from_utf8_lossy(&out.stdout)
+        .lines()
+        .filter(|l| l.len() > 3)
+        .map(|l| {
+            let code = l[..2].to_string();
+            let path = l[3..].trim();
+            let disp = format!("{}  {}", code, path);
+            (code, disp, root.join(path))
+        })
+        .collect()
 }

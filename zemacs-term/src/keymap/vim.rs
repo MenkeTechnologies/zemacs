@@ -52,6 +52,7 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space t n n", "Toggles", ":toggle line-number absolute relative"), // SPC t n n : toggle line numbers
     ("space t C-w", "Toggles", ":toggle whitespace.render all none"),    // SPC t C-w : global whitespace
     ("space t i",   "Toggles", ":toggle indent-guides.render"),          // indent guides
+    ("space t t",   "Toggles", ":theme-toggle"),                         // SPC t t : light/dark toggle
     ("space t a",   "Toggles", ":toggle auto-completion"),               // auto-complete
     ("space t h h", "Toggles", ":toggle cursorline"),                    // highlight line
     ("space t w",   "Toggles", ":toggle whitespace.render all none"),    // whitespace
@@ -73,6 +74,17 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space x i i", "Text",    ":cycle-case"),                           // SPC x i i : cycle
     ("space j n",   "Jump",    ":split-line"),                           // SPC j n : split line
     ("space j o",   "Jump",    ":split-line"),                           // SPC j o : split line, keep point
+    // --- Git hunks (gitsigns / vim-gitgutter / JetBrains gutter) ---
+    ("] c",         "Git",     ":hunk-next"),                            // next changed hunk
+    ("[ c",         "Git",     ":hunk-prev"),                            // previous changed hunk
+    ("space g r",   "Git",     ":hunk-reset"),                           // SPC g r : reset/undo hunk
+    ("space g n",   "Git",     ":hunk-next"),                            // SPC g n : next hunk
+    ("space g p",   "Git",     ":hunk-prev"),                            // SPC g p : prev hunk
+    ("space g c o", "Git",     ":conflict-ours"),                        // SPC g c o : keep ours
+    ("space g c t", "Git",     ":conflict-theirs"),                      // SPC g c t : keep theirs
+    ("space g c b", "Git",     ":conflict-both"),                        // SPC g c b : keep both
+    ("] x",         "Git",     ":conflict-next"),                        // next conflict
+    ("[ x",         "Git",     ":conflict-prev"),                        // previous conflict
     ("space f e d", "Files",   ":config-open"),                          // SPC f e d : open dotfile/config
     ("space q f",   "Quit",    ":quit"),                                 // SPC q f : kill frame
     ("space b s",   "Buffers", ":new"),                                  // SPC b s : scratch buffer

@@ -1,0 +1,24 @@
+# zgui-matrix-light — "Matrix" light variant
+# Generated from zgui-core/webui/colorscheme.js → COLOR_SCHEMES.matrix.lightVars.
+# Inherits the dark scope mapping; only the [palette] neutrals/accents flip to light.
+
+inherits = "zgui-matrix"
+
+[palette]
+accent = "#16a34a"
+accent_light = "#22c55e"
+cyan = "#15803d"
+magenta = "#166534"
+green = "#22c55e"
+yellow = "#65a30d"
+orange = "#4ade80"
+red = "#dc2626"
+text = "#14532d"
+text_dim = "#166534"
+text_muted = "#86efac"
+bg = "#f0fdf4"
+bg2 = "#dcfce7"
+bg_card = "#ffffff"
+bg_hover = "#f0fdf4"
+border = "#bbf7d0"
+border_glow = "#86efac"

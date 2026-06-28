@@ -1,0 +1,24 @@
+# zgui-vapor-light — "Vapor" light variant
+# Generated from zgui-core/webui/colorscheme.js → COLOR_SCHEMES.vapor.lightVars.
+# Inherits the dark scope mapping; only the [palette] neutrals/accents flip to light.
+
+inherits = "zgui-vapor"
+
+[palette]
+accent = "#d6469e"
+accent_light = "#ff6ec7"
+cyan = "#0e9bb0"
+magenta = "#8b5cf6"
+green = "#10a37f"
+yellow = "#b59000"
+orange = "#d97757"
+red = "#e11d48"
+text = "#2a1e3a"
+text_dim = "#5a4a72"
+text_muted = "#9a8ab0"
+bg = "#f7f0fb"
+bg2 = "#ede2f5"
+bg_card = "#ffffff"
+bg_hover = "#faf4fd"
+border = "#ddc9ec"
+border_glow = "#c4a8db"

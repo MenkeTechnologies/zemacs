@@ -1,0 +1,24 @@
+# zgui-toxic-light — "Toxic" light variant
+# Generated from zgui-core/webui/colorscheme.js → COLOR_SCHEMES.toxic.lightVars.
+# Inherits the dark scope mapping; only the [palette] neutrals/accents flip to light.
+
+inherits = "zgui-toxic"
+
+[palette]
+accent = "#5c8a00"
+accent_light = "#7cab1a"
+cyan = "#0891b2"
+magenta = "#a3006e"
+green = "#15803d"
+yellow = "#a16207"
+orange = "#c2410c"
+red = "#dc2626"
+text = "#1e293b"
+text_dim = "#475569"
+text_muted = "#94a3b8"
+bg = "#f3f7ec"
+bg2 = "#e7eedb"
+bg_card = "#ffffff"
+bg_hover = "#f8fbf2"
+border = "#d0dcc0"
+border_glow = "#b0c098"

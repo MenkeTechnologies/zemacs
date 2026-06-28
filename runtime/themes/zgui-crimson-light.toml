@@ -1,0 +1,24 @@
+# zgui-crimson-light — "Crimson" light variant
+# Generated from zgui-core/webui/colorscheme.js → COLOR_SCHEMES.crimson.lightVars.
+# Inherits the dark scope mapping; only the [palette] neutrals/accents flip to light.
+
+inherits = "zgui-crimson"
+
+[palette]
+accent = "#be123c"
+accent_light = "#e11d48"
+cyan = "#0d9488"
+magenta = "#be185d"
+green = "#15803d"
+yellow = "#a16207"
+orange = "#c2410c"
+red = "#dc2626"
+text = "#1e293b"
+text_dim = "#475569"
+text_muted = "#94a3b8"
+bg = "#faf0f1"
+bg2 = "#f2e4e6"
+bg_card = "#ffffff"
+bg_hover = "#fdf6f7"
+border = "#e0c5cb"
+border_glow = "#c8a5ad"

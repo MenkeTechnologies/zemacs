@@ -1171,6 +1171,270 @@ fn cycle_theme(cx: &mut compositor::Context, delta: isize) -> anyhow::Result<()>
     Ok(())
 }
 
+/// Reset (undo) the git hunk under the primary cursor, restoring it from the diff base (HEAD/index).
+/// This is gitsigns/`vim-gitgutter`'s `reset_hunk` and JetBrains' gutter "rollback".
+fn hunk_reset(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    // Compute the replacement under an immutable borrow, then re-borrow mutably to apply it.
+    let change: Option<(usize, usize, String)> = {
+        let (view, doc) = current_ref!(cx.editor);
+        match doc.diff_handle() {
+            None => None,
+            Some(handle) => {
+                let diff = handle.load();
+                let text = doc.text();
+                let cursor = doc.selection(view.id).primary().cursor(text.slice(..));
+                let line = text.char_to_line(cursor) as u32;
+                diff.hunk_at(line, true).map(|idx| {
+                    let hunk = diff.nth_hunk(idx);
+                    let base = diff.diff_base();
+                    let bstart = base.line_to_char(hunk.before.start as usize);
+                    let bend = base.line_to_char(hunk.before.end as usize);
+                    let replacement: String = base.slice(bstart..bend).chars().collect();
+                    let dstart = text.line_to_char(hunk.after.start as usize);
+                    let dend = text.line_to_char(hunk.after.end as usize);
+                    (dstart, dend, replacement)
+                })
+            }
+        }
+    };
+    let Some((start, end, replacement)) = change else {
+        cx.editor.set_status("no git hunk at cursor");
+        return Ok(());
+    };
+    let (view, doc) = current!(cx.editor);
+    let transaction = Transaction::change(
+        doc.text(),
+        std::iter::once((start, end, (!replacement.is_empty()).then(|| replacement.into()))),
+    );
+    doc.apply(&transaction, view.id);
+    doc.append_changes_to_history(view);
+    cx.editor.set_status("hunk reset");
+    Ok(())
+}
+
+/// Move the primary cursor to the next/previous git hunk (gitsigns `]c`/`[c`, vim-gitgutter hunks).
+fn hunk_goto(cx: &mut compositor::Context, forward: bool) -> anyhow::Result<()> {
+    let target: Option<usize> = {
+        let (view, doc) = current_ref!(cx.editor);
+        match doc.diff_handle() {
+            None => None,
+            Some(handle) => {
+                let diff = handle.load();
+                let text = doc.text();
+                let cursor = doc.selection(view.id).primary().cursor(text.slice(..));
+                let line = text.char_to_line(cursor) as u32;
+                let idx = if forward {
+                    diff.next_hunk(line)
+                } else {
+                    diff.prev_hunk(line)
+                };
+                idx.map(|i| text.line_to_char(diff.nth_hunk(i).after.start as usize))
+            }
+        }
+    };
+    let Some(pos) = target else {
+        cx.editor.set_status("no more hunks");
+        return Ok(());
+    };
+    let scrolloff = cx.editor.config().scrolloff;
+    let (view, doc) = current!(cx.editor);
+    doc.set_selection(view.id, zemacs_core::Selection::point(pos));
+    view.ensure_cursor_in_view(doc, scrolloff);
+    Ok(())
+}
+
+fn hunk_next(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    hunk_goto(cx, true)
+}
+
+fn hunk_prev(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    hunk_goto(cx, false)
+}
+
+/// Locate the git merge-conflict block containing (or nearest above) `cursor`.
+/// Returns `(block_start_char, block_end_char, ours_text, theirs_text)`. Handles both the 2-way
+/// (`<<<<<<< ======= >>>>>>>`) and diff3 (`<<<<<<< ||||||| ======= >>>>>>>`) marker styles.
+fn conflict_block(
+    text: &zemacs_core::Rope,
+    cursor: usize,
+) -> Option<(usize, usize, String, String)> {
+    let cursor_line = text.char_to_line(cursor);
+    let total = text.len_lines();
+    let line_str = |l: usize| text.line(l).chars().collect::<String>();
+
+    let mut start = None;
+    for l in (0..=cursor_line).rev() {
+        let s = line_str(l);
+        if s.starts_with("<<<<<<<") {
+            start = Some(l);
+            break;
+        }
+        if s.starts_with(">>>>>>>") && l != cursor_line {
+            return None; // cursor sits past the end of the previous block
+        }
+    }
+    let start = start?;
+    let (mut base_sep, mut sep, mut end) = (None, None, None);
+    for l in (start + 1)..total {
+        let s = line_str(l);
+        if s.starts_with("|||||||") && base_sep.is_none() {
+            base_sep = Some(l);
+        } else if s.starts_with("=======") && sep.is_none() {
+            sep = Some(l);
+        } else if s.starts_with(">>>>>>>") {
+            end = Some(l);
+            break;
+        }
+    }
+    let (sep, end) = (sep?, end?);
+    let ours_end = base_sep.unwrap_or(sep);
+    let ours: String = ((start + 1)..ours_end).map(line_str).collect();
+    let theirs: String = ((sep + 1)..end).map(line_str).collect();
+    Some((text.line_to_char(start), text.line_to_char(end + 1), ours, theirs))
+}
+
+/// Resolve the merge conflict under the cursor by keeping `which` ∈ {ours, theirs, both}.
+fn conflict_resolve(cx: &mut compositor::Context, which: &str) -> anyhow::Result<()> {
+    let change: Option<(usize, usize, String)> = {
+        let (view, doc) = current_ref!(cx.editor);
+        let text = doc.text();
+        let cursor = doc.selection(view.id).primary().cursor(text.slice(..));
+        conflict_block(text, cursor).map(|(s, e, ours, theirs)| {
+            let kept = match which {
+                "theirs" => theirs,
+                "both" => format!("{ours}{theirs}"),
+                _ => ours,
+            };
+            (s, e, kept)
+        })
+    };
+    let Some((start, end, kept)) = change else {
+        cx.editor.set_status("no merge conflict at cursor");
+        return Ok(());
+    };
+    let (view, doc) = current!(cx.editor);
+    let transaction = Transaction::change(
+        doc.text(),
+        std::iter::once((start, end, (!kept.is_empty()).then(|| kept.into()))),
+    );
+    doc.apply(&transaction, view.id);
+    doc.append_changes_to_history(view);
+    cx.editor.set_status(format!("conflict resolved: kept {which}"));
+    Ok(())
+}
+
+fn conflict_ours(cx: &mut compositor::Context, _a: Args, e: PromptEvent) -> anyhow::Result<()> {
+    if e == PromptEvent::Validate {
+        conflict_resolve(cx, "ours")?;
+    }
+    Ok(())
+}
+fn conflict_theirs(cx: &mut compositor::Context, _a: Args, e: PromptEvent) -> anyhow::Result<()> {
+    if e == PromptEvent::Validate {
+        conflict_resolve(cx, "theirs")?;
+    }
+    Ok(())
+}
+fn conflict_both(cx: &mut compositor::Context, _a: Args, e: PromptEvent) -> anyhow::Result<()> {
+    if e == PromptEvent::Validate {
+        conflict_resolve(cx, "both")?;
+    }
+    Ok(())
+}
+
+/// Jump to the next/previous `<<<<<<<` conflict marker.
+fn conflict_goto(cx: &mut compositor::Context, forward: bool) -> anyhow::Result<()> {
+    let target: Option<usize> = {
+        let (view, doc) = current_ref!(cx.editor);
+        let text = doc.text();
+        let cursor = doc.selection(view.id).primary().cursor(text.slice(..));
+        let cur = text.char_to_line(cursor);
+        let total = text.len_lines();
+        let starts = |l: usize| text.line(l).chars().take(7).collect::<String>() == "<<<<<<<";
+        if forward {
+            ((cur + 1)..total).find(|&l| starts(l))
+        } else {
+            (0..cur).rev().find(|&l| starts(l))
+        }
+        .map(|l| text.line_to_char(l))
+    };
+    let Some(pos) = target else {
+        cx.editor.set_status("no more conflicts");
+        return Ok(());
+    };
+    let scrolloff = cx.editor.config().scrolloff;
+    let (view, doc) = current!(cx.editor);
+    doc.set_selection(view.id, zemacs_core::Selection::point(pos));
+    view.ensure_cursor_in_view(doc, scrolloff);
+    Ok(())
+}
+fn conflict_next(cx: &mut compositor::Context, _a: Args, e: PromptEvent) -> anyhow::Result<()> {
+    if e == PromptEvent::Validate {
+        conflict_goto(cx, true)?;
+    }
+    Ok(())
+}
+fn conflict_prev(cx: &mut compositor::Context, _a: Args, e: PromptEvent) -> anyhow::Result<()> {
+    if e == PromptEvent::Validate {
+        conflict_goto(cx, false)?;
+    }
+    Ok(())
+}
+
+/// Toggle the editor between a dark and a light theme. The current mode is detected from the active
+/// theme's background luminance, so it works regardless of which theme is set. Optional args override
+/// the pair: `:theme-toggle [darkTheme] [lightTheme]`.
+fn theme_toggle(cx: &mut compositor::Context, args: Args, event: PromptEvent) -> anyhow::Result<()> {
+    if event != PromptEvent::Validate {
+        return Ok(());
+    }
+    let is_light = match cx.editor.theme.get("ui.background").bg {
+        Some(zemacs_view::graphics::Color::Rgb(r, g, b)) => {
+            0.299 * r as f32 + 0.587 * g as f32 + 0.114 * b as f32 > 128.0
+        }
+        _ => false,
+    };
+    let cur = cx.editor.theme.name().to_string();
+    // Prefer flipping a paired `zgui-<id>` <-> `zgui-<id>-light` theme; otherwise use the args
+    // (defaults: zgui-cyberpunk <-> catppuccin_latte).
+    let paired = if let Some(base) = cur.strip_suffix("-light") {
+        Some(base.to_string())
+    } else if cur.starts_with("zgui-") {
+        Some(format!("{cur}-light"))
+    } else {
+        None
+    };
+    let dark = args.first().map(|s| s.to_string()).unwrap_or_else(|| "zgui-cyberpunk".to_string());
+    let light = args.get(1).map(|s| s.to_string()).unwrap_or_else(|| "catppuccin_latte".to_string());
+    let target = match (paired, is_light) {
+        (Some(p), _) => p,
+        (None, true) => dark,
+        (None, false) => light,
+    };
+    let target = &target;
+    let true_color = cx.editor.config.load().true_color || crate::true_color();
+    let theme = cx
+        .editor
+        .theme_loader
+        .load(target)
+        .map_err(|err| anyhow::anyhow!("Could not load theme '{target}': {err}"))?;
+    if !(true_color || theme.is_16_color()) {
+        bail!("Unsupported theme: theme requires true color support");
+    }
+    cx.editor.set_theme(theme)?;
+    cx.editor.set_status(format!("theme: {target}"));
+    Ok(())
+}
+
 fn theme_next(cx: &mut compositor::Context, _args: Args, event: PromptEvent) -> anyhow::Result<()> {
     if event != PromptEvent::Validate {
         return Ok(());
@@ -4999,6 +5263,105 @@ pub const TYPABLE_COMMAND_LIST: &[TypableCommand] = &[
         completer: CommandCompleter::positional(&[completers::theme]),
         signature: Signature {
             positionals: (0, Some(1)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "hunk-reset",
+        aliases: &["reset-hunk", "hunk-undo"],
+        doc: "Undo the git hunk under the cursor, restoring it from HEAD (gitsigns reset_hunk).",
+        fun: hunk_reset,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "hunk-next",
+        aliases: &["next-hunk"],
+        doc: "Move the cursor to the next git hunk.",
+        fun: hunk_next,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "hunk-prev",
+        aliases: &["prev-hunk"],
+        doc: "Move the cursor to the previous git hunk.",
+        fun: hunk_prev,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "conflict-ours",
+        aliases: &["diffget-ours", "conflict-keep-ours"],
+        doc: "Resolve the merge conflict at the cursor by keeping OUR side (HEAD).",
+        fun: conflict_ours,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "conflict-theirs",
+        aliases: &["diffget-theirs", "conflict-keep-theirs"],
+        doc: "Resolve the merge conflict at the cursor by keeping THEIR side (incoming).",
+        fun: conflict_theirs,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "conflict-both",
+        aliases: &["conflict-keep-both"],
+        doc: "Resolve the merge conflict at the cursor by keeping BOTH sides.",
+        fun: conflict_both,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "conflict-next",
+        aliases: &[],
+        doc: "Jump to the next merge-conflict marker.",
+        fun: conflict_next,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "conflict-prev",
+        aliases: &[],
+        doc: "Jump to the previous merge-conflict marker.",
+        fun: conflict_prev,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(0)),
+            ..Signature::DEFAULT
+        },
+    },
+    TypableCommand {
+        name: "theme-toggle",
+        aliases: &["toggle-theme", "light-dark"],
+        doc: "Toggle between a dark and light theme (`:theme-toggle [dark] [light]`).",
+        fun: theme_toggle,
+        completer: CommandCompleter::none(),
+        signature: Signature {
+            positionals: (0, Some(2)),
             ..Signature::DEFAULT
         },
     },

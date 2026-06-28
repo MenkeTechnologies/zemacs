@@ -1,0 +1,24 @@
+# zgui-ember-light — "Ember" light variant
+# Generated from zgui-core/webui/colorscheme.js → COLOR_SCHEMES.ember.lightVars.
+# Inherits the dark scope mapping; only the [palette] neutrals/accents flip to light.
+
+inherits = "zgui-ember"
+
+[palette]
+accent = "#d97706"
+accent_light = "#f59e0b"
+cyan = "#ea580c"
+magenta = "#c2410c"
+green = "#65a30d"
+yellow = "#a16207"
+orange = "#c2410c"
+red = "#dc2626"
+text = "#451a03"
+text_dim = "#92400e"
+text_muted = "#fbbf24"
+bg = "#fffbeb"
+bg2 = "#fef3c7"
+bg_card = "#ffffff"
+bg_hover = "#fffbeb"
+border = "#fde68a"
+border_glow = "#fbbf24"
