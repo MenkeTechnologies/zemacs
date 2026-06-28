@@ -155,7 +155,63 @@ def parse_keymap():
             result["normal"]["."] = "repeat_last_insert (EditorView)"
     except OSError:
         pass
+
+    # Command-line editing keys live in the `:` prompt, not the keymap macro:
+    # ui/prompt.rs handles them with a hardcoded `match event { ... }`. Parse
+    # that handler so the cmdline-editing surface is measured from real code.
+    result["command"] = parse_prompt_keymap()
     return result
+
+
+# Named keys as written in the ctrl!/alt!/key!/shift! macros, normalised to the
+# same chord vocabulary the keymap macro uses (see zemacs-view/src/input.rs).
+_NAMED_KEYS = {
+    "Esc": "esc", "Enter": "ret", "Left": "left", "Right": "right",
+    "Up": "up", "Down": "down", "Home": "home", "End": "end",
+    "Backspace": "backspace", "Delete": "del", "Tab": "tab",
+    "PageUp": "pageup", "PageDown": "pagedown", "Insert": "ins",
+}
+
+
+def parse_prompt_keymap():
+    """Extract the keys the `:` prompt handles into {chord: "prompt"}.
+
+    Parses the `match event { ... }` arms in ui/prompt.rs, recognising the
+    ctrl!/alt!/key!/shift! key macros. This is the command-line editing surface;
+    like the EditorView dot-repeat handler above, it is hardcoded rather than
+    expressed in the keymap macro, so it is read straight from source.
+    """
+    path = os.path.join(ZEMACS_TERM, "ui", "prompt.rs")
+    try:
+        src = open(path, encoding="utf-8").read()
+    except OSError:
+        return {}
+    # There are two `match event` blocks: one unwraps the Event, the other (the
+    # one we want) handles keys. Pick the balanced block that contains key macros.
+    body = ""
+    for m in re.finditer(r"\bmatch\s+event\s*\{", src):
+        depth = 1
+        i = m.end()
+        while i < len(src) and depth:
+            if src[i] == "{":
+                depth += 1
+            elif src[i] == "}":
+                depth -= 1
+            i += 1
+        candidate = src[m.end() : i - 1]
+        if "ctrl!(" in candidate or "key!(" in candidate:
+            body = candidate
+            break
+    if not body:
+        return {}
+
+    out = {}
+    for mm in re.finditer(r"\b(ctrl|alt|shift|key)!\(\s*('?)(\w+)\2\s*\)", body):
+        macro, _q, arg = mm.group(1), mm.group(2), mm.group(3)
+        key = _NAMED_KEYS.get(arg, arg)  # named key -> canonical, else literal char
+        prefix = {"ctrl": "C-", "alt": "A-", "shift": "S-", "key": ""}[macro]
+        out[f"{prefix}{key}"] = "prompt"
+    return out
 
 
 def _split_keys(keyspec):
@@ -563,9 +619,11 @@ def write_keybinding_report(rows):
         )
     L.append("")
     L.append(
-        "Emacs shows 0% because zemacs is a modal (vim) editor — Emacs's default "
-        "chord bindings (`C-x C-f`, …) are intentionally not bound; the *commands* "
-        "they invoke are tracked under the port report's emacs `command` category.\n"
+        "Emacs coverage is low because zemacs is a modal (vim) editor — most Emacs "
+        "chord bindings (`C-x C-f`, …) are intentionally not bound. What *is* counted "
+        "are the global readline-style editing keys that genuinely work here (e.g. "
+        "`C-a`/`C-e`/`C-k`, `M-f`/`M-b`/`M-d`, `M-x`, `C-s`); the remaining Emacs "
+        "*commands* are tracked under the port report's emacs `command` category.\n"
     )
     text = "\n".join(L)
     open(KB_MD, "w", encoding="utf-8").write(text)

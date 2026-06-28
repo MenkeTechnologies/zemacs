@@ -3,7 +3,10 @@ pub mod macros;
 pub mod vim;
 
 pub use crate::commands::MappableCommand;
-pub use default::default;
+// zemacs ships the vim keymap as the default keymap that `Config` loads.
+// The Helix selection-first keymap remains available as `default::default`
+// (module path) for reference, but is no longer what the editor binds.
+pub use vim::default;
 
 use arc_swap::{
     access::{DynAccess, DynGuard},
@@ -448,10 +451,11 @@ mod tests {
             &KeyTrie::MappableCommand(MappableCommand::delete_char_forward),
             "Leaf should replace old leaf in merged subnode"
         );
-        // Assumes that `ge` is in default keymap
+        // Assumes that `ge` is in default keymap. The merge above does not touch
+        // `ge`, so it keeps the vim binding (back to end of previous word).
         assert_eq!(
             keymap.search(&[key!('g'), key!('e')]).unwrap(),
-            &KeyTrie::MappableCommand(MappableCommand::goto_last_line),
+            &KeyTrie::MappableCommand(MappableCommand::move_prev_word_end),
             "Old leaves in subnode should be present in merged node"
         );
 
@@ -492,11 +496,14 @@ mod tests {
             &KeyTrie::MappableCommand(MappableCommand::vsplit),
             "Leaf should be present in merged subnode"
         );
-        // Merged nodes were ordered at the end
+        // Merged nodes are appended at the end. The vim default already has a
+        // `SPC s` (search) submap, so the freshly merged `v`/`c` land last.
         let node = keymap.search(&[key!(' '), key!('s')]).unwrap();
+        let keys = node.node().unwrap().keys().copied().collect::<Vec<_>>();
         assert_eq!(
-            node.node().unwrap().keys().copied().collect::<Vec<_>>(),
-            vec![key!('v'), key!('c')]
+            &keys[keys.len() - 2..],
+            &[key!('v'), key!('c')],
+            "newly merged keys should be ordered at the end"
         );
     }
 

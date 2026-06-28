@@ -6,29 +6,54 @@
 <p class=muted>The keybinding subset of the <a href='port_report.html'>port report</a>. Counts only the key-press surface — vim/neovim normal/visual/insert/cmdline keys, the GNU Emacs Key Index, and the Spacemacs <code>SPC</code> tree. <b>ported</b> = the same key does the equivalent thing in zemacs.</p>
 <div class=kpi>
 <div class=card><b>2254</b>cited keybindings</div>
-<div class=card><b class=ported>345</b>ported (15.3%)</div>
-<div class=card><b class=partial>80</b>partial (3.5%)</div>
-<div class=card><b class=absent>1829</b>absent</div>
+<div class=card><b class=ported>471</b>ported (20.9%)</div>
+<div class=card><b class=partial>92</b>partial (4.1%)</div>
+<div class=card><b class=absent>1691</b>absent</div>
 </div>
 <h2>By source</h2><table>
 <tr><th>Source</th><th>Keybindings</th><th>Ported</th><th>Partial</th><th>Progress</th></tr>
-<tr><td>emacs</td><td class=n>1124</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
-<tr><td>neovim</td><td class=n>715</td><td class='n ported'>228</td><td class='n partial'>74</td><td><div class="bar"><div class="fill" style="width:31.9%"></div><span>31.9%</span></div></td></tr>
-<tr><td>spacemacs</td><td class=n>415</td><td class='n ported'>117</td><td class='n partial'>6</td><td><div class="bar"><div class="fill" style="width:28.2%"></div><span>28.2%</span></div></td></tr>
+<tr><td>emacs</td><td class=n>1124</td><td class='n ported'>25</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:2.2%"></div><span>2.2%</span></div></td></tr>
+<tr><td>neovim</td><td class=n>715</td><td class='n ported'>318</td><td class='n partial'>80</td><td><div class="bar"><div class="fill" style="width:44.5%"></div><span>44.5%</span></div></td></tr>
+<tr><td>spacemacs</td><td class=n>415</td><td class='n ported'>128</td><td class='n partial'>12</td><td><div class="bar"><div class="fill" style="width:30.8%"></div><span>30.8%</span></div></td></tr>
 </table>
 <h2>By source / category</h2><table>
 <tr><th>Source</th><th>Category</th><th>Keybindings</th><th>Ported</th><th>Partial</th><th>Progress</th></tr>
-<tr><td>emacs</td><td>keybinding</td><td class=n>1124</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
-<tr><td>neovim</td><td>cmdline-editing</td><td class=n>53</td><td class='n ported'>0</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:0.0%"></div><span>0.0%</span></div></td></tr>
-<tr><td>neovim</td><td>insert-mode</td><td class=n>98</td><td class='n ported'>20</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:20.4%"></div><span>20.4%</span></div></td></tr>
-<tr><td>neovim</td><td>normal-mode</td><td class=n>479</td><td class='n ported'>177</td><td class='n partial'>36</td><td><div class="bar"><div class="fill" style="width:37.0%"></div><span>37.0%</span></div></td></tr>
-<tr><td>neovim</td><td>visual-mode</td><td class=n>85</td><td class='n ported'>31</td><td class='n partial'>38</td><td><div class="bar"><div class="fill" style="width:36.5%"></div><span>36.5%</span></div></td></tr>
-<tr><td>spacemacs</td><td>keybinding</td><td class=n>415</td><td class='n ported'>117</td><td class='n partial'>6</td><td><div class="bar"><div class="fill" style="width:28.2%"></div><span>28.2%</span></div></td></tr>
+<tr><td>emacs</td><td>keybinding</td><td class=n>1124</td><td class='n ported'>25</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:2.2%"></div><span>2.2%</span></div></td></tr>
+<tr><td>neovim</td><td>cmdline-editing</td><td class=n>53</td><td class='n ported'>25</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:47.2%"></div><span>47.2%</span></div></td></tr>
+<tr><td>neovim</td><td>insert-mode</td><td class=n>98</td><td class='n ported'>35</td><td class='n partial'>0</td><td><div class="bar"><div class="fill" style="width:35.7%"></div><span>35.7%</span></div></td></tr>
+<tr><td>neovim</td><td>normal-mode</td><td class=n>479</td><td class='n ported'>220</td><td class='n partial'>38</td><td><div class="bar"><div class="fill" style="width:45.9%"></div><span>45.9%</span></div></td></tr>
+<tr><td>neovim</td><td>visual-mode</td><td class=n>85</td><td class='n ported'>38</td><td class='n partial'>42</td><td><div class="bar"><div class="fill" style="width:44.7%"></div><span>44.7%</span></div></td></tr>
+<tr><td>spacemacs</td><td>keybinding</td><td class=n>415</td><td class='n ported'>128</td><td class='n partial'>12</td><td><div class="bar"><div class="fill" style="width:30.8%"></div><span>30.8%</span></div></td></tr>
 </table>
 <p class=muted>Emacs is 0% because zemacs is a modal (vim) editor — Emacs default chords (<code>C-x C-f</code>, …) are intentionally not bound; the commands they invoke are tracked under the port report's emacs <code>command</code> category.</p>
 <h2>Keybinding detail</h2>
-<details><summary>emacs / keybinding <span class=muted>(1124 keys · <span class=ported>0 ported</span> · <span class=partial>0 partial</span>)</span></summary>
+<details><summary>emacs / keybinding <span class=muted>(1124 keys · <span class=ported>25 ported</span> · <span class=partial>0 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
+<tr><td>C-/</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Undo.html#index-C_002d_002f</td></tr>
+<tr><td>C-SPC</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Setting-Mark.html#index-C_002dSPC</td></tr>
+<tr><td>C-_</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Undo.html#index-C_002d_005f</td></tr>
+<tr><td>C-a</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002da</td></tr>
+<tr><td>C-b</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002db</td></tr>
+<tr><td>C-e</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002de</td></tr>
+<tr><td>C-f</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002df</td></tr>
+<tr><td>C-g</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Quitting.html#index-C_002dg</td></tr>
+<tr><td>C-j</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Inserting-Text.html#index-C_002dj</td></tr>
+<tr><td>C-k</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Killing-by-Lines.html#index-C_002dk</td></tr>
+<tr><td>C-l</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Recentering.html#index-C_002dl</td></tr>
+<tr><td>C-n</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002dn</td></tr>
+<tr><td>C-p</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002dp</td></tr>
+<tr><td>C-s</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Isearch.html#index-C_002ds</td></tr>
+<tr><td>C-v</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002dv</td></tr>
+<tr><td>M-&lt;</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-M_002d_003c</td></tr>
+<tr><td>M-&gt;</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-M_002d_003e</td></tr>
+<tr><td>M-DEL</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html#index-M_002dDEL</td></tr>
+<tr><td>M-b</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html#index-M_002db</td></tr>
+<tr><td>M-d</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html#index-M_002dd</td></tr>
+<tr><td>M-f</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html#index-M_002df</td></tr>
+<tr><td>M-v</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-M_002dv</td></tr>
+<tr><td>M-w</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Other-Kill-Commands.html#index-M_002dw</td></tr>
+<tr><td>M-x</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/M_002dx.html#index-M_002dx</td></tr>
+<tr><td>RET</td><td class=ported>ported</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Inserting-Text.html#index-RET</td></tr>
 <tr><td>! (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Shell-Commands-in-Dired.html#index-_0021-_0028Dired_0029</td></tr>
 <tr><td>" (TeX mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/TeX-Editing.html#index-_0022-_0028TeX-mode_0029</td></tr>
 <tr><td># (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Flagging-Many-Files.html#index-_0023-_0028Dired_0029</td></tr>
@@ -104,7 +129,6 @@
 <tr><td>B (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Operating-on-Files.html#index-B-_0028Dired_0029</td></tr>
 <tr><td>BS (MS-DOS)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/MS_002dDOS-Keyboard.html#index-BS-_0028MS_002dDOS_0029</td></tr>
 <tr><td>C (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Operating-on-Files.html#index-C-_0028Dired_0029</td></tr>
-<tr><td>C-/</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Undo.html#index-C_002d_002f</td></tr>
 <tr><td>C-0, tab bar</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Tab-Bars.html#index-C_002d0_002c-tab-bar</td></tr>
 <tr><td>C-1, tab bar</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Tab-Bars.html#index-C_002d1_002c-tab-bar</td></tr>
 <tr><td>C-9, tab bar</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Tab-Bars.html#index-C_002d9_002c-tab-bar</td></tr>
@@ -175,18 +199,14 @@
 <tr><td>C-RIGHT</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002dRIGHT</td></tr>
 <tr><td>C-S-backspace</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Killing-by-Lines.html#index-C_002dS_002dbackspace</td></tr>
 <tr><td>C-S-mouse-3 (FFAP)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-C_002dS_002dmouse_002d3-_0028FFAP_0029</td></tr>
-<tr><td>C-SPC</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Setting-Mark.html#index-C_002dSPC</td></tr>
 <tr><td>C-SPC C-SPC</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark-Ring.html#index-C_002dSPC-C_002dSPC</td></tr>
 <tr><td>C-SPC C-SPC, enabling Transient Mark mode temporarily</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Disabled-Transient-Mark.html#index-C_002dSPC-C_002dSPC_002c-enabling-Transient-Mark-mode-temporarily</td></tr>
 <tr><td>C-TAB</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/File-Name-Cache.html#index-C_002dTAB</td></tr>
 <tr><td>C-\</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Input-Method.html#index-C_002d_005c</td></tr>
 <tr><td>C-]</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Quitting.html#index-C_002d_005d</td></tr>
 <tr><td>C-^ (Incremental Search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Special-Isearch.html#index-C_002d_005e-_0028Incremental-Search_0029</td></tr>
-<tr><td>C-_</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Undo.html#index-C_002d_005f</td></tr>
 <tr><td>C-_ (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Marks-vs-Flags.html#index-C_002d_005f-_0028Dired_0029</td></tr>
-<tr><td>C-a</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002da</td></tr>
 <tr><td>C-a (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Move-to-Beginning-or-End.html#index-C_002da-_0028Calendar-mode_0029</td></tr>
-<tr><td>C-b</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002db</td></tr>
 <tr><td>C-b (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Calendar-Unit-Motion.html#index-C_002db-_0028Calendar-mode_0029</td></tr>
 <tr><td>C-b, when using input methods</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Input-Methods.html#index-C_002db_002c-when-using-input-methods</td></tr>
 <tr><td>C-c ' (Picture mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Insert-in-Picture.html#index-C_002dc-_0027-_0028Picture-mode_0029</td></tr>
@@ -366,12 +386,9 @@
 <tr><td>C-d (Buffer Menu)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Several-Buffers.html#index-C_002dd-_0028Buffer-Menu_0029</td></tr>
 <tr><td>C-d (Rmail)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Rmail-Deletion.html#index-C_002dd-_0028Rmail_0029</td></tr>
 <tr><td>C-d (Shell mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Shell-Mode.html#index-C_002dd-_0028Shell-mode_0029</td></tr>
-<tr><td>C-e</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002de</td></tr>
 <tr><td>C-e (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Move-to-Beginning-or-End.html#index-C_002de-_0028Calendar-mode_0029</td></tr>
-<tr><td>C-f</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002df</td></tr>
 <tr><td>C-f (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Calendar-Unit-Motion.html#index-C_002df-_0028Calendar-mode_0029</td></tr>
 <tr><td>C-f, when using input methods</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Input-Methods.html#index-C_002df_002c-when-using-input-methods</td></tr>
-<tr><td>C-g</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Quitting.html#index-C_002dg</td></tr>
 <tr><td>C-g (Incremental search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Error-in-Isearch.html#index-C_002dg-_0028Incremental-search_0029</td></tr>
 <tr><td>C-g (MS-DOS)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/MS_002dDOS-Keyboard.html#index-C_002dg-_0028MS_002dDOS_0029</td></tr>
 <tr><td>C-g C-g (Incremental Search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Isearch.html#index-C_002dg-C_002dg-_0028Incremental-Search_0029</td></tr>
@@ -419,21 +436,17 @@
 <tr><td>C-h v</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Name-Help.html#index-C_002dh-v</td></tr>
 <tr><td>C-h w</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Key-Help.html#index-C_002dh-w</td></tr>
 <tr><td>C-h x</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Name-Help.html#index-C_002dh-x</td></tr>
-<tr><td>C-j</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Inserting-Text.html#index-C_002dj</td></tr>
 <tr><td>C-j (Lisp Interaction mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Interaction.html#index-C_002dj-_0028Lisp-Interaction-mode_0029</td></tr>
 <tr><td>C-j (MS-DOS)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/MS_002dDOS-Keyboard.html#index-C_002dj-_0028MS_002dDOS_0029</td></tr>
 <tr><td>C-j (TeX mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/TeX-Editing.html#index-C_002dj-_0028TeX-mode_0029</td></tr>
 <tr><td>C-j (and major modes)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Major-Modes.html#index-C_002dj-_0028and-major-modes_0029</td></tr>
-<tr><td>C-k</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Killing-by-Lines.html#index-C_002dk</td></tr>
 <tr><td>C-k (Gnus Group mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Gnus-Group-Buffer.html#index-C_002dk-_0028Gnus-Group-mode_0029</td></tr>
-<tr><td>C-l</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Recentering.html#index-C_002dl</td></tr>
 <tr><td>C-mouse-1</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Menu-Mouse-Clicks.html#index-C_002dmouse_002d1</td></tr>
 <tr><td>C-mouse-2</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Menu-Mouse-Clicks.html#index-C_002dmouse_002d2</td></tr>
 <tr><td>C-mouse-2 (mode line)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Split-Window.html#index-C_002dmouse_002d2-_0028mode-line_0029</td></tr>
 <tr><td>C-mouse-2 (scroll bar)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Split-Window.html#index-C_002dmouse_002d2-_0028scroll-bar_0029</td></tr>
 <tr><td>C-mouse-3</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Menu-Mouse-Clicks.html#index-C_002dmouse_002d3</td></tr>
 <tr><td>C-mouse-3 (when menu bar is disabled)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Menu-Bars.html#index-C_002dmouse_002d3-_0028when-menu-bar-is-disabled_0029</td></tr>
-<tr><td>C-n</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002dn</td></tr>
 <tr><td>C-n (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Calendar-Unit-Motion.html#index-C_002dn-_0028Calendar-mode_0029</td></tr>
 <tr><td>C-n (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired-Navigation.html#index-C_002dn-_0028Dired_0029</td></tr>
 <tr><td>C-n, when using input methods</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Input-Methods.html#index-C_002dn_002c-when-using-input-methods</td></tr>
@@ -442,7 +455,6 @@
 <tr><td>C-o (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired-Visiting.html#index-C_002do-_0028Dired_0029</td></tr>
 <tr><td>C-o (Occur mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Other-Repeating-Search.html#index-C_002do-_0028Occur-mode_0029</td></tr>
 <tr><td>C-o (Rmail)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Rmail-Output.html#index-C_002do-_0028Rmail_0029</td></tr>
-<tr><td>C-p</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002dp</td></tr>
 <tr><td>C-p (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Calendar-Unit-Motion.html#index-C_002dp-_0028Calendar-mode_0029</td></tr>
 <tr><td>C-p (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired-Navigation.html#index-C_002dp-_0028Dired_0029</td></tr>
 <tr><td>C-p, when using input methods</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Input-Methods.html#index-C_002dp_002c-when-using-input-methods</td></tr>
@@ -450,7 +462,6 @@
 <tr><td>C-q (Incremental Search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Special-Isearch.html#index-C_002dq-_0028Incremental-Search_0029</td></tr>
 <tr><td>C-r</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Isearch.html#index-C_002dr</td></tr>
 <tr><td>C-r (Incremental Search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Repeat-Isearch.html#index-C_002dr-_0028Incremental-Search_0029</td></tr>
-<tr><td>C-s</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Isearch.html#index-C_002ds</td></tr>
 <tr><td>C-s (Incremental Search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Repeat-Isearch.html#index-C_002ds-_0028Incremental-Search_0029</td></tr>
 <tr><td>C-t</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Transpose.html#index-C_002dt</td></tr>
 <tr><td>C-t d (Image-Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Image_002dDired.html#index-C_002dt-d-_0028Image_002dDired_0029</td></tr>
@@ -463,7 +474,6 @@
 <tr><td>C-u C-x v D</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Old-Revisions.html#index-C_002du-C_002dx-v-D</td></tr>
 <tr><td>C-u M-;</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Comment-Commands.html#index-C_002du-M_002d_003b</td></tr>
 <tr><td>C-u TAB</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Multi_002dline-Indent.html#index-C_002du-TAB</td></tr>
-<tr><td>C-v</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-C_002dv</td></tr>
 <tr><td>C-v (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Scroll-Calendar.html#index-C_002dv-_0028Calendar-mode_0029</td></tr>
 <tr><td>C-w</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Other-Kill-Commands.html#index-C_002dw</td></tr>
 <tr><td>C-w (Incremental search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Isearch-Yank.html#index-C_002dw-_0028Incremental-search_0029</td></tr>
@@ -773,19 +783,16 @@
 <tr><td>M-9, tab bar</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Tab-Bars.html#index-M_002d9_002c-tab-bar</td></tr>
 <tr><td>M-:</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Eval.html#index-M_002d_003a</td></tr>
 <tr><td>M-;</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Comment-Commands.html#index-M_002d_003b</td></tr>
-<tr><td>M-&lt;</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-M_002d_003c</td></tr>
 <tr><td>M-&lt; (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Move-to-Beginning-or-End.html#index-M_002d_003c-_0028Calendar-mode_0029</td></tr>
 <tr><td>M-&lt; (DocView mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/DocView-Navigation.html#index-M_002d_003c-_0028DocView-mode_0029</td></tr>
 <tr><td>M-=</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Position-Info.html#index-M_002d_003d</td></tr>
 <tr><td>M-= (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Counting-Days.html#index-M_002d_003d-_0028Calendar-mode_0029</td></tr>
-<tr><td>M-&gt;</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-M_002d_003e</td></tr>
 <tr><td>M-&gt; (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Move-to-Beginning-or-End.html#index-M_002d_003e-_0028Calendar-mode_0029</td></tr>
 <tr><td>M-&gt; (DocView mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/DocView-Navigation.html#index-M_002d_003e-_0028DocView-mode_0029</td></tr>
 <tr><td>M-?</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Identifier-Search.html#index-M_002d_003f</td></tr>
 <tr><td>M-? (Nroff mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Nroff-Mode.html#index-M_002d_003f-_0028Nroff-mode_0029</td></tr>
 <tr><td>M-? (Shell mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Shell-Mode.html#index-M_002d_003f-_0028Shell-mode_0029</td></tr>
 <tr><td>M-@</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Marking-Objects.html#index-M_002d_0040</td></tr>
-<tr><td>M-DEL</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html#index-M_002dDEL</td></tr>
 <tr><td>M-DEL (Buffer Menu)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Several-Buffers.html#index-M_002dDEL-_0028Buffer-Menu_0029</td></tr>
 <tr><td>M-DEL (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Marks-vs-Flags.html#index-M_002dDEL-_0028Dired_0029</td></tr>
 <tr><td>M-DOWN</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Completion-Commands.html#index-M_002dDOWN</td></tr>
@@ -818,16 +825,13 @@
 <tr><td>M-a (C mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Motion-in-C.html#index-M_002da-_0028C-mode_0029</td></tr>
 <tr><td>M-a (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Move-to-Beginning-or-End.html#index-M_002da-_0028Calendar-mode_0029</td></tr>
 <tr><td>M-a (programming modes)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-by-Sentences.html#index-M_002da-_0028programming-modes_0029</td></tr>
-<tr><td>M-b</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html#index-M_002db</td></tr>
 <tr><td>M-c</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Case.html#index-M_002dc</td></tr>
 <tr><td>M-c (Incremental search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Lax-Search.html#index-M_002dc-_0028Incremental-search_0029</td></tr>
-<tr><td>M-d</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html#index-M_002dd</td></tr>
 <tr><td>M-e</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Sentences.html#index-M_002de</td></tr>
 <tr><td>M-e (C mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Motion-in-C.html#index-M_002de-_0028C-mode_0029</td></tr>
 <tr><td>M-e (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Move-to-Beginning-or-End.html#index-M_002de-_0028Calendar-mode_0029</td></tr>
 <tr><td>M-e (Incremental search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Repeat-Isearch.html#index-M_002de-_0028Incremental-search_0029</td></tr>
 <tr><td>M-e (programming modes)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-by-Sentences.html#index-M_002de-_0028programming-modes_0029</td></tr>
-<tr><td>M-f</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html#index-M_002df</td></tr>
 <tr><td>M-g M-g</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-M_002dg-M_002dg</td></tr>
 <tr><td>M-g M-n</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation-Mode.html#index-M_002dg-M_002dn</td></tr>
 <tr><td>M-g M-n, for navigation in *xref* buffer</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Looking-Up-Identifiers.html#index-M_002dg-M_002dn_002c-for-navigation-in-_002axref_002a-buffer</td></tr>
@@ -914,10 +918,7 @@
 <tr><td>M-s w</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Word-Search.html#index-M_002ds-w</td></tr>
 <tr><td>M-t</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Transpose.html#index-M_002dt</td></tr>
 <tr><td>M-u</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Case.html#index-M_002du</td></tr>
-<tr><td>M-v</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html#index-M_002dv</td></tr>
 <tr><td>M-v (Calendar mode)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Scroll-Calendar.html#index-M_002dv-_0028Calendar-mode_0029</td></tr>
-<tr><td>M-w</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Other-Kill-Commands.html#index-M_002dw</td></tr>
-<tr><td>M-x</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/M_002dx.html#index-M_002dx</td></tr>
 <tr><td>M-x list-keyboard-macros RET</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Kmacro-Menu.html#index-M_002dx-list_002dkeyboard_002dmacros-RET</td></tr>
 <tr><td>M-y</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Earlier-Kills.html#index-M_002dy</td></tr>
 <tr><td>M-y (Incremental search)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Isearch-Yank.html#index-M_002dy-_0028Incremental-search_0029</td></tr>
@@ -942,7 +943,6 @@
 <tr><td>Q (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Operating-on-Files.html#index-Q-_0028Dired_0029</td></tr>
 <tr><td>Q (Rmail summary)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Rmail-Summary-Edit.html#index-Q-_0028Rmail-summary_0029</td></tr>
 <tr><td>R (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Operating-on-Files.html#index-R-_0028Dired_0029</td></tr>
-<tr><td>RET</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Inserting-Text.html#index-RET</td></tr>
 <tr><td>RET (Buffer Menu)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Several-Buffers.html#index-RET-_0028Buffer-Menu_0029</td></tr>
 <tr><td>RET (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired-Visiting.html#index-RET-_0028Dired_0029</td></tr>
 <tr><td>RET (GDB Breakpoints buffer)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Breakpoints-Buffer.html#index-RET-_0028GDB-Breakpoints-buffer_0029</td></tr>
@@ -1154,55 +1154,55 @@
 <tr><td>~ (Dired)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Flagging-Many-Files.html#index-_007e-_0028Dired_0029</td></tr>
 <tr><td>~ (Package Menu)</td><td class=absent>absent</td><td class=muted>https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Menu.html#index-_007e-_0028Package-Menu_0029</td></tr>
 </table></details>
-<details><summary>neovim / cmdline-editing <span class=muted>(53 keys · <span class=ported>0 ported</span> · <span class=partial>0 partial</span>)</span></summary>
+<details><summary>neovim / cmdline-editing <span class=muted>(53 keys · <span class=ported>25 ported</span> · <span class=partial>0 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
+<tr><td>&lt;BS&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<BS></td></tr>
+<tr><td>&lt;C-Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<C-Left></td></tr>
+<tr><td>&lt;C-Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<C-Right></td></tr>
+<tr><td>&lt;CR&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<CR></td></tr>
+<tr><td>&lt;Del&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<Del></td></tr>
+<tr><td>&lt;Down&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<Down></td></tr>
+<tr><td>&lt;End&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<End></td></tr>
+<tr><td>&lt;Esc&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<Esc></td></tr>
+<tr><td>&lt;Home&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<Home></td></tr>
+<tr><td>&lt;Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<Left></td></tr>
+<tr><td>&lt;Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<Right></td></tr>
+<tr><td>&lt;S-Tab&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<S-Tab></td></tr>
+<tr><td>&lt;Tab&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<Tab></td></tr>
+<tr><td>&lt;Up&gt;</td><td class=ported>ported</td><td class=muted>index.txt:c_<Up></td></tr>
+<tr><td>CTRL-C</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-C</td></tr>
+<tr><td>CTRL-E</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-E</td></tr>
+<tr><td>CTRL-H</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-H</td></tr>
+<tr><td>CTRL-I</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-I</td></tr>
+<tr><td>CTRL-M</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-M</td></tr>
+<tr><td>CTRL-N</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-N</td></tr>
+<tr><td>CTRL-P</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-P</td></tr>
+<tr><td>CTRL-R {regname}</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-R</td></tr>
+<tr><td>CTRL-U</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-U</td></tr>
+<tr><td>CTRL-W</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-W</td></tr>
+<tr><td>CTRL-[</td><td class=ported>ported</td><td class=muted>index.txt:c_CTRL-[</td></tr>
 <tr><td>'wildchar'</td><td class=absent>absent</td><td class=muted>index.txt:c_wildchar</td></tr>
-<tr><td>&lt;BS&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<BS></td></tr>
-<tr><td>&lt;C-Left&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<C-Left></td></tr>
-<tr><td>&lt;C-Right&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<C-Right></td></tr>
-<tr><td>&lt;CR&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<CR></td></tr>
-<tr><td>&lt;Del&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Del></td></tr>
-<tr><td>&lt;Down&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Down></td></tr>
-<tr><td>&lt;End&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<End></td></tr>
-<tr><td>&lt;Esc&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Esc></td></tr>
-<tr><td>&lt;Home&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Home></td></tr>
 <tr><td>&lt;Insert&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Insert></td></tr>
-<tr><td>&lt;Left&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Left></td></tr>
 <tr><td>&lt;LeftMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<LeftMouse></td></tr>
 <tr><td>&lt;NL&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<NL></td></tr>
 <tr><td>&lt;PageDown&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<PageDown></td></tr>
 <tr><td>&lt;PageUp&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<PageUp></td></tr>
-<tr><td>&lt;Right&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Right></td></tr>
 <tr><td>&lt;S-Down&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<S-Down></td></tr>
 <tr><td>&lt;S-Left&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<S-Left></td></tr>
 <tr><td>&lt;S-Right&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<S-Right></td></tr>
-<tr><td>&lt;S-Tab&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<S-Tab></td></tr>
 <tr><td>&lt;S-Up&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<S-Up></td></tr>
-<tr><td>&lt;Tab&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Tab></td></tr>
-<tr><td>&lt;Up&gt;</td><td class=absent>absent</td><td class=muted>index.txt:c_<Up></td></tr>
 <tr><td>CTRL-A</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-A</td></tr>
 <tr><td>CTRL-B</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-B</td></tr>
-<tr><td>CTRL-C</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-C</td></tr>
 <tr><td>CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-D</td></tr>
-<tr><td>CTRL-E</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-E</td></tr>
 <tr><td>CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-G</td></tr>
-<tr><td>CTRL-H</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-H</td></tr>
-<tr><td>CTRL-I</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-I</td></tr>
 <tr><td>CTRL-J</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-J</td></tr>
 <tr><td>CTRL-K {char1} {char2}</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-K</td></tr>
 <tr><td>CTRL-L</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-L</td></tr>
-<tr><td>CTRL-M</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-M</td></tr>
-<tr><td>CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-N</td></tr>
-<tr><td>CTRL-P</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-P</td></tr>
 <tr><td>CTRL-Q</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-Q</td></tr>
 <tr><td>CTRL-R CTRL-O {regname}</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-R_CTRL-O</td></tr>
 <tr><td>CTRL-R CTRL-R {regname}</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-R_CTRL-R</td></tr>
-<tr><td>CTRL-R {regname}</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-R</td></tr>
 <tr><td>CTRL-T</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-T</td></tr>
-<tr><td>CTRL-U</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-U</td></tr>
 <tr><td>CTRL-V</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-V</td></tr>
-<tr><td>CTRL-W</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-W</td></tr>
-<tr><td>CTRL-[</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-[</td></tr>
 <tr><td>CTRL-\ CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-\_CTRL-G</td></tr>
 <tr><td>CTRL-\ CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-\_CTRL-N</td></tr>
 <tr><td>CTRL-\ e {expr} replace the command line with the result of</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-\_e</td></tr>
@@ -1210,9 +1210,13 @@
 <tr><td>CTRL-^</td><td class=absent>absent</td><td class=muted>index.txt:c_CTRL-^</td></tr>
 <tr><td>{char1} &lt;BS&gt; {char2}</td><td class=absent>absent</td><td class=muted>index.txt:c_digraph</td></tr>
 </table></details>
-<details><summary>neovim / insert-mode <span class=muted>(98 keys · <span class=ported>20 ported</span> · <span class=partial>0 partial</span>)</span></summary>
+<details><summary>neovim / insert-mode <span class=muted>(98 keys · <span class=ported>35 ported</span> · <span class=partial>0 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
 <tr><td>&lt;BS&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<BS></td></tr>
+<tr><td>&lt;C-End&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<C-End></td></tr>
+<tr><td>&lt;C-Home&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<C-Home></td></tr>
+<tr><td>&lt;C-Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<C-Left></td></tr>
+<tr><td>&lt;C-Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<C-Right></td></tr>
 <tr><td>&lt;CR&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<CR></td></tr>
 <tr><td>&lt;Del&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<Del></td></tr>
 <tr><td>&lt;Down&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<Down></td></tr>
@@ -1224,38 +1228,40 @@
 <tr><td>&lt;PageDown&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<PageDown></td></tr>
 <tr><td>&lt;PageUp&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<PageUp></td></tr>
 <tr><td>&lt;Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<Right></td></tr>
+<tr><td>&lt;S-Down&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<S-Down></td></tr>
+<tr><td>&lt;S-Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<S-Left></td></tr>
+<tr><td>&lt;S-Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<S-Right></td></tr>
+<tr><td>&lt;S-Up&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<S-Up></td></tr>
 <tr><td>&lt;Tab&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<Tab></td></tr>
 <tr><td>&lt;Up&gt;</td><td class=ported>ported</td><td class=muted>index.txt:i_<Up></td></tr>
 <tr><td>CTRL-C</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-C</td></tr>
+<tr><td>CTRL-D</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-D</td></tr>
 <tr><td>CTRL-H</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-H</td></tr>
+<tr><td>CTRL-I</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-I</td></tr>
 <tr><td>CTRL-J</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-J</td></tr>
+<tr><td>CTRL-M</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-M</td></tr>
+<tr><td>CTRL-N</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-N</td></tr>
+<tr><td>CTRL-P</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-P</td></tr>
 <tr><td>CTRL-R {register}</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-R</td></tr>
+<tr><td>CTRL-T</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-T</td></tr>
 <tr><td>CTRL-U</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-U</td></tr>
 <tr><td>CTRL-W</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-W</td></tr>
+<tr><td>CTRL-[</td><td class=ported>ported</td><td class=muted>index.txt:i_CTRL-[</td></tr>
 <tr><td>0 CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:i_0_CTRL-D</td></tr>
-<tr><td>&lt;C-End&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<C-End></td></tr>
-<tr><td>&lt;C-Home&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<C-Home></td></tr>
-<tr><td>&lt;C-Left&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<C-Left></td></tr>
-<tr><td>&lt;C-Right&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<C-Right></td></tr>
 <tr><td>&lt;F1&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<F1></td></tr>
 <tr><td>&lt;Help&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<Help></td></tr>
 <tr><td>&lt;Insert&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<Insert></td></tr>
 <tr><td>&lt;LeftMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<LeftMouse></td></tr>
-<tr><td>&lt;S-Down&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<S-Down></td></tr>
-<tr><td>&lt;S-Left&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<S-Left></td></tr>
-<tr><td>&lt;S-Right&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<S-Right></td></tr>
 <tr><td>&lt;S-ScrollWheelDown&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<S-ScrollWheelDown></td></tr>
 <tr><td>&lt;S-ScrollWheelLeft&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<S-ScrollWheelLeft></td></tr>
 <tr><td>&lt;S-ScrollWheelRight&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<S-ScrollWheelRight></td></tr>
 <tr><td>&lt;S-ScrollWheelUp&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<S-ScrollWheelUp></td></tr>
-<tr><td>&lt;S-Up&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<S-Up></td></tr>
 <tr><td>&lt;ScrollWheelDown&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<ScrollWheelDown></td></tr>
 <tr><td>&lt;ScrollWheelLeft&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<ScrollWheelLeft></td></tr>
 <tr><td>&lt;ScrollWheelRight&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<ScrollWheelRight></td></tr>
 <tr><td>&lt;ScrollWheelUp&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_<ScrollWheelUp></td></tr>
 <tr><td>CTRL-@</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-@</td></tr>
 <tr><td>CTRL-A</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-A</td></tr>
-<tr><td>CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-D</td></tr>
 <tr><td>CTRL-E</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-E</td></tr>
 <tr><td>CTRL-E</td><td class=absent>absent</td><td class=muted>index.txt:complete_CTRL-E</td></tr>
 <tr><td>CTRL-G &lt;Down&gt;</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-G_j</td></tr>
@@ -1266,19 +1272,14 @@
 <tr><td>CTRL-G j</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-G_j</td></tr>
 <tr><td>CTRL-G k</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-G_k</td></tr>
 <tr><td>CTRL-G u</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-G_u</td></tr>
-<tr><td>CTRL-I</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-I</td></tr>
 <tr><td>CTRL-K {char1} {char2}</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-K</td></tr>
-<tr><td>CTRL-M</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-M</td></tr>
-<tr><td>CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-N</td></tr>
 <tr><td>CTRL-O</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-O</td></tr>
-<tr><td>CTRL-P</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-P</td></tr>
 <tr><td>CTRL-Q</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-Q</td></tr>
 <tr><td>CTRL-R CTRL-O {register}</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-R_CTRL-O</td></tr>
 <tr><td>CTRL-R CTRL-P {register}</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-R_CTRL-P</td></tr>
 <tr><td>CTRL-R CTRL-R {register}</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-R_CTRL-R</td></tr>
 <tr><td>CTRL-SHIFT-Q {char}</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-SHIFT-Q</td></tr>
 <tr><td>CTRL-SHIFT-V {char}</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-SHIFT-V</td></tr>
-<tr><td>CTRL-T</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-T</td></tr>
 <tr><td>CTRL-V {char}</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-V</td></tr>
 <tr><td>CTRL-V {number} insert three digit decimal number as a single</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-V_digit</td></tr>
 <tr><td>CTRL-X CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-X_CTRL-D</td></tr>
@@ -1302,7 +1303,6 @@
 <tr><td>CTRL-X {mode}</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-X</td></tr>
 <tr><td>CTRL-Y</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-Y</td></tr>
 <tr><td>CTRL-Y</td><td class=absent>absent</td><td class=muted>index.txt:complete_CTRL-Y</td></tr>
-<tr><td>CTRL-[</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-[</td></tr>
 <tr><td>CTRL-\ CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-\_CTRL-G</td></tr>
 <tr><td>CTRL-\ CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-\_CTRL-N</td></tr>
 <tr><td>CTRL-]</td><td class=absent>absent</td><td class=muted>index.txt:i_CTRL-]</td></tr>
@@ -1311,7 +1311,7 @@
 <tr><td>^ CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:i_^_CTRL-D</td></tr>
 <tr><td>{char1}&lt;BS&gt;{char2}</td><td class=absent>absent</td><td class=muted>index.txt:i_digraph</td></tr>
 </table></details>
-<details><summary>neovim / normal-mode <span class=muted>(479 keys · <span class=ported>177 ported</span> · <span class=partial>36 partial</span>)</span></summary>
+<details><summary>neovim / normal-mode <span class=muted>(479 keys · <span class=ported>220 ported</span> · <span class=partial>38 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
 <tr><td>!!{filter}</td><td class=ported>ported</td><td class=muted>index.txt:!!</td></tr>
 <tr><td>!{motion}{filter}</td><td class=ported>ported</td><td class=muted>index.txt:!</td></tr>
@@ -1334,17 +1334,29 @@
 <tr><td>;</td><td class=ported>ported</td><td class=muted>index.txt:;</td></tr>
 <tr><td>&lt;&lt;</td><td class=ported>ported</td><td class=muted>index.txt:<<</td></tr>
 <tr><td>&lt;BS&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<BS></td></tr>
+<tr><td>&lt;C-End&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<C-End></td></tr>
+<tr><td>&lt;C-Home&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<C-Home></td></tr>
+<tr><td>&lt;C-Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<C-Left></td></tr>
+<tr><td>&lt;C-Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<C-Right></td></tr>
 <tr><td>&lt;CR&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<CR></td></tr>
 <tr><td>&lt;Down&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<Down></td></tr>
 <tr><td>&lt;End&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<End></td></tr>
 <tr><td>&lt;Home&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<Home></td></tr>
+<tr><td>&lt;Insert&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<Insert></td></tr>
 <tr><td>&lt;Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<Left></td></tr>
 <tr><td>&lt;NL&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<NL></td></tr>
 <tr><td>&lt;PageDown&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<PageDown></td></tr>
 <tr><td>&lt;PageUp&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<PageUp></td></tr>
 <tr><td>&lt;Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<Right></td></tr>
+<tr><td>&lt;S-Down&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<S-Down></td></tr>
+<tr><td>&lt;S-Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<S-Left></td></tr>
+<tr><td>&lt;S-Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<S-Right></td></tr>
+<tr><td>&lt;S-Up&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<S-Up></td></tr>
 <tr><td>&lt;Tab&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<Tab></td></tr>
+<tr><td>&lt;Undo&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<Undo></td></tr>
 <tr><td>&lt;Up&gt;</td><td class=ported>ported</td><td class=muted>index.txt:<Up></td></tr>
+<tr><td>==</td><td class=ported>ported</td><td class=muted>index.txt:==</td></tr>
+<tr><td>={motion}</td><td class=ported>ported</td><td class=muted>index.txt:=</td></tr>
 <tr><td>&gt;&gt;</td><td class=ported>ported</td><td class=muted>index.txt:>></td></tr>
 <tr><td>?{pattern}&lt;CR&gt;</td><td class=ported>ported</td><td class=muted>index.txt:?</td></tr>
 <tr><td>@@</td><td class=ported>ported</td><td class=muted>index.txt:@@</td></tr>
@@ -1356,14 +1368,31 @@
 <tr><td>CTRL-D</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-D</td></tr>
 <tr><td>CTRL-E</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-E</td></tr>
 <tr><td>CTRL-F</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-F</td></tr>
+<tr><td>CTRL-H</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-H</td></tr>
 <tr><td>CTRL-I</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-I</td></tr>
+<tr><td>CTRL-J</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-J</td></tr>
+<tr><td>CTRL-M</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-M</td></tr>
+<tr><td>CTRL-N</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-N</td></tr>
 <tr><td>CTRL-O</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-O</td></tr>
+<tr><td>CTRL-P</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-P</td></tr>
 <tr><td>CTRL-R</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-R</td></tr>
 <tr><td>CTRL-U</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-U</td></tr>
 <tr><td>CTRL-W &lt;Down&gt;</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_<Down></td></tr>
 <tr><td>CTRL-W &lt;Left&gt;</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_<Left></td></tr>
 <tr><td>CTRL-W &lt;Right&gt;</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_<Right></td></tr>
 <tr><td>CTRL-W &lt;Up&gt;</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_<Up></td></tr>
+<tr><td>CTRL-W CTRL-D</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-D</td></tr>
+<tr><td>CTRL-W CTRL-H</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-H</td></tr>
+<tr><td>CTRL-W CTRL-J</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-J</td></tr>
+<tr><td>CTRL-W CTRL-K</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-K</td></tr>
+<tr><td>CTRL-W CTRL-L</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-L</td></tr>
+<tr><td>CTRL-W CTRL-N</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-N</td></tr>
+<tr><td>CTRL-W CTRL-O</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-O</td></tr>
+<tr><td>CTRL-W CTRL-Q</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-Q</td></tr>
+<tr><td>CTRL-W CTRL-S</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-S</td></tr>
+<tr><td>CTRL-W CTRL-V</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-V</td></tr>
+<tr><td>CTRL-W CTRL-W</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-W</td></tr>
+<tr><td>CTRL-W CTRL-X</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_CTRL-X</td></tr>
 <tr><td>CTRL-W H</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_H</td></tr>
 <tr><td>CTRL-W J</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_J</td></tr>
 <tr><td>CTRL-W K</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_K</td></tr>
@@ -1374,6 +1403,7 @@
 <tr><td>CTRL-W j</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_j</td></tr>
 <tr><td>CTRL-W k</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_k</td></tr>
 <tr><td>CTRL-W l</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_l</td></tr>
+<tr><td>CTRL-W n</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_n</td></tr>
 <tr><td>CTRL-W o</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_o</td></tr>
 <tr><td>CTRL-W q</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_q</td></tr>
 <tr><td>CTRL-W r</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-W_r</td></tr>
@@ -1384,6 +1414,7 @@
 <tr><td>CTRL-X</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-X</td></tr>
 <tr><td>CTRL-Y</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-Y</td></tr>
 <tr><td>CTRL-Z</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-Z</td></tr>
+<tr><td>CTRL-]</td><td class=ported>ported</td><td class=muted>index.txt:CTRL-]</td></tr>
 <tr><td>E</td><td class=ported>ported</td><td class=muted>index.txt:E</td></tr>
 <tr><td>F{char}</td><td class=ported>ported</td><td class=muted>index.txt:F</td></tr>
 <tr><td>G</td><td class=ported>ported</td><td class=muted>index.txt:G</td></tr>
@@ -1401,15 +1432,23 @@
 <tr><td>W</td><td class=ported>ported</td><td class=muted>index.txt:W</td></tr>
 <tr><td>ZQ</td><td class=ported>ported</td><td class=muted>index.txt:ZQ</td></tr>
 <tr><td>ZZ</td><td class=ported>ported</td><td class=muted>index.txt:ZZ</td></tr>
+<tr><td>["x]P</td><td class=ported>ported</td><td class=muted>index.txt:P</td></tr>
+<tr><td>["x]X</td><td class=ported>ported</td><td class=muted>index.txt:X</td></tr>
 <tr><td>["x]cc</td><td class=ported>ported</td><td class=muted>index.txt:cc</td></tr>
 <tr><td>["x]dd</td><td class=ported>ported</td><td class=muted>index.txt:dd</td></tr>
+<tr><td>["x]gP</td><td class=ported>ported</td><td class=muted>index.txt:gP</td></tr>
+<tr><td>["x]gp</td><td class=ported>ported</td><td class=muted>index.txt:gp</td></tr>
+<tr><td>["x]p</td><td class=ported>ported</td><td class=muted>index.txt:p</td></tr>
+<tr><td>["x]x</td><td class=ported>ported</td><td class=muted>index.txt:x</td></tr>
 <tr><td>["x]yy</td><td class=ported>ported</td><td class=muted>index.txt:yy</td></tr>
 <tr><td>[/</td><td class=ported>ported</td><td class=muted>index.txt:[/</td></tr>
 <tr><td>[c</td><td class=ported>ported</td><td class=muted>index.txt:[c</td></tr>
 <tr><td>[f</td><td class=ported>ported</td><td class=muted>index.txt:[f</td></tr>
+<tr><td>[p</td><td class=ported>ported</td><td class=muted>index.txt:[p</td></tr>
 <tr><td>]/</td><td class=ported>ported</td><td class=muted>index.txt:]/</td></tr>
 <tr><td>]c</td><td class=ported>ported</td><td class=muted>index.txt:]c</td></tr>
 <tr><td>]f</td><td class=ported>ported</td><td class=muted>index.txt:]f</td></tr>
+<tr><td>]p</td><td class=ported>ported</td><td class=muted>index.txt:]p</td></tr>
 <tr><td>^</td><td class=ported>ported</td><td class=muted>index.txt:^</td></tr>
 <tr><td>`{</td><td class=ported>ported</td><td class=muted>index.txt:`{</td></tr>
 <tr><td>`{a-zA-Z0-9}</td><td class=ported>ported</td><td class=muted>index.txt:`</td></tr>
@@ -1440,14 +1479,18 @@
 <tr><td>gE</td><td class=ported>ported</td><td class=muted>index.txt:gE</td></tr>
 <tr><td>gI</td><td class=ported>ported</td><td class=muted>index.txt:gI</td></tr>
 <tr><td>gJ</td><td class=ported>ported</td><td class=muted>index.txt:gJ</td></tr>
+<tr><td>gT</td><td class=ported>ported</td><td class=muted>index.txt:gT</td></tr>
 <tr><td>g^</td><td class=ported>ported</td><td class=muted>index.txt:g^</td></tr>
 <tr><td>ga</td><td class=ported>ported</td><td class=muted>index.txt:ga</td></tr>
 <tr><td>gd</td><td class=ported>ported</td><td class=muted>index.txt:gd</td></tr>
+<tr><td>ge</td><td class=ported>ported</td><td class=muted>index.txt:ge</td></tr>
 <tr><td>gf</td><td class=ported>ported</td><td class=muted>index.txt:gf</td></tr>
 <tr><td>gg</td><td class=ported>ported</td><td class=muted>index.txt:gg</td></tr>
 <tr><td>gi</td><td class=ported>ported</td><td class=muted>index.txt:gi</td></tr>
 <tr><td>gj</td><td class=ported>ported</td><td class=muted>index.txt:gj</td></tr>
 <tr><td>gk</td><td class=ported>ported</td><td class=muted>index.txt:gk</td></tr>
+<tr><td>gn</td><td class=ported>ported</td><td class=muted>index.txt:gn</td></tr>
+<tr><td>gt</td><td class=ported>ported</td><td class=muted>index.txt:gt</td></tr>
 <tr><td>gv</td><td class=ported>ported</td><td class=muted>index.txt:gv</td></tr>
 <tr><td>h</td><td class=ported>ported</td><td class=muted>index.txt:h</td></tr>
 <tr><td>i</td><td class=ported>ported</td><td class=muted>index.txt:i</td></tr>
@@ -1495,6 +1538,7 @@
 <tr><td>&lt;{motion}</td><td class=partial>partial</td><td class=muted>index.txt:<</td></tr>
 <tr><td>&gt;{motion}</td><td class=partial>partial</td><td class=muted>index.txt:></td></tr>
 <tr><td>?&lt;CR&gt;</td><td class=partial>partial</td><td class=muted>index.txt:?<CR></td></tr>
+<tr><td>CTRL-V</td><td class=partial>partial</td><td class=muted>index.txt:o_CTRL-V</td></tr>
 <tr><td>CTRL-W c</td><td class=partial>partial</td><td class=muted>index.txt:CTRL-W_c</td></tr>
 <tr><td>R</td><td class=partial>partial</td><td class=muted>index.txt:R</td></tr>
 <tr><td>["x]C</td><td class=partial>partial</td><td class=muted>index.txt:C</td></tr>
@@ -1513,6 +1557,7 @@
 <tr><td>ab</td><td class=partial>partial</td><td class=muted>index.txt:v_ab</td></tr>
 <tr><td>al</td><td class=partial>partial</td><td class=muted>index.txt:v_al</td></tr>
 <tr><td>at</td><td class=partial>partial</td><td class=muted>index.txt:v_at</td></tr>
+<tr><td>g8</td><td class=partial>partial</td><td class=muted>index.txt:g8</td></tr>
 <tr><td>gF</td><td class=partial>partial</td><td class=muted>index.txt:gF</td></tr>
 <tr><td>gN</td><td class=partial>partial</td><td class=muted>index.txt:gN</td></tr>
 <tr><td>gU{motion}</td><td class=partial>partial</td><td class=muted>index.txt:gU</td></tr>
@@ -1544,46 +1589,28 @@
 <tr><td>7</td><td class=absent>absent</td><td class=muted>index.txt:count</td></tr>
 <tr><td>8</td><td class=absent>absent</td><td class=muted>index.txt:count</td></tr>
 <tr><td>9</td><td class=absent>absent</td><td class=muted>index.txt:count</td></tr>
-<tr><td>&lt;C-End&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<C-End></td></tr>
-<tr><td>&lt;C-Home&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<C-Home></td></tr>
-<tr><td>&lt;C-Left&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<C-Left></td></tr>
 <tr><td>&lt;C-LeftMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<C-LeftMouse></td></tr>
-<tr><td>&lt;C-Right&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<C-Right></td></tr>
 <tr><td>&lt;C-RightMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<C-RightMouse></td></tr>
 <tr><td>&lt;C-Tab&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<C-Tab></td></tr>
 <tr><td>&lt;F1&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<F1></td></tr>
 <tr><td>&lt;Help&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<Help></td></tr>
-<tr><td>&lt;Insert&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<Insert></td></tr>
 <tr><td>&lt;LeftMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<LeftMouse></td></tr>
 <tr><td>&lt;MiddleMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<MiddleMouse></td></tr>
 <tr><td>&lt;RightMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<RightMouse></td></tr>
 <tr><td>&lt;S-+&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-Plus></td></tr>
 <tr><td>&lt;S--&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-Minus></td></tr>
 <tr><td>&lt;S-CR&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-CR></td></tr>
-<tr><td>&lt;S-Down&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-Down></td></tr>
-<tr><td>&lt;S-Left&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-Left></td></tr>
 <tr><td>&lt;S-LeftMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-LeftMouse></td></tr>
 <tr><td>&lt;S-NL&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-NL></td></tr>
-<tr><td>&lt;S-Right&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-Right></td></tr>
 <tr><td>&lt;S-RightMouse&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-RightMouse></td></tr>
-<tr><td>&lt;S-Up&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<S-Up></td></tr>
 <tr><td>&lt;Space&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<Space></td></tr>
-<tr><td>&lt;Undo&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<Undo></td></tr>
-<tr><td>==</td><td class=absent>absent</td><td class=muted>index.txt:==</td></tr>
-<tr><td>={motion}</td><td class=absent>absent</td><td class=muted>index.txt:=</td></tr>
 <tr><td>@:</td><td class=absent>absent</td><td class=muted>index.txt:@:</td></tr>
 <tr><td>CTRL-&lt;Tab&gt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-<Tab></td></tr>
 <tr><td>CTRL-C</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-C</td></tr>
 <tr><td>CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-G</td></tr>
-<tr><td>CTRL-H</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-H</td></tr>
-<tr><td>CTRL-J</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-J</td></tr>
 <tr><td>CTRL-L</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-L</td></tr>
-<tr><td>CTRL-M</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-M</td></tr>
-<tr><td>CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-N</td></tr>
-<tr><td>CTRL-P</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-P</td></tr>
 <tr><td>CTRL-T</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-T</td></tr>
 <tr><td>CTRL-V</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-V</td></tr>
-<tr><td>CTRL-V</td><td class=absent>absent</td><td class=muted>index.txt:o_CTRL-V</td></tr>
 <tr><td>CTRL-W +</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_+</td></tr>
 <tr><td>CTRL-W -</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_-</td></tr>
 <tr><td>CTRL-W &lt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_<</td></tr>
@@ -1591,23 +1618,11 @@
 <tr><td>CTRL-W &gt;</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_></td></tr>
 <tr><td>CTRL-W CTRL-B</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-B</td></tr>
 <tr><td>CTRL-W CTRL-C</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-C</td></tr>
-<tr><td>CTRL-W CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-D</td></tr>
 <tr><td>CTRL-W CTRL-F</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-F</td></tr>
-<tr><td>CTRL-W CTRL-H</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-H</td></tr>
 <tr><td>CTRL-W CTRL-I</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-I</td></tr>
-<tr><td>CTRL-W CTRL-J</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-J</td></tr>
-<tr><td>CTRL-W CTRL-K</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-K</td></tr>
-<tr><td>CTRL-W CTRL-L</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-L</td></tr>
-<tr><td>CTRL-W CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-N</td></tr>
-<tr><td>CTRL-W CTRL-O</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-O</td></tr>
 <tr><td>CTRL-W CTRL-P</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-P</td></tr>
-<tr><td>CTRL-W CTRL-Q</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-Q</td></tr>
 <tr><td>CTRL-W CTRL-R</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-R</td></tr>
-<tr><td>CTRL-W CTRL-S</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-S</td></tr>
 <tr><td>CTRL-W CTRL-T</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-T</td></tr>
-<tr><td>CTRL-W CTRL-V</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-V</td></tr>
-<tr><td>CTRL-W CTRL-W</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-W</td></tr>
-<tr><td>CTRL-W CTRL-X</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-X</td></tr>
 <tr><td>CTRL-W CTRL-Z</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-Z</td></tr>
 <tr><td>CTRL-W CTRL-]</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-]</td></tr>
 <tr><td>CTRL-W CTRL-^</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_CTRL-^</td></tr>
@@ -1631,7 +1646,6 @@
 <tr><td>CTRL-W g t</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_gt</td></tr>
 <tr><td>CTRL-W g }</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_g}</td></tr>
 <tr><td>CTRL-W i</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_i</td></tr>
-<tr><td>CTRL-W n</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_n</td></tr>
 <tr><td>CTRL-W p</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_p</td></tr>
 <tr><td>CTRL-W t</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_t</td></tr>
 <tr><td>CTRL-W z</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_z</td></tr>
@@ -1640,20 +1654,13 @@
 <tr><td>CTRL-W }</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-W_}</td></tr>
 <tr><td>CTRL-\ CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-\_CTRL-G</td></tr>
 <tr><td>CTRL-\ CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-\_CTRL-N</td></tr>
-<tr><td>CTRL-]</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-]</td></tr>
 <tr><td>CTRL-^</td><td class=absent>absent</td><td class=muted>index.txt:CTRL-^</td></tr>
 <tr><td>U</td><td class=absent>absent</td><td class=muted>index.txt:U</td></tr>
 <tr><td>V</td><td class=absent>absent</td><td class=muted>index.txt:V</td></tr>
 <tr><td>[ CTRL-D</td><td class=absent>absent</td><td class=muted>index.txt:[_CTRL-D</td></tr>
 <tr><td>[ CTRL-I</td><td class=absent>absent</td><td class=muted>index.txt:[_CTRL-I</td></tr>
 <tr><td>["x]&lt;Del&gt;</td><td class=absent>absent</td><td class=muted>index.txt:<Del></td></tr>
-<tr><td>["x]P</td><td class=absent>absent</td><td class=muted>index.txt:P</td></tr>
 <tr><td>["x]S</td><td class=absent>absent</td><td class=muted>index.txt:S</td></tr>
-<tr><td>["x]X</td><td class=absent>absent</td><td class=muted>index.txt:X</td></tr>
-<tr><td>["x]gP</td><td class=absent>absent</td><td class=muted>index.txt:gP</td></tr>
-<tr><td>["x]gp</td><td class=absent>absent</td><td class=muted>index.txt:gp</td></tr>
-<tr><td>["x]p</td><td class=absent>absent</td><td class=muted>index.txt:p</td></tr>
-<tr><td>["x]x</td><td class=absent>absent</td><td class=muted>index.txt:x</td></tr>
 <tr><td>[#</td><td class=absent>absent</td><td class=muted>index.txt:[#</td></tr>
 <tr><td>['</td><td class=absent>absent</td><td class=muted>index.txt:['</td></tr>
 <tr><td>[(</td><td class=absent>absent</td><td class=muted>index.txt:[(</td></tr>
@@ -1666,7 +1673,6 @@
 <tr><td>[`</td><td class=absent>absent</td><td class=muted>index.txt:[`</td></tr>
 <tr><td>[d</td><td class=absent>absent</td><td class=muted>index.txt:[d</td></tr>
 <tr><td>[i</td><td class=absent>absent</td><td class=muted>index.txt:[i</td></tr>
-<tr><td>[p</td><td class=absent>absent</td><td class=muted>index.txt:[p</td></tr>
 <tr><td>[s</td><td class=absent>absent</td><td class=muted>index.txt:[s</td></tr>
 <tr><td>[z</td><td class=absent>absent</td><td class=muted>index.txt:[z</td></tr>
 <tr><td>[{</td><td class=absent>absent</td><td class=muted>index.txt:[{</td></tr>
@@ -1685,7 +1691,6 @@
 <tr><td>]`</td><td class=absent>absent</td><td class=muted>index.txt:]`</td></tr>
 <tr><td>]d</td><td class=absent>absent</td><td class=muted>index.txt:]d</td></tr>
 <tr><td>]i</td><td class=absent>absent</td><td class=muted>index.txt:]i</td></tr>
-<tr><td>]p</td><td class=absent>absent</td><td class=muted>index.txt:]p</td></tr>
 <tr><td>]s</td><td class=absent>absent</td><td class=muted>index.txt:]s</td></tr>
 <tr><td>]z</td><td class=absent>absent</td><td class=muted>index.txt:]z</td></tr>
 <tr><td>]{char}</td><td class=absent>absent</td><td class=muted>index.txt:]</td></tr>
@@ -1708,7 +1713,6 @@
 <tr><td>g+</td><td class=absent>absent</td><td class=muted>index.txt:g+</td></tr>
 <tr><td>g,</td><td class=absent>absent</td><td class=muted>index.txt:g,</td></tr>
 <tr><td>g-</td><td class=absent>absent</td><td class=muted>index.txt:g-</td></tr>
-<tr><td>g8</td><td class=absent>absent</td><td class=muted>index.txt:g8</td></tr>
 <tr><td>g&lt;</td><td class=absent>absent</td><td class=muted>index.txt:g<</td></tr>
 <tr><td>g&lt;Down&gt;</td><td class=absent>absent</td><td class=muted>index.txt:g<Down></td></tr>
 <tr><td>g&lt;End&gt;</td><td class=absent>absent</td><td class=muted>index.txt:g<End></td></tr>
@@ -1725,18 +1729,14 @@
 <tr><td>gM</td><td class=absent>absent</td><td class=muted>index.txt:gM</td></tr>
 <tr><td>gQ</td><td class=absent>absent</td><td class=muted>index.txt:gQ</td></tr>
 <tr><td>gR</td><td class=absent>absent</td><td class=muted>index.txt:gR</td></tr>
-<tr><td>gT</td><td class=absent>absent</td><td class=muted>index.txt:gT</td></tr>
 <tr><td>gV</td><td class=absent>absent</td><td class=muted>index.txt:gV</td></tr>
 <tr><td>g]</td><td class=absent>absent</td><td class=muted>index.txt:g]</td></tr>
 <tr><td>g`{mark}</td><td class=absent>absent</td><td class=muted>index.txt:g`</td></tr>
-<tr><td>ge</td><td class=absent>absent</td><td class=muted>index.txt:ge</td></tr>
 <tr><td>gh</td><td class=absent>absent</td><td class=muted>index.txt:gh</td></tr>
 <tr><td>gm</td><td class=absent>absent</td><td class=muted>index.txt:gm</td></tr>
-<tr><td>gn</td><td class=absent>absent</td><td class=muted>index.txt:gn</td></tr>
 <tr><td>go</td><td class=absent>absent</td><td class=muted>index.txt:go</td></tr>
 <tr><td>gr{char}</td><td class=absent>absent</td><td class=muted>index.txt:gr</td></tr>
 <tr><td>gs</td><td class=absent>absent</td><td class=muted>index.txt:gs</td></tr>
-<tr><td>gt</td><td class=absent>absent</td><td class=muted>index.txt:gt</td></tr>
 <tr><td>g{char}</td><td class=absent>absent</td><td class=muted>index.txt:g</td></tr>
 <tr><td>q/</td><td class=absent>absent</td><td class=muted>index.txt:q/</td></tr>
 <tr><td>q:</td><td class=absent>absent</td><td class=muted>index.txt:q:</td></tr>
@@ -1793,19 +1793,23 @@
 <tr><td>{count}&lt;Del&gt;</td><td class=absent>absent</td><td class=muted>index.txt:N<Del></td></tr>
 <tr><td>~{motion}</td><td class=absent>absent</td><td class=muted>index.txt:~</td></tr>
 </table></details>
-<details><summary>neovim / visual-mode <span class=muted>(85 keys · <span class=ported>31 ported</span> · <span class=partial>38 partial</span>)</span></summary>
+<details><summary>neovim / visual-mode <span class=muted>(85 keys · <span class=ported>38 ported</span> · <span class=partial>42 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
 <tr><td>!{filter}</td><td class=ported>ported</td><td class=muted>index.txt:v_!</td></tr>
 <tr><td>:</td><td class=ported>ported</td><td class=muted>index.txt:v_:</td></tr>
 <tr><td>&lt;</td><td class=ported>ported</td><td class=muted>index.txt:v_<</td></tr>
+<tr><td>&lt;BS&gt;</td><td class=ported>ported</td><td class=muted>index.txt:v_<BS></td></tr>
 <tr><td>&lt;Esc&gt;</td><td class=ported>ported</td><td class=muted>index.txt:v_<Esc></td></tr>
 <tr><td>&gt;</td><td class=ported>ported</td><td class=muted>index.txt:v_></td></tr>
 <tr><td>C</td><td class=ported>ported</td><td class=muted>index.txt:v_C</td></tr>
 <tr><td>CTRL-A</td><td class=ported>ported</td><td class=muted>index.txt:v_CTRL-A</td></tr>
 <tr><td>CTRL-C</td><td class=ported>ported</td><td class=muted>index.txt:v_CTRL-C</td></tr>
+<tr><td>CTRL-H</td><td class=ported>ported</td><td class=muted>index.txt:v_CTRL-H</td></tr>
 <tr><td>CTRL-X</td><td class=ported>ported</td><td class=muted>index.txt:v_CTRL-X</td></tr>
+<tr><td>CTRL-]</td><td class=ported>ported</td><td class=muted>index.txt:v_CTRL-]</td></tr>
 <tr><td>D</td><td class=ported>ported</td><td class=muted>index.txt:v_D</td></tr>
 <tr><td>J</td><td class=ported>ported</td><td class=muted>index.txt:v_J</td></tr>
+<tr><td>K</td><td class=ported>ported</td><td class=muted>index.txt:v_K</td></tr>
 <tr><td>O</td><td class=ported>ported</td><td class=muted>index.txt:v_O</td></tr>
 <tr><td>P</td><td class=ported>ported</td><td class=muted>index.txt:v_P</td></tr>
 <tr><td>R</td><td class=ported>ported</td><td class=muted>index.txt:v_R</td></tr>
@@ -1817,16 +1821,22 @@
 <tr><td>as</td><td class=ported>ported</td><td class=muted>index.txt:v_as</td></tr>
 <tr><td>c</td><td class=ported>ported</td><td class=muted>index.txt:v_c</td></tr>
 <tr><td>d</td><td class=ported>ported</td><td class=muted>index.txt:v_d</td></tr>
+<tr><td>g CTRL-A</td><td class=ported>ported</td><td class=muted>index.txt:v_g_CTRL-A</td></tr>
+<tr><td>g CTRL-X</td><td class=ported>ported</td><td class=muted>index.txt:v_g_CTRL-X</td></tr>
 <tr><td>is</td><td class=ported>ported</td><td class=muted>index.txt:v_is</td></tr>
 <tr><td>o</td><td class=ported>ported</td><td class=muted>index.txt:v_o</td></tr>
 <tr><td>p</td><td class=ported>ported</td><td class=muted>index.txt:v_p</td></tr>
 <tr><td>r</td><td class=ported>ported</td><td class=muted>index.txt:v_r</td></tr>
 <tr><td>s</td><td class=ported>ported</td><td class=muted>index.txt:v_s</td></tr>
 <tr><td>u</td><td class=ported>ported</td><td class=muted>index.txt:v_u</td></tr>
+<tr><td>v</td><td class=ported>ported</td><td class=muted>index.txt:v_v</td></tr>
 <tr><td>x</td><td class=ported>ported</td><td class=muted>index.txt:v_x</td></tr>
 <tr><td>y</td><td class=ported>ported</td><td class=muted>index.txt:v_y</td></tr>
 <tr><td>~</td><td class=ported>ported</td><td class=muted>index.txt:v_~</td></tr>
 <tr><td>=</td><td class=partial>partial</td><td class=muted>index.txt:v_=</td></tr>
+<tr><td>A</td><td class=partial>partial</td><td class=muted>index.txt:v_b_A</td></tr>
+<tr><td>CTRL-V</td><td class=partial>partial</td><td class=muted>index.txt:v_CTRL-V</td></tr>
+<tr><td>I</td><td class=partial>partial</td><td class=muted>index.txt:v_b_I</td></tr>
 <tr><td>a"</td><td class=partial>partial</td><td class=muted>index.txt:v_aquote</td></tr>
 <tr><td>a'</td><td class=partial>partial</td><td class=muted>index.txt:v_a'</td></tr>
 <tr><td>a(</td><td class=partial>partial</td><td class=muted>index.txt:v_a(</td></tr>
@@ -1845,6 +1855,7 @@
 <tr><td>aw</td><td class=partial>partial</td><td class=muted>index.txt:v_aw</td></tr>
 <tr><td>a{</td><td class=partial>partial</td><td class=muted>index.txt:v_a{</td></tr>
 <tr><td>a}</td><td class=partial>partial</td><td class=muted>index.txt:v_a}</td></tr>
+<tr><td>gJ</td><td class=partial>partial</td><td class=muted>index.txt:v_gJ</td></tr>
 <tr><td>gq</td><td class=partial>partial</td><td class=muted>index.txt:v_gq</td></tr>
 <tr><td>i"</td><td class=partial>partial</td><td class=muted>index.txt:v_iquote</td></tr>
 <tr><td>i'</td><td class=partial>partial</td><td class=muted>index.txt:v_i'</td></tr>
@@ -1864,24 +1875,13 @@
 <tr><td>iw</td><td class=partial>partial</td><td class=muted>index.txt:v_iw</td></tr>
 <tr><td>i{</td><td class=partial>partial</td><td class=muted>index.txt:v_i{</td></tr>
 <tr><td>i}</td><td class=partial>partial</td><td class=muted>index.txt:v_i}</td></tr>
-<tr><td>&lt;BS&gt;</td><td class=absent>absent</td><td class=muted>index.txt:v_<BS></td></tr>
-<tr><td>A</td><td class=absent>absent</td><td class=muted>index.txt:v_b_A</td></tr>
 <tr><td>CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-G</td></tr>
-<tr><td>CTRL-H</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-H</td></tr>
 <tr><td>CTRL-O</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-O</td></tr>
-<tr><td>CTRL-V</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-V</td></tr>
 <tr><td>CTRL-\ CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-\_CTRL-G</td></tr>
 <tr><td>CTRL-\ CTRL-N</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-\_CTRL-N</td></tr>
-<tr><td>CTRL-]</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-]</td></tr>
-<tr><td>I</td><td class=absent>absent</td><td class=muted>index.txt:v_b_I</td></tr>
-<tr><td>K</td><td class=absent>absent</td><td class=muted>index.txt:v_K</td></tr>
-<tr><td>g CTRL-A</td><td class=absent>absent</td><td class=muted>index.txt:v_g_CTRL-A</td></tr>
-<tr><td>g CTRL-X</td><td class=absent>absent</td><td class=muted>index.txt:v_g_CTRL-X</td></tr>
-<tr><td>gJ</td><td class=absent>absent</td><td class=muted>index.txt:v_gJ</td></tr>
 <tr><td>gv</td><td class=absent>absent</td><td class=muted>index.txt:v_gv</td></tr>
-<tr><td>v</td><td class=absent>absent</td><td class=muted>index.txt:v_v</td></tr>
 </table></details>
-<details><summary>spacemacs / keybinding <span class=muted>(415 keys · <span class=ported>117 ported</span> · <span class=partial>6 partial</span>)</span></summary>
+<details><summary>spacemacs / keybinding <span class=muted>(415 keys · <span class=ported>128 ported</span> · <span class=partial>12 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
 <tr><td>SPC ;</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC SPC</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1905,6 +1905,7 @@
 <tr><td>SPC e p</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f R</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f d</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC f e d</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f f</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f j</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f s</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1920,9 +1921,12 @@
 <tr><td>SPC j j</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j k</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j n</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC j o</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j u</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k $</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k 0</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC k C-r</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC k C-v</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k I</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k U</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k h</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1935,6 +1939,7 @@
 <tr><td>SPC p h</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p p</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p r</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC q f</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC q q</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC q s</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC r e</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1960,6 +1965,11 @@
 <tr><td>SPC s k f</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s k p</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s p</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s r b</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s r d</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s r f</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s r p</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s r r</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s s</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC t V</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC t a</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1989,6 +1999,7 @@
 <tr><td>SPC x d SPC</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x d l</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x d w</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x i -</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x i c</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x i i</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x i k</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2000,12 +2011,18 @@
 <tr><td>SPC x t l</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x t w</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x u</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC c h</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC c p</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k j</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k k</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p d</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p k</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p t</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a &amp;</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a c</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a l</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a m</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a r</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC 1</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC 2</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC 3</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2071,7 +2088,6 @@
 <tr><td>SPC b h</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC b u</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC c d</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC c h</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC c k</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC c m</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC c r</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2091,7 +2107,6 @@
 <tr><td>SPC f e R</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e U</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e c</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC f e d</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e e</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e i</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e l</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2146,12 +2161,9 @@
 <tr><td>SPC i u</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j f</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j l</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC j o</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j s</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j v</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j w</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC k C-r</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC k C-v</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k ` p</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k a</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC k b</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2189,16 +2201,10 @@
 <tr><td>SPC p o</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p u</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p v</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC q f</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC q r</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC q t</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC r m</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s `</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s r b</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s r d</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s r f</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s r p</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s r r</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s w g</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC t -</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC t 8</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2260,16 +2266,10 @@
 <tr><td>SPC w t</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC w u</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x .</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a &amp;</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a c</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a l</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a m</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a r</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x c</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x e</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x g l</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x g t</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x i -</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x j c</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x j f</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x j l</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>

@@ -39,11 +39,14 @@ generator is built to make faking the number structurally impossible:
 
 1. **The numerator is re-parsed from source every run.** The set of zemacs
    static commands, typable `:` commands, and default keybindings is extracted
-   from `helix-term/src/commands.rs`, `commands/typed.rs`, and the active
-   default keymap `keymap/vim.rs` at generation time. There is no cached count
+   from `zemacs-term/src/commands.rs`, `commands/typed.rs`, and the active
+   default keymap `keymap/vim.rs` at generation time. The command-line editing
+   surface is read from the `:` prompt's hardcoded key handler in
+   `ui/prompt.rs` (exposed as the `command` mode). There is no cached count
    to edit.
 2. **Every mapping evidence token must resolve to real zemacs code.** Evidence
-   is `static:<cmd>`, `typable:<name>`, or `key:<mode>:<chord>`. A token that
+   is `static:<cmd>`, `typable:<name>`, or `key:<mode>:<chord>` (mode is
+   `normal`/`select`/`insert`/`command`). A token that
    does not resolve to a parsed command/binding is a **broken mapping**: it is
    counted as *absent* and listed loudly at the top of the report. The number
    can only go up by adding real code and pointing the mapping at it.

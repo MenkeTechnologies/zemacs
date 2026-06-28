@@ -4158,5 +4158,1117 @@
       "key:normal:space k y"
     ],
     "note": "spacemacs SPC k y: tree-sitter sexp -> expand_selection"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_h",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-h"
+    ],
+    "note": "CTRL-H"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_n",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-n"
+    ],
+    "note": "CTRL-N"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-p"
+    ],
+    "note": "CTRL-P"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_c_left_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-left"
+    ],
+    "note": "<C-Left>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_s_left_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:S-left"
+    ],
+    "note": "<S-Left>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_c_right_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-right"
+    ],
+    "note": "<C-Right>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_s_right_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:S-right"
+    ],
+    "note": "<S-Right>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_c_home_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-home"
+    ],
+    "note": "<C-Home>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_c_end_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-end"
+    ],
+    "note": "<C-End>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_s_down_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:S-down"
+    ],
+    "note": "<S-Down>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_s_up_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:S-up"
+    ],
+    "note": "<S-Up>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_insert_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:ins"
+    ],
+    "note": "<Insert>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_rbracket",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-]"
+    ],
+    "note": "CTRL-]"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_v_1",
+    "status": "partial",
+    "evidence": [
+      "key:normal:C-v"
+    ],
+    "note": "CTRL-V"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_quote_x_rbracket_x_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:x"
+    ],
+    "note": "[\"x]x"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_quote_x_rbracket_x",
+    "status": "ported",
+    "evidence": [
+      "key:normal:X"
+    ],
+    "note": "[\"x]X"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_quote_x_rbracket_p_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:p"
+    ],
+    "note": "[\"x]p"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_quote_x_rbracket_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:P"
+    ],
+    "note": "[\"x]P"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_undo_gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:u"
+    ],
+    "note": "<Undo>"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ge_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g e"
+    ],
+    "note": "ge"
+  },
+  {
+    "spec_id": "neovim.normal-mode.gt_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g t"
+    ],
+    "note": "gt"
+  },
+  {
+    "spec_id": "neovim.normal-mode.gt",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g T"
+    ],
+    "note": "gT"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_quote_x_rbracket_gp_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g p"
+    ],
+    "note": "[\"x]gp"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_quote_x_rbracket_gp",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g P"
+    ],
+    "note": "[\"x]gP"
+  },
+  {
+    "spec_id": "neovim.normal-mode.gn_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g n"
+    ],
+    "note": "gn"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lbracket_p_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:[ p"
+    ],
+    "note": "[p"
+  },
+  {
+    "spec_id": "neovim.normal-mode.rbracket_p_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:] p"
+    ],
+    "note": "]p"
+  },
+  {
+    "spec_id": "neovim.normal-mode.eq_eq",
+    "status": "ported",
+    "evidence": [
+      "key:normal:= ="
+    ],
+    "note": "=="
+  },
+  {
+    "spec_id": "neovim.normal-mode.eq_lbrace_motion_rbrace",
+    "status": "ported",
+    "evidence": [
+      "key:normal:= j"
+    ],
+    "note": "={motion}"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-d"
+    ],
+    "note": "CTRL-W CTRL-D"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_h",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-h"
+    ],
+    "note": "CTRL-W CTRL-H"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_j",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-j"
+    ],
+    "note": "CTRL-W CTRL-J"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_k",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-k"
+    ],
+    "note": "CTRL-W CTRL-K"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-l"
+    ],
+    "note": "CTRL-W CTRL-L"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_o",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-o"
+    ],
+    "note": "CTRL-W CTRL-O"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_q",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-q"
+    ],
+    "note": "CTRL-W CTRL-Q"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-s"
+    ],
+    "note": "CTRL-W CTRL-S"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_v",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-v"
+    ],
+    "note": "CTRL-W CTRL-V"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_w",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-w"
+    ],
+    "note": "CTRL-W CTRL-W"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_x",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-x"
+    ],
+    "note": "CTRL-W CTRL-X"
+  },
+  {
+    "spec_id": "neovim.visual-mode.ctrl_v",
+    "status": "partial",
+    "evidence": [
+      "key:select:C-v"
+    ],
+    "note": "CTRL-V"
+  },
+  {
+    "spec_id": "neovim.visual-mode.a",
+    "status": "partial",
+    "evidence": [
+      "key:select:A"
+    ],
+    "note": "A"
+  },
+  {
+    "spec_id": "neovim.visual-mode.i",
+    "status": "partial",
+    "evidence": [
+      "key:select:I"
+    ],
+    "note": "I"
+  },
+  {
+    "spec_id": "neovim.visual-mode.k",
+    "status": "ported",
+    "evidence": [
+      "key:select:K"
+    ],
+    "note": "K"
+  },
+  {
+    "spec_id": "neovim.visual-mode.ctrl_rbracket",
+    "status": "ported",
+    "evidence": [
+      "key:select:C-]"
+    ],
+    "note": "CTRL-]"
+  },
+  {
+    "spec_id": "neovim.visual-mode.v_1",
+    "status": "ported",
+    "evidence": [
+      "key:select:v"
+    ],
+    "note": "v"
+  },
+  {
+    "spec_id": "neovim.visual-mode.lt_bs_gt",
+    "status": "ported",
+    "evidence": [
+      "key:select:backspace"
+    ],
+    "note": "<BS>"
+  },
+  {
+    "spec_id": "neovim.visual-mode.ctrl_h",
+    "status": "ported",
+    "evidence": [
+      "key:select:C-h"
+    ],
+    "note": "CTRL-H"
+  },
+  {
+    "spec_id": "neovim.visual-mode.g_ctrl_a",
+    "status": "ported",
+    "evidence": [
+      "key:select:g C-a"
+    ],
+    "note": "g CTRL-A"
+  },
+  {
+    "spec_id": "neovim.visual-mode.g_ctrl_x",
+    "status": "ported",
+    "evidence": [
+      "key:select:g C-x"
+    ],
+    "note": "g CTRL-X"
+  },
+  {
+    "spec_id": "neovim.visual-mode.gj",
+    "status": "partial",
+    "evidence": [
+      "key:select:g J"
+    ],
+    "note": "gJ"
+  },
+  {
+    "spec_id": "neovim.insert-mode.ctrl_t",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-t"
+    ],
+    "note": "CTRL-T"
+  },
+  {
+    "spec_id": "neovim.insert-mode.ctrl_d",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-d"
+    ],
+    "note": "CTRL-D"
+  },
+  {
+    "spec_id": "neovim.insert-mode.ctrl_n",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-n"
+    ],
+    "note": "CTRL-N"
+  },
+  {
+    "spec_id": "neovim.insert-mode.ctrl_p",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-p"
+    ],
+    "note": "CTRL-P"
+  },
+  {
+    "spec_id": "neovim.insert-mode.ctrl_lbracket",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-["
+    ],
+    "note": "CTRL-["
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_s_left_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:S-left"
+    ],
+    "note": "<S-Left>"
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_c_left_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-left"
+    ],
+    "note": "<C-Left>"
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_s_right_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:S-right"
+    ],
+    "note": "<S-Right>"
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_c_right_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-right"
+    ],
+    "note": "<C-Right>"
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_s_up_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:S-up"
+    ],
+    "note": "<S-Up>"
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_s_down_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:S-down"
+    ],
+    "note": "<S-Down>"
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_c_home_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-home"
+    ],
+    "note": "<C-Home>"
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_c_end_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-end"
+    ],
+    "note": "<C-End>"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_r_r",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s r r"
+    ],
+    "note": "SPC s r r"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_r_b",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s r b"
+    ],
+    "note": "SPC s r b"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_r_f",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s r f"
+    ],
+    "note": "SPC s r f"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_r_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s r d"
+    ],
+    "note": "SPC s r d"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_r_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s r p"
+    ],
+    "note": "SPC s r p"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_c_v",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k C-v"
+    ],
+    "note": "SPC k C-v"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_k_c_r",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space k C-r"
+    ],
+    "note": "SPC k C-r"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_i",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space x i -"
+    ],
+    "note": "SPC x i -"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_a",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-a"
+    ],
+    "note": "C-a"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_e",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-e"
+    ],
+    "note": "C-e"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_k",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-k"
+    ],
+    "note": "C-k"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_n",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-n"
+    ],
+    "note": "C-n"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-p"
+    ],
+    "note": "C-p"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_f",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-f"
+    ],
+    "note": "C-f"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_b",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-b"
+    ],
+    "note": "C-b"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_v",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-v"
+    ],
+    "note": "C-v"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_v",
+    "status": "ported",
+    "evidence": [
+      "key:insert:A-v"
+    ],
+    "note": "M-v"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_lt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:A-<"
+    ],
+    "note": "M-<"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_gt",
+    "status": "ported",
+    "evidence": [
+      "key:insert:A->"
+    ],
+    "note": "M->"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_f",
+    "status": "ported",
+    "evidence": [
+      "key:insert:A-f"
+    ],
+    "note": "M-f"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_b",
+    "status": "ported",
+    "evidence": [
+      "key:insert:A-b"
+    ],
+    "note": "M-b"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_d",
+    "status": "ported",
+    "evidence": [
+      "key:insert:A-d"
+    ],
+    "note": "M-d"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_del",
+    "status": "ported",
+    "evidence": [
+      "key:insert:A-backspace"
+    ],
+    "note": "M-DEL"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_w",
+    "status": "ported",
+    "evidence": [
+      "key:normal:A-w"
+    ],
+    "note": "M-w"
+  },
+  {
+    "spec_id": "emacs.keybinding.m_x",
+    "status": "ported",
+    "evidence": [
+      "key:normal:A-x"
+    ],
+    "note": "M-x"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_spc",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-space"
+    ],
+    "note": "C-SPC"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_g",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-g"
+    ],
+    "note": "C-g"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-l"
+    ],
+    "note": "C-l"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_s",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-s"
+    ],
+    "note": "C-s"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_slash",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-/"
+    ],
+    "note": "C-/"
+  },
+  {
+    "spec_id": "emacs.keybinding.c",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-_"
+    ],
+    "note": "C-_"
+  },
+  {
+    "spec_id": "emacs.keybinding.ret",
+    "status": "ported",
+    "evidence": [
+      "key:insert:ret"
+    ],
+    "note": "RET"
+  },
+  {
+    "spec_id": "emacs.keybinding.c_j",
+    "status": "ported",
+    "evidence": [
+      "key:insert:C-j"
+    ],
+    "note": "C-j"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_n",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w n"
+    ],
+    "note": "CTRL-W n"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_w_ctrl_n",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-w C-n"
+    ],
+    "note": "CTRL-W CTRL-N"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_j",
+    "status": "ported",
+    "evidence": [
+      "key:normal:C-j"
+    ],
+    "note": "CTRL-J"
+  },
+  {
+    "spec_id": "neovim.normal-mode.ctrl_m",
+    "status": "ported",
+    "evidence": [
+      "key:normal:ret"
+    ],
+    "note": "CTRL-M"
+  },
+  {
+    "spec_id": "neovim.normal-mode.g8",
+    "status": "partial",
+    "evidence": [
+      "key:normal:g 8"
+    ],
+    "note": "g8"
+  },
+  {
+    "spec_id": "neovim.insert-mode.ctrl_i",
+    "status": "ported",
+    "evidence": [
+      "key:insert:tab"
+    ],
+    "note": "CTRL-I"
+  },
+  {
+    "spec_id": "neovim.insert-mode.ctrl_m",
+    "status": "ported",
+    "evidence": [
+      "key:insert:ret"
+    ],
+    "note": "CTRL-M"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_o",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j o"
+    ],
+    "note": "SPC j o"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_e_d",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space f e d"
+    ],
+    "note": "SPC f e d"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_q_f",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space q f"
+    ],
+    "note": "SPC q f"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a &"
+    ],
+    "note": "SPC x a &"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_c",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a c"
+    ],
+    "note": "SPC x a c"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_l",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a l"
+    ],
+    "note": "SPC x a l"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_r",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a r"
+    ],
+    "note": "SPC x a r"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_m",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a m"
+    ],
+    "note": "SPC x a m"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_c_h",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space c h"
+    ],
+    "note": "SPC c h"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_c",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-c"
+    ],
+    "note": "CTRL-C"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_bs_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:backspace"
+    ],
+    "note": "<BS>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_h",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-h"
+    ],
+    "note": "CTRL-H"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_tab_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:tab"
+    ],
+    "note": "<Tab>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_s_tab_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:S-tab"
+    ],
+    "note": "<S-Tab>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_i",
+    "status": "ported",
+    "evidence": [
+      "key:command:tab"
+    ],
+    "note": "CTRL-I"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_cr_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:ret"
+    ],
+    "note": "<CR>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_m",
+    "status": "ported",
+    "evidence": [
+      "key:command:ret"
+    ],
+    "note": "CTRL-M"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_n",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-n"
+    ],
+    "note": "CTRL-N"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_p",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-p"
+    ],
+    "note": "CTRL-P"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_r_lbrace_regname_rbrace",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-r"
+    ],
+    "note": "CTRL-R {regname}"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_u",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-u"
+    ],
+    "note": "CTRL-U"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_w",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-w"
+    ],
+    "note": "CTRL-W"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_esc_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:esc"
+    ],
+    "note": "<Esc>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_lbracket",
+    "status": "ported",
+    "evidence": [
+      "key:command:esc"
+    ],
+    "note": "CTRL-["
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_del_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:del"
+    ],
+    "note": "<Del>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_left_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:left"
+    ],
+    "note": "<Left>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_c_left_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-left"
+    ],
+    "note": "<C-Left>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_right_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:right"
+    ],
+    "note": "<Right>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_c_right_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-right"
+    ],
+    "note": "<C-Right>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_up_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:up"
+    ],
+    "note": "<Up>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_down_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:down"
+    ],
+    "note": "<Down>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_home_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:home"
+    ],
+    "note": "<Home>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.lt_end_gt",
+    "status": "ported",
+    "evidence": [
+      "key:command:end"
+    ],
+    "note": "<End>"
+  },
+  {
+    "spec_id": "neovim.cmdline-editing.ctrl_e",
+    "status": "ported",
+    "evidence": [
+      "key:command:C-e"
+    ],
+    "note": "CTRL-E"
+  },
+  {
+    "spec_id": "neovim.ex-command.colon_ascii",
+    "status": "ported",
+    "evidence": [
+      "typable:character-info"
+    ],
+    "note": ":as[cii]"
   }
 ]

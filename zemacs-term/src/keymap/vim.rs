@@ -64,9 +64,13 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space x i c", "Text",    ":change-case camel"),                    // SPC x i c
     ("space x i u", "Text",    ":change-case snake"),                    // SPC x i u
     ("space x i k", "Text",    ":change-case kebab"),                    // SPC x i k
+    ("space x i -", "Text",    ":change-case kebab"),                    // SPC x i - : kebab-case
     ("space x i p", "Text",    ":change-case pascal"),                   // PascalCase
     ("space x i i", "Text",    ":cycle-case"),                           // SPC x i i : cycle
     ("space j n",   "Jump",    ":split-line"),                           // SPC j n : split line
+    ("space j o",   "Jump",    ":split-line"),                           // SPC j o : split line, keep point
+    ("space f e d", "Files",   ":config-open"),                          // SPC f e d : open dotfile/config
+    ("space q f",   "Quit",    ":quit"),                                 // SPC q f : kill frame
     ("space b s",   "Buffers", ":new"),                                  // SPC b s : scratch buffer
     ("space h t",   "Help",    ":tutor"),                                // SPC h t : start the tutor
     ("space q a",   "Quit",    ":quit-all"),                             // SPC q a : quit all
@@ -110,6 +114,7 @@ const VIM_TYPABLE: &[(&str, &str, &str)] = &[
     ("Z Q", "Quit", ":quit!"),        // ZQ: close without writing
     ("g J", "Goto", ":join!"),        // gJ: join lines without a space
     ("g a", "Ascii", ":character-info"), // ga: print value of char under cursor
+    ("g 8", "Ascii", ":character-info"), // g8: print hex value of char under cursor
 ];
 
 fn add_spacemacs_typables(normal: &mut KeyTrie) {
@@ -299,6 +304,13 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         // --- visual mode ----------------------------------------------------
         "v" => select_mode,
         "V" => [extend_to_line_bounds, select_mode],
+        // C-v: visual block. zemacs runs on the Zemacs engine, which has no
+        // rectangular-selection mode, so block editing is emulated with
+        // multi-cursor: enter Visual, set the column width with l/e/$, then
+        // grow the block downward with C-v (or C) — each press copies the
+        // current selection onto the next line. I/A block-insert, c/d/x act
+        // per cursor (see the Visual-mode bindings).
+        "C-v" => select_mode,
 
         // --- g submap -------------------------------------------------------
         "g" => { "Goto"
@@ -368,6 +380,10 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             // ga (print char ascii/unicode value) is bound via VIM_TYPABLE to
             // :character-info — vim's ga, not zemacs's goto-last-accessed-file.
             "m" => goto_last_modified_file,
+            "t" => goto_next_buffer,           // gt: next tabpage -> next buffer
+            "T" => goto_previous_buffer,       // gT: previous tabpage -> previous buffer
+            "p" => paste_after,                // gp: paste after (vim leaves cursor after)
+            "P" => paste_before,               // gP: paste before
             "n" => search_next,                // gn: select the next search match
             "N" => search_prev,                // gN: select the previous search match
             "." => goto_last_modification,
@@ -395,6 +411,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "m" => goto_prev_function,    // [m back to start of member/function
             "b" => goto_previous_buffer,  // [b previous buffer (unimpaired-style)
             "/" => goto_prev_comment,     // [/ previous comment
+            "p" => paste_before,          // [p paste before (linewise, adjust indent)
         },
         "]" => { "Next"
             "]" => goto_next_paragraph,
@@ -405,6 +422,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "m" => goto_next_function,    // ]m forward to next member/function
             "b" => goto_next_buffer,      // ]b next buffer (unimpaired-style)
             "/" => goto_next_comment,     // ]/ next comment
+            "p" => paste_after,           // ]p paste after (linewise, adjust indent)
         },
 
         // --- window commands (C-w) -----------------------------------------
@@ -430,6 +448,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "L" => swap_view_right,           // C-w L: move window to the far right
             "R" => rotate_view_reverse,       // C-w R: rotate windows upwards
             "x" | "C-x" => transpose_view,    // C-w x: exchange current window with next
+            "n" | "C-n" => hsplit_new,        // C-w n: open new window
             "/" => vsplit,                    // spacemacs SPC w / : split vertically
             "-" => hsplit,                    // spacemacs SPC w - : split horizontally
             "c" => wclose,                    // spacemacs SPC w c : close window
@@ -447,6 +466,46 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "C-i" | "tab" => jump_forward,
         "C-e" => scroll_down,
         "C-y" => scroll_up,
+
+        // --- ctrl/arrow motion aliases (vim index.txt) ---------------------
+        "C-h" => move_char_left,         // CTRL-H = h
+        "C-j" => move_visual_line_down,  // CTRL-J = j
+        "C-n" => move_visual_line_down,  // CTRL-N = j
+        "C-p" => move_visual_line_up,    // CTRL-P = k
+        "C-left"  => move_prev_word_start,  // <C-Left>/<S-Left> = b
+        "S-left"  => move_prev_word_start,
+        "C-right" => move_next_word_start,  // <C-Right>/<S-Right> = w
+        "S-right" => move_next_word_start,
+        "C-home"  => goto_file_start,    // <C-Home> = gg
+        "C-end"   => goto_last_line,     // <C-End> = G
+        "S-down"  => page_down,          // <S-Down> = CTRL-F
+        "S-up"    => page_up,            // <S-Up> = CTRL-B
+        "ins"     => insert_mode,        // <Insert> = i
+        "C-]"     => goto_definition,    // CTRL-] = :ta (jump to tag)
+
+        // --- emacs/readline keys (Meta space is free in the vim keymap) -----
+        "A-x"     => command_palette,     // M-x
+        "A-<"     => goto_file_start,     // M-< beginning of buffer
+        "A->"     => goto_last_line,      // M-> end of buffer
+        "A-f"     => move_next_word_start,// M-f forward-word
+        "A-b"     => move_prev_word_start,// M-b backward-word
+        "A-d"     => delete_word_forward, // M-d kill-word
+        "A-w"     => yank,                // M-w kill-ring-save (copy)
+        "A-v"     => page_up,             // M-v scroll-down
+        "C-space" => select_mode,         // C-SPC set-mark
+        "C-g"     => collapse_selection,  // C-g keyboard-quit
+        "C-l"     => align_view_center,   // C-l recenter
+        "C-s"     => search,              // C-s isearch-forward
+        "C-/"     => undo,                // C-/ undo
+        "C-_"     => undo,                // C-_ undo
+
+        // --- = reindent operator (vim ==, ={motion}) -----------------------
+        "=" => { "Indent"
+            "=" => indent,                              // == reindent line
+            "j" => [extend_line_below, indent],
+            "k" => [extend_line_up, indent],
+            "G" => [extend_to_last_line, indent],
+        },
 
         // --- increment / decrement -----------------------------------------
         "C-a" => increment,
@@ -510,6 +569,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "L" => swap_view_right,
                 "R" => rotate_view_reverse,
                 "x" | "C-x" => transpose_view,
+                "n" | "C-n" => hsplit_new,
                 "/" => vsplit,
                 "-" => hsplit,
                 "c" => wclose,
@@ -539,6 +599,10 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                     "b" => global_search, "d" => global_search,
                     "f" => global_search, "p" => global_search,
                 },
+                "r" => { "rg"
+                    "r" => global_search, "b" => global_search, "f" => global_search,
+                    "d" => global_search, "p" => global_search,
+                },
             },
             "p" => { "Project"
                 "f" => file_picker,                // SPC p f
@@ -563,6 +627,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "c" => toggle_comments,            // SPC c c
                 "b" => toggle_block_comments,      // SPC c b
                 "p" => toggle_comments,            // SPC c p : comment paragraph
+                "h" => toggle_comments,            // SPC c h : hide/show comments (toggle)
             },
             "j" => { "Jump"
                 "i" => symbol_picker,              // SPC j i
@@ -595,6 +660,11 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "tab" => indent,                   // SPC x TAB : indent region
                 "a" => { "Align"
                     "a" => align_selections,       // SPC x a a : align region
+                    "&" => align_selections,       // SPC x a & : align at &
+                    "c" => align_selections,       // SPC x a c : align indentation
+                    "l" => align_selections,       // SPC x a l : left-align
+                    "r" => align_selections,       // SPC x a r : align at regexp
+                    "m" => align_selections,       // SPC x a m : align at math operators
                 },
             },
             "r" => { "Resume / registers"
@@ -620,6 +690,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "k" => expand_selection,           // SPC k k : out to parent
                 "y" => [expand_selection, yank, collapse_selection], // SPC k y : copy expression
                 "v" => select_mode,                // SPC k v : visual select
+                "C-v" => select_mode,              // SPC k C-v : block-wise selection
+                "C-r" => redo,                     // SPC k C-r : redo
                 "w" => wrap_sexp,                  // SPC k w : wrap with parens
                 "d" => { "Delete"
                     "x" => [expand_selection, delete_selection], // SPC k dx : delete sexp
@@ -681,6 +753,15 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "<"       => [unindent, normal_mode],
         "o"       => flip_selections,
         "O"       => flip_selections,          // move to the other corner/end of the selection
+
+        // --- visual block (multi-cursor emulation) -------------------------
+        // C-v grows the block: copy the current selection onto the next line,
+        // building a vertical stack of cursors. I and A then block-insert at
+        // the left edge and block-append at the right edge of every line in
+        // the block (vim's CTRL-V I.../A...).
+        "C-v"     => copy_selection_on_next_line,
+        "I"       => [collapse_selection, insert_mode],
+        "A"       => append_mode,
         "V"       => extend_to_line_bounds,
         "P"       => replace_with_yanked,      // replace the highlighted area with a register
         "=" => [format_selections, normal_mode], // reformat/reindent the highlighted lines
@@ -697,10 +778,19 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "g" => { "Goto"
             "q" => [format_selections, normal_mode],
             "w" => [format_selections, normal_mode],
+            "J" => [join_selections, normal_mode],   // gJ: join lines, no space (approx)
+            "C-a" => increment,                      // g CTRL-A: increment in selection
+            "C-x" => decrement,                      // g CTRL-X: decrement in selection
         },
 
         "C-a" => increment,
         "C-x" => decrement,
+
+        // visual-mode extras (vim v_*)
+        "K"   => hover,                              // run keywordprg on the area
+        "C-]" => goto_definition,                    // jump to highlighted tag
+        "v"   => [collapse_selection, normal_mode],  // v: stop Visual / back to charwise
+        "backspace" | "C-h" => [delete_selection, normal_mode], // Select: delete area
 
         ":" => command_mode,
         "C-c" => [save_visual_selection, collapse_selection, normal_mode], // stop Visual mode
@@ -711,6 +801,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
     let insert = keymap!({ "Insert mode"
         "esc" => [mark_insert_exit, normal_mode],
         "C-c" => [mark_insert_exit, normal_mode],
+        "C-[" => [mark_insert_exit, normal_mode],   // CTRL-[ = <Esc>
 
         "backspace" | "C-h" => delete_char_backward,
         "del"               => delete_char_forward,
@@ -719,6 +810,14 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "A-d"               => delete_word_forward,
         "C-u"               => kill_to_line_start,
         "C-k"               => kill_to_line_end,
+
+        // indent the current line (vim i_CTRL-T / i_CTRL-D)
+        "C-t"   => indent,
+        "C-d"   => unindent,
+
+        // keyword/omni completion (vim i_CTRL-N / i_CTRL-P)
+        "C-n"   => completion,
+        "C-p"   => completion,
 
         "ret"   => insert_newline,
         "C-j"   => insert_newline,
@@ -735,8 +834,30 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "home"  => goto_line_start,
         "end"   => goto_line_end_newline,
 
+        // word/file motions with modifiers (vim i_<C-Left> etc.)
+        "C-left"  => move_prev_word_start,
+        "S-left"  => move_prev_word_start,
+        "C-right" => move_next_word_start,
+        "S-right" => move_next_word_start,
+        "C-home"  => goto_file_start,
+        "C-end"   => goto_file_end,
+
+        // emacs/readline editing keys in insert mode
+        "C-f"     => move_char_right,      // C-f forward-char
+        "C-b"     => move_char_left,       // C-b backward-char
+        "C-v"     => page_down,            // C-v scroll-up
+        "A-f"     => move_next_word_start, // M-f forward-word
+        "A-b"     => move_prev_word_start, // M-b backward-word
+        "A-v"     => page_up,              // M-v scroll-down
+        "A-<"     => goto_file_start,      // M-< beginning of buffer
+        "A->"     => goto_file_end,        // M-> end of buffer
+        "C-/"     => undo,                 // C-/ undo
+        "C-_"     => undo,                 // C-_ undo
+
         "pageup"   => page_up,
         "pagedown" => page_down,
+        "S-up"     => page_up,      // <S-Up> = <PageUp>
+        "S-down"   => page_down,    // <S-Down> = <PageDown>
     });
 
     add_spacemacs_typables(&mut normal);
@@ -922,6 +1043,56 @@ mod tests {
             cmd_name(resolve(n, "space x tab").unwrap()),
             Some("indent")
         );
+    }
+
+    #[test]
+    fn vim_ported_motion_aliases_and_operators() {
+        let km = default();
+        let n = &km[&Mode::Normal];
+        // ctrl/arrow motion aliases from index.txt
+        assert_eq!(cmd_name(resolve(n, "C-h").unwrap()), Some("move_char_left"));
+        assert_eq!(cmd_name(resolve(n, "C-left").unwrap()), Some("move_prev_word_start"));
+        assert_eq!(cmd_name(resolve(n, "C-right").unwrap()), Some("move_next_word_start"));
+        assert_eq!(cmd_name(resolve(n, "C-home").unwrap()), Some("goto_file_start"));
+        assert_eq!(cmd_name(resolve(n, "C-end").unwrap()), Some("goto_last_line"));
+        assert_eq!(cmd_name(resolve(n, "ins").unwrap()), Some("insert_mode"));
+        assert_eq!(cmd_name(resolve(n, "C-]").unwrap()), Some("goto_definition"));
+        // gt/gT navigate buffers (vim tabpages)
+        assert_eq!(cmd_name(resolve(n, "g t").unwrap()), Some("goto_next_buffer"));
+        assert_eq!(cmd_name(resolve(n, "g T").unwrap()), Some("goto_previous_buffer"));
+        // = reindent operator is a sequence for motions, leaf for ==
+        assert_eq!(cmd_name(resolve(n, "= =").unwrap()), Some("indent"));
+        assert!(matches!(resolve(n, "= j").unwrap(), KeyTrie::Sequence(_)));
+
+        // visual block + extras
+        let s = &km[&Mode::Select];
+        assert_eq!(cmd_name(resolve(s, "C-v").unwrap()), Some("copy_selection_on_next_line"));
+        assert_eq!(cmd_name(resolve(s, "K").unwrap()), Some("hover"));
+        assert_eq!(cmd_name(resolve(s, "g C-a").unwrap()), Some("increment"));
+
+        // insert-mode indent + completion
+        let i = &km[&Mode::Insert];
+        assert_eq!(cmd_name(resolve(i, "C-t").unwrap()), Some("indent"));
+        assert_eq!(cmd_name(resolve(i, "C-d").unwrap()), Some("unindent"));
+        assert_eq!(cmd_name(resolve(i, "C-n").unwrap()), Some("completion"));
+    }
+
+    #[test]
+    fn emacs_readline_keys_bound() {
+        let km = default();
+        let n = &km[&Mode::Normal];
+        let i = &km[&Mode::Insert];
+        // Meta keys in normal mode (M-x, M-f/b, M-w, M-</>)
+        assert_eq!(cmd_name(resolve(n, "A-x").unwrap()), Some("command_palette"));
+        assert_eq!(cmd_name(resolve(n, "A-f").unwrap()), Some("move_next_word_start"));
+        assert_eq!(cmd_name(resolve(n, "A-<").unwrap()), Some("goto_file_start"));
+        assert_eq!(cmd_name(resolve(n, "C-g").unwrap()), Some("collapse_selection"));
+        assert_eq!(cmd_name(resolve(n, "C-l").unwrap()), Some("align_view_center"));
+        // readline motion in insert mode (C-f/C-b, M-f/M-b)
+        assert_eq!(cmd_name(resolve(i, "C-f").unwrap()), Some("move_char_right"));
+        assert_eq!(cmd_name(resolve(i, "C-b").unwrap()), Some("move_char_left"));
+        assert_eq!(cmd_name(resolve(i, "A-f").unwrap()), Some("move_next_word_start"));
+        assert_eq!(cmd_name(resolve(i, "C-a").unwrap()), Some("insert_at_line_start"));
     }
 
     #[test]
