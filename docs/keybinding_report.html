@@ -6,15 +6,15 @@
 <p class=muted>The keybinding subset of the <a href='port_report.html'>port report</a>. Counts only the key-press surface — vim/neovim normal/visual/insert/cmdline keys, the GNU Emacs Key Index, and the Spacemacs <code>SPC</code> tree. <b>ported</b> = the same key does the equivalent thing in zemacs.</p>
 <div class=kpi>
 <div class=card><b>2541</b>cited keybindings</div>
-<div class=card><b class=ported>600</b>ported (23.6%)</div>
-<div class=card><b class=partial>242</b>partial (9.5%)</div>
-<div class=card><b class=absent>1699</b>absent</div>
+<div class=card><b class=ported>609</b>ported (24.0%)</div>
+<div class=card><b class=partial>260</b>partial (10.2%)</div>
+<div class=card><b class=absent>1672</b>absent</div>
 </div>
 <h2>By source</h2><table>
 <tr><th>Source</th><th>Keybindings</th><th>Ported</th><th>Partial</th><th>Progress</th></tr>
 <tr><td>emacs</td><td class=n>1124</td><td class='n ported'>28</td><td class='n partial'>2</td><td><div class="bar"><div class="fill" style="width:2.5%"></div><span>2.5%</span></div></td></tr>
 <tr><td>neovim</td><td class=n>715</td><td class='n ported'>393</td><td class='n partial'>156</td><td><div class="bar"><div class="fill" style="width:55.0%"></div><span>55.0%</span></div></td></tr>
-<tr><td>spacemacs</td><td class=n>702</td><td class='n ported'>179</td><td class='n partial'>84</td><td><div class="bar"><div class="fill" style="width:25.5%"></div><span>25.5%</span></div></td></tr>
+<tr><td>spacemacs</td><td class=n>702</td><td class='n ported'>188</td><td class='n partial'>102</td><td><div class="bar"><div class="fill" style="width:26.8%"></div><span>26.8%</span></div></td></tr>
 </table>
 <h2>By source / category</h2><table>
 <tr><th>Source</th><th>Category</th><th>Keybindings</th><th>Ported</th><th>Partial</th><th>Progress</th></tr>
@@ -23,7 +23,7 @@
 <tr><td>neovim</td><td>insert-mode</td><td class=n>98</td><td class='n ported'>41</td><td class='n partial'>20</td><td><div class="bar"><div class="fill" style="width:41.8%"></div><span>41.8%</span></div></td></tr>
 <tr><td>neovim</td><td>normal-mode</td><td class=n>479</td><td class='n ported'>277</td><td class='n partial'>93</td><td><div class="bar"><div class="fill" style="width:57.8%"></div><span>57.8%</span></div></td></tr>
 <tr><td>neovim</td><td>visual-mode</td><td class=n>85</td><td class='n ported'>41</td><td class='n partial'>42</td><td><div class="bar"><div class="fill" style="width:48.2%"></div><span>48.2%</span></div></td></tr>
-<tr><td>spacemacs</td><td>keybinding</td><td class=n>702</td><td class='n ported'>179</td><td class='n partial'>84</td><td><div class="bar"><div class="fill" style="width:25.5%"></div><span>25.5%</span></div></td></tr>
+<tr><td>spacemacs</td><td>keybinding</td><td class=n>702</td><td class='n ported'>188</td><td class='n partial'>102</td><td><div class="bar"><div class="fill" style="width:26.8%"></div><span>26.8%</span></div></td></tr>
 </table>
 <p class=muted>Emacs is 0% because zemacs is a modal (vim) editor — Emacs default chords (<code>C-x C-f</code>, …) are intentionally not bound; the commands they invoke are tracked under the port report's emacs <code>command</code> category.</p>
 <h2>Keybinding detail</h2>
@@ -1881,7 +1881,7 @@
 <tr><td>CTRL-G</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-G</td></tr>
 <tr><td>CTRL-O</td><td class=absent>absent</td><td class=muted>index.txt:v_CTRL-O</td></tr>
 </table></details>
-<details><summary>spacemacs / keybinding <span class=muted>(702 keys · <span class=ported>179 ported</span> · <span class=partial>84 partial</span>)</span></summary>
+<details><summary>spacemacs / keybinding <span class=muted>(702 keys · <span class=ported>188 ported</span> · <span class=partial>102 partial</span>)</span></summary>
 <table><tr><th>Key</th><th>Status</th><th>Source ref</th></tr>
 <tr><td>SPC /</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC ;</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1910,6 +1910,7 @@
 <tr><td>SPC e y</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f C d</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f C u</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC f F</td><td class=ported>ported</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f R</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f S</td><td class=ported>ported</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f d</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1931,6 +1932,8 @@
 <tr><td>SPC h t</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j $</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j 0</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC j =</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC j I</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j b</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j c</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j d</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1959,6 +1962,10 @@
 <tr><td>SPC l r</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC m g g</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC m h h</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC n +</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC n -</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC n =</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC n _</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p b</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p f</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p h</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1972,6 +1979,7 @@
 <tr><td>SPC r l</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC r r</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC r y</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s P</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s S</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s `</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s a a</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -1993,6 +2001,7 @@
 <tr><td>SPC s k d</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s k f</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s k p</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s l</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s p</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s r b</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s r d</td><td class=ported>ported</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2080,6 +2089,7 @@
 <tr><td>SPC e h</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC e v</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f A</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC f L</td><td class=partial>partial</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e C-e</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e e</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e i</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2105,6 +2115,8 @@
 <tr><td>SPC h n</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC h p</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC h r</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC j (</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC j +</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j f</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j l</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j v</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2118,6 +2130,9 @@
 <tr><td>SPC p o</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC p t</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC r m</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s B</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s H</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC s d</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC t C-S-l</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC t C-p</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC u SPC b d</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2134,10 +2149,22 @@
 <tr><td>SPC w TAB</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC w \vert</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x a &amp;</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a (</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a )</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a ,</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a .</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a :</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a ;</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a =</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a L</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a [</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a ]</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x a c</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x a l</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x a m</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x a r</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a {</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
+<tr><td>SPC x a }</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x j c</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x j f</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x j l</td><td class=partial>partial</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2241,9 +2268,7 @@
 <tr><td>SPC e c</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f D</td><td class=absent>absent</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f E</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC f F</td><td class=absent>absent</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f J</td><td class=absent>absent</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC f L</td><td class=absent>absent</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f b</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f c</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC f e D</td><td class=absent>absent</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2301,11 +2326,7 @@
 <tr><td>SPC i p n</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC i p p</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC i u</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC j (</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC j +</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC j =</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j D</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC j I</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j S</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j U</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC j s</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2399,13 +2420,9 @@
 <tr><td>SPC m t b</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC m t q</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC m u</td><td class=absent>absent</td><td class=muted>https://raw.githubusercontent.com/syl20bnr/spacemacs/develop/layers/+source-control/git/README.org</td></tr>
-<tr><td>SPC n +</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC n -</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC n =</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC n F</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC n P</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC n R</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC n _</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC n f</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC n p</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC n r</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2420,18 +2437,14 @@
 <tr><td>SPC q r</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC q t</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC r s</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s B</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s D</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s F</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s H</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s P</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s a A</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s a B</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s a D</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s a F</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s a P</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s c</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s d</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s g B</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s g F</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s g G</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2439,7 +2452,6 @@
 <tr><td>SPC s k D</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s k F</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s k P</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC s l</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s r B</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s r D</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC s r F</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
@@ -2542,18 +2554,6 @@
 <tr><td>SPC x O</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x U</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x Y</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a (</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a )</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a ,</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a .</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a :</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a ;</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a =</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a L</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a [</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a ]</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a {</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
-<tr><td>SPC x a }</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x a ¦</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x e</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>
 <tr><td>SPC x g T</td><td class=absent>absent</td><td class=muted>https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org</td></tr>

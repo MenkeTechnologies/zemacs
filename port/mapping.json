@@ -8126,5 +8126,221 @@
       "key:normal:space q Q"
     ],
     "note": "SPC q Q (already bound)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a ("
+    ],
+    "note": "align at ( -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_2",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a )"
+    ],
+    "note": "align at ) -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_3",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a ["
+    ],
+    "note": "align at [ -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_4",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a ]"
+    ],
+    "note": "align at ] -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_5",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a {"
+    ],
+    "note": "align at { -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_6",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a }"
+    ],
+    "note": "align at } -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_7",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a ,"
+    ],
+    "note": "align at , -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_8",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a ."
+    ],
+    "note": "align at . -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_9",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a :"
+    ],
+    "note": "align at : -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_semi",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a ;"
+    ],
+    "note": "align at ; -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_x_10",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a ="
+    ],
+    "note": "align at = -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_a_lU",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x a L"
+    ],
+    "note": "align at L -> align_selections"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_n_x",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space n +"
+    ],
+    "note": "increment number"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_n_x_2",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space n ="
+    ],
+    "note": "increment number"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_n",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space n -"
+    ],
+    "note": "decrement number"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_n_x_3",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space n _"
+    ],
+    "note": "decrement number"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_iU",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j I"
+    ],
+    "note": "imenu -> workspace symbol picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_x_2",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space j ="
+    ],
+    "note": "format region/buffer"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_x_3",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space j +"
+    ],
+    "note": "format region/buffer (alt)"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_x",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space j ("
+    ],
+    "note": "jump to unbalanced paren"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_pU",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s P"
+    ],
+    "note": "search project -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_d",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space s d"
+    ],
+    "note": "search dir -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_bU",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space s B"
+    ],
+    "note": "search buffers -> global_search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_l",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space s l"
+    ],
+    "note": "resume search -> last_picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_s_hU",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space s H"
+    ],
+    "note": "last occurrence -> search_next"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_fU",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space f F"
+    ],
+    "note": "open file under point -> goto_file"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_lU",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space f L"
+    ],
+    "note": "locate file -> file_picker"
   }
 ]

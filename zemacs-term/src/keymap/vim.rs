@@ -689,6 +689,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "l" => file_picker,                            // SPC f l : open file literally
                 "A" => file_picker,                            // SPC f A : open file, replace buffer
                 "o" => goto_file,                              // SPC f o : open with external program
+                "F" => goto_file,                              // SPC f F : open file under point
+                "L" => file_picker,                            // SPC f L : locate a file
                 "r" => goto_last_modified_file,                // SPC f r
                 "t" => file_explorer,                          // SPC f t
                 "d" => file_explorer_in_current_buffer_directory, // SPC f d
@@ -782,6 +784,11 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "h" => select_references_to_symbol_under_cursor, // SPC s h : highlight symbol
                 "S" => workspace_symbol_picker,
                 "`" => jump_backward,              // SPC s ` : back to pre-jump location
+                "P" => global_search,              // SPC s P : search in a project
+                "d" => global_search,              // SPC s d : search current directory
+                "B" => global_search,              // SPC s B : search all open buffers
+                "l" => last_picker,                // SPC s l : resume last search
+                "H" => search_next,                // SPC s H : go to last search occurrence
                 // ag / grep / ack search families all map to project-wide search.
                 "a" => { "ag"
                     "a" => global_search, "b" => global_search, "d" => global_search,
@@ -847,9 +854,19 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "l" => goto_word,                  // SPC j l : avy jump to line
                 "f" => goto_definition,            // SPC j f : jump to elisp function def
                 "v" => goto_definition,            // SPC j v : jump to elisp variable def
+                "I" => workspace_symbol_picker,    // SPC j I : jump to def in any buffer (imenu)
+                "=" => format_selections,          // SPC j = : format region/buffer
+                "+" => format_selections,          // SPC j + : format region/buffer (alt)
+                "(" => goto_prev_unmatched_paren,  // SPC j ( : jump to first unbalanced paren
             },
             "F" => { "Frames"
                 "n" => hsplit_new,                 // SPC F n : create a new frame (new window)
+            },
+            "n" => { "Numbers/Narrow"
+                "+" => increment,                  // SPC n + : increase number under point
+                "=" => increment,                  // SPC n = : increase number under point
+                "-" => decrement,                  // SPC n - : decrease number under point
+                "_" => decrement,                  // SPC n _ : decrease number under point
             },
             "g" => { "Goto (LSP)"
                 "d" => goto_definition,
@@ -888,6 +905,18 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                     "l" => align_selections,       // SPC x a l : left-align
                     "r" => align_selections,       // SPC x a r : align at regexp
                     "m" => align_selections,       // SPC x a m : align at math operators
+                    "L" => align_selections,       // SPC x a L : right-align
+                    "(" => align_selections,       // SPC x a ( : align at (
+                    ")" => align_selections,       // SPC x a ) : align at )
+                    "[" => align_selections,       // SPC x a [ : align at [
+                    "]" => align_selections,       // SPC x a ] : align at ]
+                    "{" => align_selections,       // SPC x a { : align at {
+                    "}" => align_selections,       // SPC x a } : align at }
+                    "," => align_selections,       // SPC x a , : align at ,
+                    "." => align_selections,       // SPC x a . : align at . (numeric)
+                    ":" => align_selections,       // SPC x a : : align at :
+                    ";" => align_selections,       // SPC x a ; : align at ;
+                    "=" => align_selections,       // SPC x a = : align at =
                 },
             },
             "r" => { "Resume / registers"
