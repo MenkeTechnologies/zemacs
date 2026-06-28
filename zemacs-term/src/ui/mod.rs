@@ -11,6 +11,7 @@ pub mod popup;
 pub mod prompt;
 mod select;
 mod spinner;
+pub mod startify;
 mod statusline;
 mod text;
 mod text_decorations;
@@ -29,6 +30,7 @@ pub use popup::Popup;
 pub use prompt::{Prompt, PromptEvent};
 pub use select::Select;
 pub use spinner::{ProgressSpinners, Spinner};
+pub use startify::Startify;
 pub use text::Text;
 
 use zemacs_view::Editor;
