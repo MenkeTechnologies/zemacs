@@ -7286,5 +7286,205 @@
       "key:insert:F1"
     ],
     "note": "i_<F1> stop insert (help omitted)"
+  },
+  {
+    "spec_id": "neovim.option.mousemodel",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set mouse"
+  },
+  {
+    "spec_id": "neovim.option.shell",
+    "status": "ported",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set shell"
+  },
+  {
+    "spec_id": "neovim.option.statusline",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set statusline"
+  },
+  {
+    "spec_id": "neovim.option.clipboard",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set clipboard-provider"
+  },
+  {
+    "spec_id": "neovim.option.autowrite",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set auto-save"
+  },
+  {
+    "spec_id": "neovim.option.autowriteall",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set auto-save"
+  },
+  {
+    "spec_id": "neovim.option.autocomplete",
+    "status": "ported",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set auto-completion"
+  },
+  {
+    "spec_id": "neovim.option.autocompletedelay",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set idle-timeout"
+  },
+  {
+    "spec_id": "neovim.option.autocompletetimeout",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set completion-timeout"
+  },
+  {
+    "spec_id": "neovim.option.endofline",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set insert-final-newline"
+  },
+  {
+    "spec_id": "neovim.option.fixendofline",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set insert-final-newline"
+  },
+  {
+    "spec_id": "neovim.option.cursorlineopt",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set cursorline"
+  },
+  {
+    "spec_id": "neovim.option.breakindent",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set soft-wrap"
+  },
+  {
+    "spec_id": "neovim.option.scroll",
+    "status": "ported",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set scroll-lines"
+  },
+  {
+    "spec_id": "neovim.option.sidescrolloff",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set scrolloff"
+  },
+  {
+    "spec_id": "neovim.option.signcolumn",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set gutters"
+  },
+  {
+    "spec_id": "neovim.option.listchars",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set whitespace"
+  },
+  {
+    "spec_id": "neovim.option.wrapmargin",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set text-width"
+  },
+  {
+    "spec_id": "neovim.option.fileformat",
+    "status": "ported",
+    "evidence": [
+      "typable:line-ending"
+    ],
+    "note": "vim option -> zemacs :line-ending line-ending"
+  },
+  {
+    "spec_id": "neovim.option.fileformats",
+    "status": "partial",
+    "evidence": [
+      "typable:line-ending"
+    ],
+    "note": "vim option -> zemacs :line-ending line-ending"
+  },
+  {
+    "spec_id": "neovim.option.fileencoding",
+    "status": "partial",
+    "evidence": [
+      "typable:encoding"
+    ],
+    "note": "vim option -> zemacs :encoding encoding"
+  },
+  {
+    "spec_id": "neovim.option.encoding",
+    "status": "partial",
+    "evidence": [
+      "typable:encoding"
+    ],
+    "note": "vim option -> zemacs :encoding encoding"
+  },
+  {
+    "spec_id": "neovim.option.laststatus",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set statusline"
+  },
+  {
+    "spec_id": "neovim.option.ruler",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set statusline"
+  },
+  {
+    "spec_id": "neovim.option.guicursor",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> zemacs :set cursor-shape"
   }
 ]
