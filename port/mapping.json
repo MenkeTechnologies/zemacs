@@ -7246,5 +7246,45 @@
       "key:normal:space u space w 4"
     ],
     "note": "4-window layout (force) -> vsplit"
+  },
+  {
+    "spec_id": "neovim.normal-mode.gh_1",
+    "status": "ported",
+    "evidence": [
+      "key:normal:g h"
+    ],
+    "note": "gh: start Select mode"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_p",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t p"
+    ],
+    "note": "smartparens -> :toggle auto-pairs"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_c_p",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space t C-p"
+    ],
+    "note": "global smartparens -> :toggle auto-pairs"
+  },
+  {
+    "spec_id": "neovim.normal-mode.lt_f1_gt",
+    "status": "partial",
+    "evidence": [
+      "key:normal:F1"
+    ],
+    "note": "<F1> help -> command palette"
+  },
+  {
+    "spec_id": "neovim.insert-mode.lt_f1_gt",
+    "status": "partial",
+    "evidence": [
+      "key:insert:F1"
+    ],
+    "note": "i_<F1> stop insert (help omitted)"
   }
 ]

@@ -90,6 +90,8 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space t h c", "Toggles", ":toggle cursorcolumn"),                // SPC t h c : highlight current column
     ("space t C-S-l", "Toggles", ":toggle soft-wrap.enable"),          // SPC t C-S-l : visual line navigation
     ("space t K", "Toggles", ":toggle auto-info"),                     // SPC t K : which-key (auto-info) mode
+    ("space t p", "Toggles", ":toggle auto-pairs"),                    // SPC t p : smartparens (auto-pairs)
+    ("space t C-p", "Toggles", ":toggle auto-pairs"),                  // SPC t C-p : global smartparens
     ("space h d c", "Help",    ":character-info"),                     // SPC h d c : describe char under point
     ("space p e",   "Project", ":config-open"),                       // SPC p e : edit dir-locals/config
     ("space f e i", "Files",   ":config-open"),                       // SPC f e i : open init/config
@@ -402,7 +404,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "e" => move_prev_word_end,         // ge back to end of previous word
             "j" => move_line_down,
             "k" => move_line_up,
-            "h" => goto_line_start,
+            "h" => select_mode,                // gh: start Select mode (vim); g0/g^ cover line start
             "l" => goto_line_end,
             "0" => goto_line_start,            // g0 leftmost (screen line)
             "$" => goto_line_end,              // g$ rightmost (screen line)
@@ -621,6 +623,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "S-+"     => page_down,          // <S-+> = CTRL-F (page down)
         "S-minus" => page_up,            // <S--> = CTRL-B (page up)
         "U"       => undo,               // U: undo latest changes on one line (approx: undo)
+        "F1"      => command_palette,     // <F1>: help -> command palette (commands/help list)
         "C-t"     => jump_backward,      // CTRL-T = pop tag stack (≈ jump back)
         "C-tab"   => goto_last_accessed_file, // CTRL-<Tab> = go to last accessed tab
 
@@ -1076,6 +1079,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
         "esc" => [mark_insert_exit, normal_mode],
         "C-c" => [mark_insert_exit, normal_mode],
         "C-[" => [mark_insert_exit, normal_mode],   // CTRL-[ = <Esc>
+        "F1"  => [mark_insert_exit, normal_mode],   // i_<F1>: stop insert mode (help omitted)
         // CTRL-\ CTRL-N / CTRL-\ CTRL-G: leave insert for Normal mode
         "C-\\" => { "To normal"
             "C-n" => [mark_insert_exit, normal_mode],
