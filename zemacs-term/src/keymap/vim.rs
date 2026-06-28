@@ -83,6 +83,9 @@ const SPACEMACS_TYPABLE: &[(&str, &str, &str)] = &[
     ("space p k",   "Project", ":buffer-close-all"),                    // SPC p k : kill all project buffers
     ("space t l",   "Toggles", ":toggle soft-wrap.enable"),            // SPC t l : truncate/wrap lines
     ("space t V",   "Toggles", ":toggle line-number absolute relative"), // SPC t V : visual line numbers
+    ("space t h i", "Toggles", ":toggle indent-guides.render"),        // SPC t h i : highlight indentation
+    ("space t C-i", "Toggles", ":toggle indent-guides.render"),        // SPC t C-i : global indent guide
+    ("space h d c", "Help",    ":character-info"),                     // SPC h d c : describe char under point
 ];
 
 /// Insert `cmd` at `path` under `root`, creating intermediate submap nodes
@@ -615,6 +618,9 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
 
             "f" => { "Files"
                 "f" => file_picker,                            // SPC f f
+                "l" => file_picker,                            // SPC f l : open file literally
+                "A" => file_picker,                            // SPC f A : open file, replace buffer
+                "o" => goto_file,                              // SPC f o : open with external program
                 "r" => goto_last_modified_file,                // SPC f r
                 "t" => file_explorer,                          // SPC f t
                 "d" => file_explorer_in_current_buffer_directory, // SPC f d
@@ -632,6 +638,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "n" => goto_next_buffer,           // SPC b n
                 "p" => goto_previous_buffer,       // SPC b p
                 "m" => changed_file_picker,        // SPC b m
+                "W" => buffer_picker,              // SPC b W : go to buffer (workspace/window)
                 "Y" => [select_all, yank_to_clipboard, collapse_selection], // SPC b Y
             },
             // Kept identical to the `C-w` window submap (see aliased-modes test).
@@ -721,6 +728,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "r" => goto_last_modified_file,    // SPC p r
                 "t" => file_explorer,              // SPC p t : project tree (treemacs)
                 "d" => file_explorer,              // SPC p d : find directory
+                "g" => symbol_picker,              // SPC p g : find tags
+                "o" => global_search,              // SPC p o : multi-occur
             },
             "e" => { "Errors"
                 "l" => diagnostics_picker,             // SPC e l
@@ -736,6 +745,8 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "b" => toggle_block_comments,      // SPC c b
                 "p" => toggle_comments,            // SPC c p : comment paragraph
                 "h" => toggle_comments,            // SPC c h : hide/show comments (toggle)
+                "t" => toggle_comments,            // SPC c t : comment to line
+                "y" => [yank, toggle_comments],    // SPC c y : comment and yank
             },
             "j" => { "Jump"
                 "i" => symbol_picker,              // SPC j i
@@ -748,6 +759,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "k" => [move_visual_line_down, indent], // SPC j k : next line + indent
                 "u" => goto_file,                  // SPC j u : jump to URL/file under cursor
                 "w" => goto_word,                  // SPC j w : avy jump to word
+                "l" => goto_word,                  // SPC j l : avy jump to line
             },
             "g" => { "Goto (LSP)"
                 "d" => goto_definition,
@@ -767,6 +779,10 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
             "x" => { "Text"
                 "c" => count_selection,            // SPC x c : count chars/words/lines
                 "u" => switch_to_lowercase,        // SPC x u : lowercase
+                "o" => goto_file,                  // SPC x o : open link in frame (avy)
+                "w" => { "Words"
+                    "c" => count_selection,        // SPC x w c : count occurrences per word
+                },
                 "tab" => indent,                   // SPC x TAB : indent region
                 "a" => { "Align"
                     "a" => align_selections,       // SPC x a a : align region
@@ -781,6 +797,7 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "l" => last_picker,                // SPC r l : resume picker
                 "e" => register_picker,            // SPC r e : registers
                 "r" => register_picker,            // SPC r r : show registers
+                "m" => register_picker,            // SPC r m : show marks register
                 "y" => register_picker,            // SPC r y : kill ring
             },
             "a" => { "Applications"
@@ -813,6 +830,19 @@ pub fn default() -> HashMap<Mode, KeyTrie> {
                 "k" => command_palette,            // SPC h k : describe key / commands
                 "?" => command_palette,            // SPC h ? : list bindings
                 "c" => command_palette,            // SPC h c : describe command
+                "space" => command_palette,        // SPC h SPC : discover docs/layers
+                "f" => command_palette,            // SPC h f : discover the FAQ
+                "l" => command_palette,            // SPC h l : search layers
+                "p" => command_palette,            // SPC h p : search packages
+                "n" => command_palette,            // SPC h n : browse emacs news
+                "d" => { "Describe"
+                    "b" => command_palette,        // SPC h d b : describe bindings
+                    "f" => command_palette,        // SPC h d f : describe function
+                    "k" => command_palette,        // SPC h d k : describe key
+                    "v" => command_palette,        // SPC h d v : describe variable
+                    "m" => command_palette,        // SPC h d m : describe modes
+                    // SPC h d c (describe char) -> :character-info via typable table
+                },
             },
             "m" => { "Major mode"
                 "g" => { "Goto"

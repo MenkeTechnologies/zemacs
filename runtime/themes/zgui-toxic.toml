@@ -1,0 +1,140 @@
+# zgui-toxic — "Toxic" (Acid lime + electric cyan)
+# Cyberpunk colorscheme for zemacs, generated from the zgui-core design system
+# (zgui-core/webui/colorscheme.js → COLOR_SCHEMES.toxic). Dark variant.
+
+# --- syntax ---
+"keyword" = "accent"
+"keyword.control" = "accent_light"
+"keyword.control.import" = "magenta"
+"keyword.control.return" = "accent_light"
+"keyword.directive" = "magenta"
+"keyword.operator" = "accent_light"
+"keyword.function" = "accent"
+"keyword.storage" = "accent"
+"function" = "cyan"
+"function.builtin" = "cyan"
+"function.method" = "cyan"
+"function.macro" = "magenta"
+"type" = "yellow"
+"type.builtin" = "yellow"
+"type.enum.variant" = "orange"
+"constructor" = "yellow"
+"constant" = "orange"
+"constant.builtin" = "orange"
+"constant.numeric" = "orange"
+"constant.character" = "green"
+"constant.character.escape" = "magenta"
+"string" = "green"
+"string.regexp" = "cyan"
+"string.special" = "cyan"
+"comment" = { fg = "text_muted", modifiers = ["italic"] }
+"variable" = "text"
+"variable.builtin" = "magenta"
+"variable.parameter" = "accent_light"
+"variable.other.member" = "cyan"
+"label" = "magenta"
+"punctuation" = "text_dim"
+"punctuation.delimiter" = "text_dim"
+"punctuation.bracket" = "text_dim"
+"operator" = "accent_light"
+"tag" = "accent"
+"attribute" = "yellow"
+"namespace" = "accent_light"
+"special" = "magenta"
+
+# --- markup ---
+"markup.heading" = { fg = "accent", modifiers = ["bold"] }
+"markup.heading.marker" = "text_muted"
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+"markup.link.url" = { fg = "cyan", modifiers = ["underlined"] }
+"markup.link.text" = "accent_light"
+"markup.link.label" = "magenta"
+"markup.raw" = "green"
+"markup.quote" = { fg = "text_dim", modifiers = ["italic"] }
+"markup.list" = "accent"
+
+# --- diff ---
+"diff.plus" = "green"
+"diff.minus" = "red"
+"diff.delta" = "yellow"
+
+# --- diagnostics ---
+"diagnostic.error" = { underline = { color = "red", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "yellow", style = "curl" } }
+"diagnostic.info" = { underline = { color = "cyan", style = "curl" } }
+"diagnostic.hint" = { underline = { color = "accent_light", style = "curl" } }
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
+"diagnostic.deprecated" = { modifiers = ["crossed_out"] }
+error = "red"
+warning = "yellow"
+info = "cyan"
+hint = "accent_light"
+
+# --- ui ---
+"ui.background" = { bg = "bg" }
+"ui.background.separator" = { fg = "border" }
+"ui.text" = { fg = "text" }
+"ui.text.focus" = { fg = "accent_light", modifiers = ["bold"] }
+"ui.text.inactive" = { fg = "text_muted" }
+"ui.text.directory" = { fg = "cyan" }
+"ui.linenr" = { fg = "text_muted" }
+"ui.linenr.selected" = { fg = "accent", modifiers = ["bold"] }
+"ui.cursor" = { fg = "bg", bg = "text" }
+"ui.cursor.primary" = { fg = "bg", bg = "accent" }
+"ui.cursor.match" = { fg = "accent", bg = "bg_hover", modifiers = ["bold"] }
+"ui.cursor.insert" = { fg = "bg", bg = "green" }
+"ui.cursor.select" = { fg = "bg", bg = "cyan" }
+"ui.cursor.primary.insert" = { fg = "bg", bg = "green" }
+"ui.cursor.primary.select" = { fg = "bg", bg = "cyan" }
+"ui.cursorline.primary" = { bg = "bg2" }
+"ui.cursorcolumn.primary" = { bg = "bg2" }
+"ui.selection" = { bg = "border" }
+"ui.selection.primary" = { bg = "border_glow" }
+"ui.highlight" = { bg = "bg_hover" }
+"ui.highlight.frameline" = { bg = "border_glow" }
+"ui.virtual.whitespace" = { fg = "text_muted" }
+"ui.virtual.ruler" = { bg = "bg2" }
+"ui.virtual.indent-guide" = { fg = "border" }
+"ui.virtual.inlay-hint" = { fg = "text_muted", bg = "bg2" }
+"ui.virtual.jump-label" = { fg = "accent", modifiers = ["bold"] }
+"ui.statusline" = { fg = "text", bg = "bg_card" }
+"ui.statusline.inactive" = { fg = "text_dim", bg = "bg2" }
+"ui.statusline.normal" = { fg = "bg", bg = "accent", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "bg", bg = "green", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "bg", bg = "cyan", modifiers = ["bold"] }
+"ui.statusline.separator" = { fg = "border" }
+"ui.bufferline" = { fg = "text_dim", bg = "bg2" }
+"ui.bufferline.active" = { fg = "accent", bg = "bg_card", modifiers = ["bold"] }
+"ui.bufferline.background" = { bg = "bg2" }
+"ui.popup" = { fg = "text", bg = "bg_card" }
+"ui.popup.info" = { fg = "text", bg = "bg2" }
+"ui.window" = { fg = "border" }
+"ui.help" = { fg = "text", bg = "bg_card" }
+"ui.menu" = { fg = "text", bg = "bg_card" }
+"ui.menu.selected" = { fg = "bg", bg = "accent", modifiers = ["bold"] }
+"ui.menu.scroll" = { fg = "accent", bg = "bg2" }
+"ui.gutter" = { bg = "bg" }
+"ui.gutter.selected" = { bg = "bg2" }
+"ui.debug.breakpoint" = { fg = "red" }
+"ui.debug.active" = { fg = "yellow" }
+
+[palette]
+accent = "#c6ff00"
+accent_light = "#e2ff6b"
+cyan = "#00e5ff"
+magenta = "#ff00aa"
+green = "#39ff14"
+yellow = "#f9f002"
+orange = "#ff6b35"
+red = "#ff073a"
+text = "#e8ffd0"
+text_dim = "#8a9a6a"
+text_muted = "#4a5a32"
+bg = "#07090a"
+bg2 = "#0c0f0a"
+bg_card = "#0f130c"
+bg_hover = "#161b10"
+border = "#2a3a1a"
+border_glow = "#3a4a20"

@@ -6110,5 +6110,205 @@
       "key:normal:space j w"
     ],
     "note": "avy jump to word -> goto_word"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_d_c",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space h d c"
+    ],
+    "note": "describe char -> :character-info"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_d_b",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h d b"
+    ],
+    "note": "describe bindings -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_d_f",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h d f"
+    ],
+    "note": "describe function -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_d_k",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h d k"
+    ],
+    "note": "describe key -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_d_v",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h d v"
+    ],
+    "note": "describe variable -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_d_m",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h d m"
+    ],
+    "note": "describe modes -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_spc",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h space"
+    ],
+    "note": "discover docs -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_l",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h l"
+    ],
+    "note": "search layers -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_p",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h p"
+    ],
+    "note": "search packages -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_f",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h f"
+    ],
+    "note": "FAQ -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_h_n",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space h n"
+    ],
+    "note": "emacs news -> command palette"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_b_w",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space b W"
+    ],
+    "note": "go to buffer -> buffer picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_l",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space f l"
+    ],
+    "note": "open file literally -> file picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_a",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space f A"
+    ],
+    "note": "open file replace buffer -> file picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_f_o",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space f o"
+    ],
+    "note": "open external -> goto_file"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_o",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x o"
+    ],
+    "note": "avy open link -> goto_file"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_x_w_c",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space x w c"
+    ],
+    "note": "count word occurrences -> count_selection"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_r_m",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space r m"
+    ],
+    "note": "marks register -> register picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_c_t",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space c t"
+    ],
+    "note": "comment to line -> toggle_comments"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_c_y",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space c y"
+    ],
+    "note": "comment and yank -> yank+toggle_comments"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_g",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space p g"
+    ],
+    "note": "find tags -> symbol picker"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_p_o",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space p o"
+    ],
+    "note": "multi-occur -> global search"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_j_l",
+    "status": "partial",
+    "evidence": [
+      "key:normal:space j l"
+    ],
+    "note": "avy jump line -> goto_word"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_h_i",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t h i"
+    ],
+    "note": "highlight indentation -> :toggle indent-guides"
+  },
+  {
+    "spec_id": "spacemacs.keybinding.spc_t_c_i",
+    "status": "ported",
+    "evidence": [
+      "key:normal:space t C-i"
+    ],
+    "note": "global indent guide -> :toggle indent-guides"
   }
 ]
