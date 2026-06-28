@@ -7686,5 +7686,205 @@
       "typable:set"
     ],
     "note": "vim option -> :set path-completion"
+  },
+  {
+    "spec_id": "neovim.option.sidescroll",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set scroll-lines"
+  },
+  {
+    "spec_id": "neovim.option.smoothscroll",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set scroll-lines"
+  },
+  {
+    "spec_id": "neovim.option.mousescroll",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set scroll-lines"
+  },
+  {
+    "spec_id": "neovim.option.mousemoveevent",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set mouse"
+  },
+  {
+    "spec_id": "neovim.option.breakindentopt",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set soft-wrap"
+  },
+  {
+    "spec_id": "neovim.option.showbreak",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set soft-wrap"
+  },
+  {
+    "spec_id": "neovim.option.statuscolumn",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set gutters"
+  },
+  {
+    "spec_id": "neovim.option.foldcolumn",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set gutters"
+  },
+  {
+    "spec_id": "neovim.option.shellslash",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set shell"
+  },
+  {
+    "spec_id": "neovim.option.shellxquote",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set shell"
+  },
+  {
+    "spec_id": "neovim.option.shellxescape",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set shell"
+  },
+  {
+    "spec_id": "neovim.option.lisp",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.cinoptions",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.cinkeys",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.cinwords",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.cinscopedecls",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.shiftround",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.lispwords",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.lispoptions",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.indentkeys",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.completeitemalign",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set completion-replace"
+  },
+  {
+    "spec_id": "neovim.option.dictionary",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set word-completion"
+  },
+  {
+    "spec_id": "neovim.option.thesaurus",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set word-completion"
+  },
+  {
+    "spec_id": "neovim.option.infercase",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set word-completion"
+  },
+  {
+    "spec_id": "neovim.option.wildignorecase",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set file-picker"
   }
 ]
