@@ -7486,5 +7486,205 @@
       "typable:set"
     ],
     "note": "vim option -> zemacs :set cursor-shape"
+  },
+  {
+    "spec_id": "neovim.option.smarttab",
+    "status": "ported",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set smart-tab"
+  },
+  {
+    "spec_id": "neovim.option.updatetime",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set idle-timeout"
+  },
+  {
+    "spec_id": "neovim.option.showtabline",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set bufferline"
+  },
+  {
+    "spec_id": "neovim.option.tabline",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set bufferline"
+  },
+  {
+    "spec_id": "neovim.option.scrolljump",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set scroll-lines"
+  },
+  {
+    "spec_id": "neovim.option.backup",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set atomic-save"
+  },
+  {
+    "spec_id": "neovim.option.writebackup",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set atomic-save"
+  },
+  {
+    "spec_id": "neovim.option.completeopt",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set completion-replace"
+  },
+  {
+    "spec_id": "neovim.option.complete",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set word-completion"
+  },
+  {
+    "spec_id": "neovim.option.completefunc",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set word-completion"
+  },
+  {
+    "spec_id": "neovim.option.formatoptions",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set continue-comments"
+  },
+  {
+    "spec_id": "neovim.option.mousetime",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set mouse"
+  },
+  {
+    "spec_id": "neovim.option.mousefocus",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set mouse"
+  },
+  {
+    "spec_id": "neovim.option.autoindent",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.smartindent",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.cindent",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.indentexpr",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.preserveindent",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.copyindent",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set indent-heuristic"
+  },
+  {
+    "spec_id": "neovim.option.shellcmdflag",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set shell"
+  },
+  {
+    "spec_id": "neovim.option.shellpipe",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set shell"
+  },
+  {
+    "spec_id": "neovim.option.shellredir",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set shell"
+  },
+  {
+    "spec_id": "neovim.option.shellquote",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set shell"
+  },
+  {
+    "spec_id": "neovim.option.shelltemp",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set shell"
+  },
+  {
+    "spec_id": "neovim.option.completeslash",
+    "status": "partial",
+    "evidence": [
+      "typable:set"
+    ],
+    "note": "vim option -> :set path-completion"
   }
 ]
